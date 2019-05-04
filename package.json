@@ -1,0 +1,28 @@
+{
+  "name": "viatransit",
+  "version": "0.1.4",
+  "description": "viaTransit API wrapper and usefull tools",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Slaymd/viatransit-JSWrapper.git"
+  },
+  "keywords": [
+    "viatransit",
+    "public",
+    "transit",
+    "gtfs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Slaymd/viatransit-JSWrapper/issues"
+  },
+  "homepage": "https://github.com/Slaymd/viatransit-JSWrapper#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
