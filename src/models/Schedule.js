@@ -7,20 +7,75 @@ const DayDate = require('./DayDate');
  */
 class Schedule {
 
+    /**
+     * Create an instance of Schedule
+     */
     constructor()
     {
+        /**
+         * Id
+         * @type {string}
+         */
         this.id = "";
+        /**
+         * Line id
+         * @type {string}
+         */
         this.lineId = "";
+        /**
+         * Stop id
+         * @type {string}
+         */
         this.stopId = "";
+        /**
+         * Destination stop id
+         * @type {string}
+         */
         this.destinationId = "";
+        /**
+         * Line direction id
+         * @type {number}
+         */
         this.directionId = 0;
+        /**
+         * Headsign (generally the destination displayed on vehicle)
+         * @type {string}
+         */
         this.headsign = "";
+        /**
+         * Waiting time in seconds
+         * @type {number}
+         */
         this.waitingTime = 0;
+        /**
+         * Departure time
+         * @type {DayDate}
+         */
         this.departureTime = new DayDate();
+        /**
+         * Is theorical
+         * @type {boolean}
+         */
         this.theorical = true;
+        /**
+         * Is day last schedule
+         * @type {boolean}
+         */
         this.isLast = false;
+        /**
+         * Delay time in seconds (compared to the theorical schedule)
+         * @type {number}
+         */
         this.delayTime = 0;
+        /**
+         * Network
+         * @type {string}
+         */
         this.network = "";
+        /**
+         * Attributes
+         * @type {Object|null}
+         */
         this.attributes = null;
     }
 

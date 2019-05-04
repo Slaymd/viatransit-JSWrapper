@@ -4,10 +4,28 @@
  */
 class DayDate {
 
+    /**
+     * Create an instance of DayDate
+     * @param hour
+     * @param min
+     * @param sec
+     */
     constructor(/*Number*/hour = 0, /*Number*/min = 0, /*Number*/sec = 0)
     {
+        /**
+         * Hour
+         * @type {Number}
+         */
         this.hour = hour;
+        /**
+         * Minute
+         * @type {Number}
+         */
         this.min = min;
+        /**
+         * Second
+         * @type {Number}
+         */
         this.sec = sec;
     }
 
