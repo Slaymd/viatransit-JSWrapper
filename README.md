@@ -9,6 +9,7 @@ A nodejs package that includes a **wrapper** of the public **[viatransit](https:
 ## Services
 
 * Schedules
+* Disruptions
 
 ## Usage
 
