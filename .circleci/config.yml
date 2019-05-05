@@ -67,4 +67,4 @@ jobs:
           prefix: tests
 
       - codecov/upload:
-          file: {{ ./coverage/lcov.info }}
+          file: ./coverage/lcov.info
