@@ -160,18 +160,18 @@ class Schedule {
         this.headsign = tripHeadsign;
         this.departureTime.fillFromColonString(departureTime);
         this.waitingTime = this.departureTime.getWaitingTime();
+        this.theorical = theorical === 1;
         if (this.waitingTime < 86300 && this.waitingTime > 7200)
             return false;
         else if (this.waitingTime >= 86300)
             this.waitingTime = 0;
-        this.theorical = theorical === 1;
         return true;
     }
 
     /**
      * Get attribute value from key
      * @param key
-     * @returns {String}
+     * @returns {*}
      */
     getAttribute(/*String*/key) {
         if (this.attributes === null || this.attributes === undefined)

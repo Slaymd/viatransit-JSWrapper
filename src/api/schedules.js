@@ -25,7 +25,6 @@ module.exports = {
         const url = apiRoot + '/stations/schedules?network=' + networkKey + '&id=' + stationId + '&format=cluster';
 
         return axios.get(url).then(res => {
-            console.log(res.data);
             if (!(res.data instanceof Array))
                 return [];
             let clusters = [];
@@ -58,7 +57,6 @@ module.exports = {
         const url = apiRoot + '/stations/schedules?network=' + networkKey + '&id=' + stationId;
 
         return axios.get(url).then(res => {
-            console.log(res.data);
             if (!(res.data instanceof Array))
                 return [];
             let schedules = [];
