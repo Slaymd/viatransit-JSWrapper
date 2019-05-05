@@ -3,6 +3,8 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+orbs:
+  codecov: codecov/codecov@1.0.2
 jobs:
   build:
     docker:
@@ -43,24 +45,6 @@ jobs:
           command: ./node_modules/.bin/nyc ./node_modules/.bin/mocha tests --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
           when: always
 
-      # Run eslint
-#      - run:
-#          name: eslint
-#          command: |
-#            ./node_modules/.bin/eslint ./ --format junit --output-file ./reports/eslint/eslint.xml
-#          when: always
-
-      # Run coverage report for Code Climate
-
-      - run:
-          name: Setup Code Climate test-reporter
-          command: |
-            # download test reporter as a static binary
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
-            ./cc-test-reporter before-build
-          when: always
-
       - run:
           name: code-coverage
           command: |
@@ -68,7 +52,6 @@ jobs:
             # nyc report requires that nyc has already been run,
             # which creates the .nyc_output folder containing necessary data
             ./node_modules/.bin/nyc report --reporter=text-lcov > coverage/lcov.info
-            ./cc-test-reporter after-build -t lcov
           when: always
 
       # Upload results
@@ -79,9 +62,9 @@ jobs:
       - store_artifacts:
           path: ./reports/mocha/test-results.xml
 
-#      - store_artifacts:
-#          path: ./reports/eslint/eslint.xml
-
       - store_artifacts: # upload test coverage as artifact
           path: ./coverage/lcov.info
           prefix: tests
+
+      - codecov/upload:
+          file: {{ ./coverage/lcov.info }}
