@@ -66,5 +66,5 @@ jobs:
           path: ./coverage/lcov.info
           prefix: tests
 
-      - codecov/upload:
+      - codecov_upload:
           file: ./coverage/lcov.info
