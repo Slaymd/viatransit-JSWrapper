@@ -49,8 +49,8 @@ jobs:
           name: code-coverage
           command: |
             mkdir coverage
-            # nyc report requires that nyc has already been run,
-            # which creates the .nyc_output folder containing necessary data
+            # nyc report requires that nyc has already been run, which
+            # creates the .nyc_output folder containing necessary data
             ./node_modules/.bin/nyc report --reporter=text-lcov > coverage/lcov.info
           when: always
 
