@@ -43,7 +43,7 @@ module.exports = {
      * @async
      * @exports viatransit.getNetworkZoneDisruptions
      * @param zoneKey
-     * @return {Promise<{dataUpdateDate: String, disruptions: Array<Disruption>}>}
+     * @return {Promise<Array<Disruption>>}
      */
     getNetworkZoneDisruptions: async function (/*String*/zoneKey) {
         const url = apiRoot + '/disruptions?networkZone=' + zoneKey;
@@ -58,7 +58,7 @@ module.exports = {
                 disruption.fillFromAPI(disruptionApiObj);
                 disruptions.push(disruption);
             }
-            return {disruptions};
+            return disruptions;
         });
     }
 };

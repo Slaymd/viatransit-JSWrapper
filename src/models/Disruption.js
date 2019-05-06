@@ -18,7 +18,7 @@ class Disruption {
         this.id = "";
         /**
          * Links
-         * @type {Array}
+         * @type {Array<{network: String, lines: Array<String>, stations: Array<String>}>}
          */
         this.links = [];
         /**
