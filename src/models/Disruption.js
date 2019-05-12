@@ -105,7 +105,7 @@ class Disruption {
      */
     isComplete()
     {
-        if (this.links instanceof Array && this.links.length > 0 && typeof this.startDate === 'string' && typeof this.endDate === 'string')
+        if (this.links instanceof Array && this.links.length > 0 && this.startDate instanceof Date && this.endDate instanceof Date)
             return true;
         return false;
     }

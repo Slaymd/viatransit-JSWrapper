@@ -1,0 +1,44 @@
+{
+  "id": "5cd09bdc87387472c1fa6198",
+  "links": [
+    {
+      "network": "capbus",
+      "lines": [
+        "3",
+        "1"
+      ],
+      "stations": [
+        "SZ01"
+      ]
+    }
+  ],
+  "type": "web",
+  "status": "valid",
+  "startDate": "2019-05-05T20:37:00.000Z",
+  "endDate": "2019-05-05T21:59:00.000Z",
+  "attributes": null,
+  "announcements": [
+    {
+      "id": "5cd09bdc87387472c1fa6199",
+      "links": [
+        {
+          "network": "all",
+          "lines": [
+            "all"
+          ],
+          "stations": [
+            "all"
+          ]
+        }
+      ],
+      "authorId": "5c61cc3363939c74bdcfde35",
+      "startDate": "2019-05-06T20:39:38.285Z",
+      "endDate": "2019-05-06T20:39:38.285Z",
+      "priority": 1,
+      "type": "warning",
+      "lang": "fr",
+      "title": "Test d'une annonce étendue au réseau",
+      "description": ""
+    }
+  ]
+}

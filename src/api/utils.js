@@ -37,7 +37,7 @@ module.exports.reformatDisruptionAnnouncements = function (/*Array<Object>*/oldA
         let description = announcement.description;
 
         if (!(links.length > 0 && typeof authorId === 'string' &&
-            typeof startDate === 'string' && typeof endDate === 'string' &&
+            startDate instanceof Date && endDate instanceof Date &&
             typeof priority === 'number' && typeof title === 'string' &&
             typeof description === 'string' && typeof lang === 'string' &&
             typeof type === 'string'))
@@ -54,7 +54,7 @@ module.exports.reformatDisruptionAnnouncements = function (/*Array<Object>*/oldA
  * @param oldLinks the links to verify
  * @returns Array reformatted links.
  */
-module.exports.reformatNetworkLinks = function (/*Array<{network: String, lines: Array<String>, stations: Array<String>}>*/oldLinks) {
+function reformatNetworkLinks(/*Array<{network: String, lines: Array<String>, stations: Array<String>}>*/oldLinks) {
 
     let links = [];
 
@@ -102,7 +102,8 @@ module.exports.reformatNetworkLinks = function (/*Array<{network: String, lines:
     });
 
     return links;
-};
+}
+module.exports.reformatNetworkLinks = reformatNetworkLinks;
 
 /**
  * Check if network is linked
