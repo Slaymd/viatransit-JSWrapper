@@ -30,8 +30,14 @@ describe('Users', () => {
             assert.typeOf(user.picture, 'string');
             assert.strictEqual(user.picture, "");
             assert.isArray(user.history);
-            for (let history of user.history)
+            for (let history of user.history) {
+                //TODO Vérifier le nombre d'attributs que l'object a
                 assert.isObject(history);
+                assert.typeOf(history.status, 'string');
+                assert.typeOf(history.type, 'string');
+                assert.typeOf(history.message, 'string');
+                assert.typeOf(history.date, 'string');
+            }
             assert.isArray(user.permissions);
             for (let permission of user.permissions)
                 assert.typeOf(permission, 'string');
@@ -55,8 +61,14 @@ describe('Users', () => {
             assert.typeOf(user.picture, 'string');
             assert.strictEqual(user.picture, "http://viatransit.fr/img/cmonjo.png");
             assert.isArray(user.history);
-            for (let history of user.history)
+            for (let history of user.history) {
+                //TODO Vérifier le nombre d'attributs que l'object a
                 assert.isObject(history);
+                assert.typeOf(history.status, 'string');
+                assert.typeOf(history.type, 'string');
+                assert.typeOf(history.message, 'string');
+                assert.typeOf(history.date, 'string');
+            }
             assert.isArray(user.permissions);
             for (let permission of user.permissions)
                 assert.typeOf(permission, 'string');

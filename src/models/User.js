@@ -48,12 +48,12 @@ class User {
         this.picture = "";
         /**
          * History
-         * @type {Array}
+         * @type {Array<{status: String, info: String, message: String, date: String}>}
          */
         this.history = [];
         /**
          * Permissions
-         * @type {Array}
+         * @type {Array<String>}
          */
         this.permissions = [];
         /**
