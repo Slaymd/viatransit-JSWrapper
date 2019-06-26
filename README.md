@@ -12,7 +12,7 @@ A nodejs package that includes a **wrapper** of the public **[viatransit](https:
 
 * Schedules
 * Disruptions
-
+* Users
 ## Usage
 
 Coming soon.

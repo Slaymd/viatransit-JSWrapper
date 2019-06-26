@@ -224,7 +224,7 @@ class Disruption {
     /**
      * Get attribute value from key
      * @param key
-     * @returns {String}
+     * @returns {Object|null}
      */
     getAttribute(/*String*/key) {
         if (this.attributes === null || this.attributes === undefined)

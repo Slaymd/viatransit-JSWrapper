@@ -3,6 +3,34 @@
  */
 
 /**
+ * USER
+ */
+
+/**
+ * AUTH
+ */
+
+/**
+ * Get jwt_token from API
+ * @async
+ * @exports viatransit.login
+ * @param email
+ * @param password
+ * @return {Promise<String>}
+ */
+module.exports.login = require('./api/auth').login;
+
+/**
+ * Create new account
+ * @async
+ * @exports viatransit.register
+ * @param email
+ * @param password
+ * @return {Promise<String>}
+ */
+module.exports.register = require('./api/auth').register;
+
+/**
  * Get schedules from API
  * @async
  * @exports viatransit.getSchedules
@@ -44,4 +72,5 @@ module.exports.models = {
     Schedule: require('./models/Schedule'),
     DayDate: require('./models/DayDate'),
     Disruption: require('./models/Disruption'),
+    User: require('./models/User'),
 };
