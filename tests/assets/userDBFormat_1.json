@@ -12,6 +12,6 @@
     "message": "account_creation",
     "date": "2019-06-25T18:25:43.511Z"
   }],
-  "permissions": ["admin", "admin.add_user"],
+  "roles": ["admin", "admin.add_user"],
   "attributes": {}
 }

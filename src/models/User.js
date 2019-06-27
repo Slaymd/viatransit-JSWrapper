@@ -55,7 +55,7 @@ class User {
          * Permissions
          * @type {Array<String>}
          */
-        this.permissions = [];
+        this.roles = [];
         /**
          * Attributes
          * @type {Object|null}
@@ -77,7 +77,7 @@ class User {
         this.lastname = obj.lastname;
         this.picture = obj.picture;
         this.history = obj.history;
-        this.permissions = obj.permissions;
+        this.roles = obj.roles;
         this.attributes = obj.attributes;
     }
 
@@ -95,7 +95,7 @@ class User {
         this.lastname = obj.lastname;
         this.picture = obj.picture;
         this.history = obj.history;
-        this.permissions = obj.permissions;
+        this.roles = obj.roles;
         this.attributes = obj.attributes;
     }
 

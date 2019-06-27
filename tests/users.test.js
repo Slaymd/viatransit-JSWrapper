@@ -38,9 +38,9 @@ describe('Users', () => {
                 assert.typeOf(history.message, 'string');
                 assert.typeOf(history.date, 'string');
             }
-            assert.isArray(user.permissions);
-            for (let permission of user.permissions)
-                assert.typeOf(permission, 'string');
+            assert.isArray(user.roles);
+            for (let role of user.roles)
+                assert.typeOf(role, 'string');
             assert.isObject(user.attributes);
         });
 
@@ -69,9 +69,9 @@ describe('Users', () => {
                 assert.typeOf(history.message, 'string');
                 assert.typeOf(history.date, 'string');
             }
-            assert.isArray(user.permissions);
-            for (let permission of user.permissions)
-                assert.typeOf(permission, 'string');
+            assert.isArray(user.roles);
+            for (let role of user.roles)
+                assert.typeOf(role, 'string');
             assert.isObject(user.attributes);
         });
 
