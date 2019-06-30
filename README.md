@@ -13,6 +13,7 @@ A nodejs package that includes a **wrapper** of the public **[viatransit](https:
 * Schedules
 * Disruptions
 * Users
+* Stations
 ## Usage
 
 Coming soon.
