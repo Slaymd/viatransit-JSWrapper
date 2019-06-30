@@ -2,7 +2,7 @@
 const axios = require('axios');
 
 //Models
-const { Disruption } = require('../models/Disruption');
+const Disruption = require('../models/Disruption');
 
 //Utils
 const apiRoot = require('./utils').getAPIRoot();

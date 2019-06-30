@@ -2,7 +2,7 @@
 const axios = require('axios');
 
 //Models
-const { Schedule } = require('../models/Schedule');
+const Schedule = require('../models/Schedule');
 
 //Utils
 const apiRoot = require('./utils').getAPIRoot();

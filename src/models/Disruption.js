@@ -236,4 +236,4 @@ class Disruption {
     }
 }
 
-module.exports = { Disruption };
+module.exports = Disruption;

@@ -117,6 +117,6 @@ class DayDate {
         return ('[DayDate ' + this.getHourMinFormatString() + ' (in ' + this.getWaitingTime(true) + ' mins)]');
     };
 
-};
+}
 
-module.exports = { DayDate };
+module.exports = DayDate;
