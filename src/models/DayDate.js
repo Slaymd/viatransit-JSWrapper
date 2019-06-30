@@ -112,10 +112,11 @@ class DayDate {
 
         return diff <= 0 ? -diff : 1440*60-diff;
     }
-}
 
-DayDate.prototype.toString = function() {
-    return ('[DayDate ' + this.getHourMinFormatString() + ' (in ' + this.getWaitingTime(true) + ' mins)]');
+    toString() {
+        return ('[DayDate ' + this.getHourMinFormatString() + ' (in ' + this.getWaitingTime(true) + ' mins)]');
+    };
+
 };
 
-module.exports = DayDate;
+module.exports = { DayDate };

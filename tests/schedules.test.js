@@ -10,17 +10,17 @@ describe('Schedules', () => {
     describe('API', () => {
         it('should throw an error because wrong parameters');
         it('should receive schedules on normal format', async () => {
-            const schedules = await viatransit.getSchedules('tam', 'S5472');
+            const schedules = await viatransit.API.getSchedules('tam', 'S5472');
 
             assert.isArray(schedules);
             if (schedules.length === 0)
                 return;
             for (let schedule of schedules) {
-                assert.instanceOf(schedule, viatransit.models.Schedule);
+                assert.instanceOf(schedule, viatransit.Schedule);
             }
         });
         it('should receive schedules on clusterized format', async () => {
-            const clusters = await viatransit.getClusterizedSchedules('tam', 'S5472');
+            const clusters = await viatransit.API.getClusterizedSchedules('tam', 'S5472');
 
             assert.isArray(clusters);
             if (clusters.length === 0)
@@ -33,7 +33,7 @@ describe('Schedules', () => {
                 assert.nestedProperty(cluster, 'schedules', 'A cluster should have a schedules property');
                 assert.isArray(cluster.schedules, 'Cluster schedules should be an Array');
                 for (let schedule of cluster.schedules) {
-                    assert.instanceOf(schedule, viatransit.models.Schedule, 'Cluster schedules should be an Array of Schedule class');
+                    assert.instanceOf(schedule, viatransit.Schedule, 'Cluster schedules should be an Array of Schedule class');
                 }
             }
         });
@@ -41,9 +41,9 @@ describe('Schedules', () => {
 
     describe('Model', () => {
         it('should be properly filled', () => {
-            let schedule = new viatransit.models.Schedule();
-            schedule.fill('tam', 'S5472', '1', 'S5472', 'S5472', 0, 'Odysseum', new viatransit.models.DayDate(8, 45, 12), 42, false, 42);
-            assert.instanceOf(schedule.departureTime, viatransit.models.DayDate);
+            let schedule = new viatransit.Schedule();
+            schedule.fill('tam', 'S5472', '1', 'S5472', 'S5472', 0, 'Odysseum', new viatransit.DayDate(8, 45, 12), 42, false, 42);
+            assert.instanceOf(schedule.departureTime, viatransit.DayDate);
             assert.strictEqual(schedule.departureTime.hour, 8);
             assert.strictEqual(schedule.departureTime.min, 45);
             assert.strictEqual(schedule.departureTime.sec, 12);
@@ -73,9 +73,9 @@ describe('Schedules', () => {
         });
 
         it('should be properly filled from viaTransit API Format', () => {
-            let schedule = new viatransit.models.Schedule();
+            let schedule = new viatransit.Schedule();
             schedule.fillFromAPI(scheduleAPIFormatAsset);
-            assert.instanceOf(schedule.departureTime, viatransit.models.DayDate);
+            assert.instanceOf(schedule.departureTime, viatransit.DayDate);
             assert.strictEqual(schedule.departureTime.hour, 16);
             assert.strictEqual(schedule.departureTime.min, 46);
             assert.strictEqual(schedule.departureTime.sec, 29);
@@ -105,10 +105,10 @@ describe('Schedules', () => {
         });
 
         it('should be properly filled from TaM array format', () => {
-            let schedule = new viatransit.models.Schedule();
+            let schedule = new viatransit.Schedule();
             let tamSchedule = ['268435729','ANTIGRTW','41217','ANTIGONE','1','MOSSON','1','17:26:46','0','661','41101'];
             schedule.fillFromTaMArray(tamSchedule);
-            assert.instanceOf(schedule.departureTime, viatransit.models.DayDate);
+            assert.instanceOf(schedule.departureTime, viatransit.DayDate);
             assert.strictEqual(schedule.departureTime.hour, 17);
             assert.strictEqual(schedule.departureTime.min, 26);
             assert.strictEqual(schedule.departureTime.sec, 46);
@@ -136,7 +136,7 @@ describe('Schedules', () => {
         });
 
         it('should fail because of bad TaM array format', () => {
-            let schedule = new viatransit.models.Schedule();
+            let schedule = new viatransit.Schedule();
             let tamSchedule = ['268435729','ANTIGRTW','41217','ANTIGONE','1','MOSSON','1','17:26:46','0','661','41101','viatransit'];
             assert.strictEqual(schedule.fillFromTaMArray(tamSchedule), false, 'TaM Array too long');
             tamSchedule = ['268435729','ANTIGRTW','41217','ANTIGONE','1','MOSSON','A','17:26:46','0','661','41101'];
@@ -144,7 +144,7 @@ describe('Schedules', () => {
         });
 
         it('should works with attributes', () => {
-           let schedule = new viatransit.models.Schedule();
+           let schedule = new viatransit.Schedule();
 
            assert.isNull(schedule.getAttribute('icon'));
            schedule.attributes = {icon: '42'};

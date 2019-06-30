@@ -1,5 +1,5 @@
 //Models
-const DayDate = require('./DayDate');
+const { DayDate } = require('./DayDate');
 
 /**
  * @class Schedule
@@ -184,4 +184,4 @@ class Schedule {
 
 }
 
-module.exports = Schedule;
+module.exports = { Schedule };

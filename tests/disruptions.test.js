@@ -13,20 +13,20 @@ describe('Disruptions', () => {
     describe('API', () => {
 
         it('should receive network disruptions', async () => {
-            let disruptions = await viatransit.getNetworkDisruptions('tam');
+            let disruptions = await viatransit.API.getNetworkDisruptions('tam');
 
             assert.isArray(disruptions.disruptions);
             for (let disruption of disruptions.disruptions) {
-                assert.instanceOf(disruption, viatransit.models.Disruption);
+                assert.instanceOf(disruption, viatransit.Disruption);
             }
         });
 
         it('should receive network zones disruptions', async () => {
-            let disruptions = await viatransit.getNetworkZoneDisruptions('mpl');
+            let disruptions = await viatransit.API.getNetworkZoneDisruptions('mpl');
 
             assert.isArray(disruptions);
             for (let disruption of disruptions) {
-                assert.instanceOf(disruption, viatransit.models.Disruption);
+                assert.instanceOf(disruption, viatransit.Disruption);
             }
         });
 
@@ -35,7 +35,7 @@ describe('Disruptions', () => {
     describe('Model', () => {
 
         it('should be properly filled from database Format', () => {
-            let disruption = new viatransit.models.Disruption();
+            let disruption = new viatransit.Disruption();
             disruption.fillFromDatabase(disruptionDBFormatAsset);
 
             assert.deepStrictEqual(disruption.endDate, new Date('2019-05-05T21:59:00.000Z'));
@@ -71,7 +71,7 @@ describe('Disruptions', () => {
         });
 
         it('should be properly filled from viaTransit API Format', () => {
-            let disruption = new viatransit.models.Disruption();
+            let disruption = new viatransit.Disruption();
             disruption.fillFromAPI(disruptionAPIFormatAsset_1);
 
             assert.deepStrictEqual(disruption.endDate, new Date('2019-05-05T21:59:00.000Z'));
@@ -107,7 +107,7 @@ describe('Disruptions', () => {
         });
 
         it('should works with attributes', () => {
-            let disruption = new viatransit.models.Disruption();
+            let disruption = new viatransit.Disruption();
             disruption.fillFromAPI(disruptionAPIFormatAsset_1);
 
             assert.isNull(disruption.getAttribute('icon'));
@@ -117,7 +117,7 @@ describe('Disruptions', () => {
         });
 
         it('should be complete', () => {
-            let disruption = new viatransit.models.Disruption();
+            let disruption = new viatransit.Disruption();
             disruption.fillFromAPI(disruptionAPIFormatAsset_1);
 
             assert.isTrue(disruption.isComplete());
@@ -130,7 +130,7 @@ describe('Disruptions', () => {
     describe('Links', () => {
 
         it('should be linked to a network', () => {
-            let disruption = new viatransit.models.Disruption();
+            let disruption = new viatransit.Disruption();
             disruption.fillFromAPI(disruptionAPIFormatAsset_1);
 
             assert.isTrue(disruption.isLinkedToNetwork('capbus'));
@@ -143,7 +143,7 @@ describe('Disruptions', () => {
         });
 
         it('should be linked to a line', () => {
-            let disruption = new viatransit.models.Disruption();
+            let disruption = new viatransit.Disruption();
             disruption.fillFromAPI(disruptionAPIFormatAsset_2);
 
             assert.isTrue(disruption.isLinkedToLine('capbus', '1'));
@@ -157,7 +157,7 @@ describe('Disruptions', () => {
         });
 
         it('should be linked to a station', () => {
-            let disruption = new viatransit.models.Disruption();
+            let disruption = new viatransit.Disruption();
             disruption.fillFromAPI(disruptionAPIFormatAsset_2);
 
             assert.isTrue(disruption.isLinkedToStation('capbus', '1', 'SZ01'));
@@ -171,7 +171,7 @@ describe('Disruptions', () => {
         });
 
         it('should get linked announcements', () => {
-            let disruption = new viatransit.models.Disruption();
+            let disruption = new viatransit.Disruption();
             disruption.fillFromAPI(disruptionAPIFormatAsset_3);
 
             assert.lengthOf(disruption.getLinkedAnnouncements('capbus', '2', 'SZ01'), 1);

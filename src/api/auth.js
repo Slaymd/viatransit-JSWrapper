@@ -1,9 +1,6 @@
 //Imports
 const axios = require('axios');
 
-//Models
-const User = require('../models/User');
-
 //Utils
 const apiRoot = require('./utils').getAPIRoot();
 

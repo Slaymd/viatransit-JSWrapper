@@ -14,7 +14,7 @@ describe('Users', () => {
 
     describe('Model', () => {
         it('should be properly filled from Database', () => {
-            let user = new viatransit.models.User();
+            let user = new viatransit.User();
 
             user.fillFromDatabase(userDBFormatAsset);
             assert.typeOf(user.email, 'string');
@@ -45,7 +45,7 @@ describe('Users', () => {
         });
 
         it('should be properly filled from API', () => {
-            let user = new viatransit.models.User();
+            let user = new viatransit.User();
 
             user.fillFromAPI(userAPIFormatAsset);
             assert.typeOf(user.email, 'string');
@@ -76,7 +76,7 @@ describe('Users', () => {
         });
 
         // it('should fail because of bad TaM array format', () => {
-        //     let schedule = new viatransit.models.Schedule();
+        //     let schedule = new viatransit.Schedule();
         //     let tamSchedule = ['268435729','ANTIGRTW','41217','ANTIGONE','1','MOSSON','1','17:26:46','0','661','41101','viatransit'];
         //     assert.strictEqual(schedule.fillFromTaMArray(tamSchedule), false, 'TaM Array too long');
         //     tamSchedule = ['268435729','ANTIGRTW','41217','ANTIGONE','1','MOSSON','A','17:26:46','0','661','41101'];
@@ -84,7 +84,7 @@ describe('Users', () => {
         // });
         //
         // it('should works with attributes', () => {
-        //    let schedule = new viatransit.models.Schedule();
+        //    let schedule = new viatransit.Schedule();
         //
         //    assert.isNull(schedule.getAttribute('icon'));
         //    schedule.attributes = {icon: '42'};
