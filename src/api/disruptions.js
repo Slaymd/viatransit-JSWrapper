@@ -15,7 +15,7 @@ const apiRoot = require('./utils').getAPIRoot();
 /**
  * Get disruptions from API on network
  * @async
- * @exports viatransit.getNetworkDisruptions
+ * @exports viatransit.API.getNetworkDisruptions
  * @param networkKey
  * @return {Promise<{dataUpdateDate: String, disruptions: Array<Disruption>}>}
  */
@@ -42,7 +42,7 @@ async function getNetworkDisruptions(/*String*/networkKey)
 /**
  * Get disruptions from API on network zone
  * @async
- * @exports viatransit.getNetworkZoneDisruptions
+ * @exports viatransit.API.getNetworkZoneDisruptions
  * @param zoneKey
  * @return {Promise<Array<Disruption>>}
  */

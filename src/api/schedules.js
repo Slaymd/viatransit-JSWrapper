@@ -15,12 +15,13 @@ const apiRoot = require('./utils').getAPIRoot();
 /**
  * Get schedules from API with clusterized format
  * @async
- * @exports viatransit.getClusterizedSchedules
+ * @exports viatransit.API.getClusterizedSchedules
  * @param networkKey
  * @param stationId
  * @return {Promise<Array<{line: {id: String, network: String}, headsign: String, schedules: Array<Schedule>}>>}
  */
-async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId) {
+async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId)
+{
     const url = apiRoot + '/stations/schedules?network=' + networkKey + '&id=' + stationId + '&format=cluster';
 
     return axios.get(url).then(res => {
@@ -48,12 +49,13 @@ async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId
 /**
  * Get schedules from API
  * @async
- * @exports viatransit.getSchedules
+ * @exports viatransit.API.getSchedules
  * @param networkKey
  * @param stationId
  * @return {Promise<Array<Schedule>>}
  */
-async function getSchedules(/*String*/networkKey, /*String*/stationId) {
+async function getSchedules(/*String*/networkKey, /*String*/stationId)
+{
     const url = apiRoot + '/stations/schedules?network=' + networkKey + '&id=' + stationId;
 
     return axios.get(url).then(res => {

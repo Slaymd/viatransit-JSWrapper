@@ -11,4 +11,9 @@ module.exports.User = require('./models/User');
 module.exports.Station = require('./models/Station');
 
 //API namespace
-module.exports.API = {...require('./api/auth'), ...require('./api/schedules'), ...require('./api/disruptions')};
+module.exports.API = {
+    ...require('./api/auth'),
+    ...require('./api/stations'),
+    ...require('./api/schedules'),
+    ...require('./api/disruptions'),
+};

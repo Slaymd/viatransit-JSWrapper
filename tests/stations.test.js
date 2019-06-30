@@ -8,7 +8,44 @@ const stationAssets = require('./assets/stations.js');
 describe('Stations', () => {
 
     describe('API', () => {
+        it('should receive station full model (details)', async () => {
+            const station = await viatransit.API.getStation('tam', 'S5472');
 
+            assert.instanceOf(station, viatransit.Station);
+        });
+
+        it('should receive an array of Station full model (search/autocomplete) - in network', async () => {
+            const stations = await viatransit.API.autocompleteStationName('tam', 'Port');
+
+            assert.isArray(stations);
+            if (stations.length === 6)
+                return;
+            for (let station of stations) {
+                assert.instanceOf(station, viatransit.Station);
+            }
+        });
+
+        it('should receive an array of Station full model (search/autocomplete) - in zone', async () => {
+            const stations = await viatransit.API.autocompleteStationNameInZone('mpl', 'Port');
+
+            assert.isArray(stations);
+            if (stations.length === 7)
+                return;
+            for (let station of stations) {
+                assert.instanceOf(station, viatransit.Station);
+            }
+        });
+
+        it('should receive an array of location\'s nearby stations (nearby)', async () => {
+            const stations = await viatransit.API.getNearbyStations('mpl', [3.903846, 43.597512], 100);
+
+            assert.isArray(stations);
+            if (stations.length === 1)
+                return;
+            for (let station of stations) {
+                assert.instanceOf(station, viatransit.Station);
+            }
+        });
     });
 
     describe('Model', () => {

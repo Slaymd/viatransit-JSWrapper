@@ -12,7 +12,7 @@ const apiRoot = require('./utils').getAPIRoot();
 /**
  * Get jwt_token from API
  * @async
- * @exports viatransit.login
+ * @exports viatransit.API.login
  * @param email
  * @param password
  * @return {Promise<String>}
@@ -32,7 +32,7 @@ async function login(/*String*/email, /*String*/password)
 /**
  * Create new account
  * @async
- * @exports viatransit.register
+ * @exports viatransit.API.register
  * @param email
  * @param password
  * @return {Promise<String>}
