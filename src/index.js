@@ -10,25 +10,7 @@
  * AUTH
  */
 
-/**
- * Get jwt_token from API
- * @async
- * @exports viatransit.login
- * @param email
- * @param password
- * @return {Promise<String>}
- */
-module.exports.login = require('./api/auth').login;
-
-/**
- * Create new account
- * @async
- * @exports viatransit.register
- * @param email
- * @param password
- * @return {Promise<String>}
- */
-module.exports.register = require('./api/auth').register;
+module.exports.API = {...require('./api/auth')};
 
 /**
  * Get schedules from API
