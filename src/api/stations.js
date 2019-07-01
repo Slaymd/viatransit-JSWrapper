@@ -84,6 +84,15 @@ async function autocompleteStationNameInZone(/*String*/zoneKey, /*String*/query)
     });
 }
 
+/**
+ * Get API coordinates' nearby stations in a Zone
+ * @async
+ * @exports viatransit.API.getNearbyStations
+ * @param zoneKey
+ * @param coordinates
+ * @param radius
+ * @return {Promise<Array<Station>>}
+ */
 async function getNearbyStations(/*String*/zoneKey, /*[Float, Float*/coordinates, /*Number*/radius = 1000)
 {
     const url = apiRoot + '/stations/nearby?networkZone=' + zoneKey + '&lon=' + coordinates[0] + '&lat=' + coordinates[1] + '&r=' + radius;
