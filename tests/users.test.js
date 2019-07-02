@@ -3,8 +3,7 @@ const assert = require('chai').assert;
 const viatransit = require('../src/index');
 
 //Assets
-const userAPIFormatAsset = require('./assets/userAPIFormat_1.json');
-const userDBFormatAsset = require('./assets/userDBFormat_1.json');
+const userAssets = require('./assets/users.js');
 
 describe('Users', () => {
 
@@ -16,7 +15,7 @@ describe('Users', () => {
         it('should be properly filled from Database', () => {
             let user = new viatransit.User();
 
-            user.fillFromDatabase(userDBFormatAsset);
+            user.fillFromDatabase(userAssets.dbFormat);
             assert.typeOf(user.email, 'string');
             assert.strictEqual(user.email, "camille.monjo@viatransit.fr");
             assert.typeOf(user.password, 'string');
@@ -47,7 +46,7 @@ describe('Users', () => {
         it('should be properly filled from API', () => {
             let user = new viatransit.User();
 
-            user.fillFromAPI(userAPIFormatAsset);
+            user.fillFromAPI(userAssets.apiFormat);
             assert.typeOf(user.email, 'string');
             assert.strictEqual(user.email, "camille.monjo@viatransit.fr");
             assert.typeOf(user.password, 'string');
