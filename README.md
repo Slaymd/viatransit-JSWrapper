@@ -14,6 +14,8 @@ A nodejs package that includes a **wrapper** of the public **[viatransit](https:
 * Disruptions
 * Users
 * Stations
+* Networks
+* Zones
 ## Usage
 
 Coming soon.
