@@ -1,3 +1,4 @@
+//Imports
 const dataUtils = require("../api/utils");
 
 /**
@@ -148,14 +149,14 @@ class Disruption {
 
         if (config.checkAnnouncements) {
             for (let announcement of this.announcements) {
-                if (dataUtils.isNetworkLinked(announcement.links, networkKey) && dataUtils.isLineLinked(announcement.links, lineId)) {
+                if (dataUtils.isNetworkLinked(announcement.links, networkKey) && dataUtils.isLineLinked(announcement.links, networkKey, lineId)) {
                     isLinked = true;
                     break;
                 }
             }
         }
         if (config.checkDisruption) {
-            if (dataUtils.isNetworkLinked(this.links, networkKey) && dataUtils.isLineLinked(this.links, lineId))
+            if (dataUtils.isNetworkLinked(this.links, networkKey) && dataUtils.isLineLinked(this.links, networkKey, lineId))
                 isLinked = true;
         }
         return isLinked;
@@ -175,7 +176,7 @@ class Disruption {
 
         if (config.checkAnnouncements) {
             for (let announcement of this.announcements) {
-                if (dataUtils.isNetworkLinked(announcement.links, networkKey) && (lineId === 'all' || dataUtils.isLineLinked(announcement.links, lineId)) && dataUtils.isStationLinked(announcement.links, stationId)) {
+                if (dataUtils.isNetworkLinked(announcement.links, networkKey) && (lineId === 'all' || dataUtils.isLineLinked(announcement.links, networkKey, lineId)) && dataUtils.isStationLinked(announcement.links, networkKey, lineId, stationId)) {
                     isLinked = true;
                     break;
                 }
@@ -183,8 +184,8 @@ class Disruption {
         }
         if (config.checkDisruption) {
             if (dataUtils.isNetworkLinked(this.links, networkKey) &&
-                (lineId === 'all' || dataUtils.isLineLinked(this.links, lineId)) &&
-                dataUtils.isStationLinked(this.links, stationId))
+                (lineId === 'all' || dataUtils.isLineLinked(this.links, networkKey, lineId)) &&
+                dataUtils.isStationLinked(this.links, networkKey, lineId, stationId))
                 isLinked = true;
         }
         return isLinked;
@@ -214,8 +215,8 @@ class Disruption {
 
         for (let announcement of this.announcements) {
             if ((networkKey === 'all' || dataUtils.isNetworkLinked(announcement.links, networkKey)) &&
-                (lineId === 'all' || dataUtils.isLineLinked(announcement.links, lineId)) &&
-                (stationId === 'all' || dataUtils.isStationLinked(announcement.links, stationId)))
+                (lineId === 'all' || dataUtils.isLineLinked(announcement.links, networkKey, lineId)) &&
+                (stationId === 'all' || dataUtils.isStationLinked(announcement.links, networkKey, lineId, stationId)))
                 linkedAnnouncements.push(announcement);
         }
         return linkedAnnouncements;

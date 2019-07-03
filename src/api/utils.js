@@ -127,14 +127,15 @@ module.exports.isNetworkLinked = function(/*Array<{network: String, lines: Array
 /**
  * Check if line id is linked
  * @param links
+ * @param networkKey
  * @param lineId
  * @return {boolean}
  */
-module.exports.isLineLinked = function(/*Array<{network: String, lines: Array<String>, stations: Array<String>}>*/links, /*String*/lineId)
+module.exports.isLineLinked = function(/*Array<{network: String, lines: Array<String>, stations: Array<String>}>*/links, /*String*/networkKey, /*String*/lineId)
 {
     let isLinked = false;
 
-    for (let link of links) {
+    for (let link of links.filter(el => networkKey === 'all' || el.network === networkKey || el.network === 'all')) {
         if (link.lines.includes('all') || link.lines.includes(lineId)) {
             isLinked = true;
             break;
@@ -146,14 +147,16 @@ module.exports.isLineLinked = function(/*Array<{network: String, lines: Array<St
 /**
  * Check if station is linked
  * @param links
+ * @param networkKey
+ * @param lineId
  * @param stationId
  * @return {boolean}
  */
-module.exports.isStationLinked = function(/*Array<{network: String, lines: Array<String>, stations: Array<String>}>*/links, /*String*/stationId)
+module.exports.isStationLinked = function(/*Array<{network: String, lines: Array<String>, stations: Array<String>}>*/links, /*String*/networkKey, /*String*/lineId, /*String*/stationId)
 {
     let isLinked = false;
 
-    for (let link of links) {
+    for (let link of links.filter(el => (networkKey === 'all' || el.network === networkKey || el.network === 'all') && (lineId === 'all' || el.lines.includes(lineId) || el.lines.includes('all')))) {
         if (link.stations.includes('all') || link.stations.includes(stationId)) {
             isLinked = true;
             break;

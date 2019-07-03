@@ -9,6 +9,7 @@ module.exports.DayDate = require('./models/DayDate');
 module.exports.Disruption = require('./models/Disruption');
 module.exports.User = require('./models/User');
 module.exports.Station = require('./models/Station');
+module.exports.Zone = require('./models/Zone');
 
 //API namespace
 module.exports.API = {
@@ -16,4 +17,5 @@ module.exports.API = {
     ...require('./api/stations'),
     ...require('./api/schedules'),
     ...require('./api/disruptions'),
+    ...require('./api/zones'),
 };
