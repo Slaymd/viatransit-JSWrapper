@@ -10,6 +10,7 @@ module.exports.Disruption = require('./models/Disruption');
 module.exports.User = require('./models/User');
 module.exports.Station = require('./models/Station');
 module.exports.Zone = require('./models/Zone');
+module.exports.Network = require('./models/Network');
 
 //API namespace
 module.exports.API = {
@@ -18,4 +19,5 @@ module.exports.API = {
     ...require('./api/schedules'),
     ...require('./api/disruptions'),
     ...require('./api/zones'),
+    ...require('./api/networks'),
 };

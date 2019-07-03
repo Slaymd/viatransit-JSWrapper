@@ -7,7 +7,7 @@ const dataUtils = require("../api/utils");
  */
 class Zone {
     /**
-     * Create an instance of Station
+     * Create an instance of Zone
      */
     constructor()
     {
@@ -139,7 +139,6 @@ class Zone {
             (lineId === 'all' || dataUtils.isLineLinked(this.links, networkKey, lineId)) &&
             dataUtils.isStationLinked(this.links, networkKey, lineId, stationId);
     }
-
 
     /**
      * Get attribute value from key
