@@ -88,18 +88,15 @@ async function autocompleteStationNameInZone(/*String*/zoneKey, /*String*/query)
  * Get API coordinates' nearby stations in a Zone
  * @async
  * @exports viatransit.API.getNearbyStations
- * @param zoneKey
  * @param coordinates
  * @param radius
  * @return {Promise<Array<Station>>}
  */
-async function getNearbyStations(/*String*/zoneKey, /*[Float, Float*/coordinates, /*Number*/radius = 1000)
+async function getNearbyStations(/*[Float, Float*/coordinates, /*Number*/radius = 1000)
 {
-    const url = apiRoot + '/stations/nearby?networkZone=' + zoneKey + '&lon=' + coordinates[0] + '&lat=' + coordinates[1] + '&r=' + radius;
+    const url = apiRoot + '/stations/nearby?lon=' + coordinates[0] + '&lat=' + coordinates[1] + '&r=' + radius;
 
     return axios.get(url).then(res => {
-        if (!(res.data instanceof Array))
-            return [];
         let stations = [];
 
         for (let stationApiObj of res.data) {
@@ -111,4 +108,30 @@ async function getNearbyStations(/*String*/zoneKey, /*[Float, Float*/coordinates
     });
 }
 
-module.exports = { getStation, autocompleteStationName, autocompleteStationNameInZone, getNearbyStations };
+/**
+ * Get API coordinates' nearby stations in a Zone by station type
+ * @async
+ * @exports viatransit.API.getNearbyStations
+ * @param coordinates
+ * @param radius
+ * @return {Promise<{public_transit?: Array<Station>, trains?: Array<Station>}>}
+ */
+async function getNearbyStationsByType(/*[Float, Float*/coordinates, /*Number*/radius = 1000)
+{
+    const url = apiRoot + '/stations/nearby?lon=' + coordinates[0] + '&lat=' + coordinates[1] + '&r=' + radius + '&format=by-type';
+
+    return axios.get(url).then(res => {
+        let result = {};
+
+        for (let type of Object.keys(res.data)) {
+            result[type] = res.data[type].map(apiStationObject => {
+                let station = new Station();
+                station.fillFromAPI(apiStationObject);
+                return station;
+            })
+        }
+        return result;
+    });
+}
+
+module.exports = { getStation, autocompleteStationName, autocompleteStationNameInZone, getNearbyStations, getNearbyStationsByType };

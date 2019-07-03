@@ -9,6 +9,7 @@ const stationAssets = require('./assets/stations.js');
 describe('Stations', () => {
 
     describe('API', () => {
+
         it('should receive station full model (details)', async () => {
             const station = await viatransit.API.getStation('tam', 'S5472');
 
@@ -38,7 +39,7 @@ describe('Stations', () => {
         });
 
         it('should receive an array of location\'s nearby stations (nearby)', async () => {
-            const stations = await viatransit.API.getNearbyStations('mpl', [3.903846, 43.597512], 100);
+            const stations = await viatransit.API.getNearbyStations([3.903846, 43.597512], 100);
 
             assert.isArray(stations);
             if (stations.length === 1)
@@ -47,6 +48,17 @@ describe('Stations', () => {
                 assert.instanceOf(station, viatransit.Station);
             }
         });
+
+        it('should receive an array of nearby stations sorted by type (nearby)', async () => {
+            const res = await viatransit.API.getNearbyStationsByType([3.903846, 43.597512], 100);
+
+            assert.lengthOf(Object.keys(res), 2);
+            for (let station of res.public_transit) {
+                console.log(station.name);
+                assert.instanceOf(station, viatransit.Station);
+            }
+        });
+
     });
 
     describe('Model', () => {
