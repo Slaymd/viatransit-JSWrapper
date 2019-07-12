@@ -130,6 +130,9 @@ class Schedule {
         this.directionId = apiObject.directionId;
         this.headsign = apiObject.headsign;
         this.destinationId = apiObject.destinationId;
+        this.attributes = apiObject.attributes;
+        if (apiObject.theoricalDepartureTime !== undefined)
+            this.attributes = {...this.attributes, ...{theoricalDepartureTime: apiObject.theoricalDepartureTime}};
     }
 
     /**
