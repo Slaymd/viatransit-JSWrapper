@@ -7,13 +7,7 @@ module.exports = {
         "firstname": "",
         "lastname": "",
         "picture": "",
-        "history": [{
-            "status": "info",
-            "type": "register",
-            "message": "account_creation",
-            "date": "2019-06-25T18:25:43.511Z"
-        }],
-        "roles": ["admin", "admin.add_user"],
+        "roles": ["user.update.all", "user.get.all", "user.remove.self"],
         "attributes": {}
     },
     apiFormat: {
@@ -30,7 +24,7 @@ module.exports = {
             "message": "account_creation",
             "date": "2019-06-25T18:25:43.511Z"
         }],
-        "roles": ["admin", "admin.add_user"],
+        "roles": ["user.update.all", "user.get.all", "user.remove.self"],
         "attributes": {}
     }
 };

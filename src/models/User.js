@@ -47,11 +47,6 @@ class User {
          */
         this.picture = "";
         /**
-         * History
-         * @type {Array<{status: String, info: String, message: String, date: String}>}
-         */
-        this.history = [];
-        /**
          * Permissions
          * @type {Array<String>}
          */
@@ -76,7 +71,6 @@ class User {
         this.firstname = obj.firstname;
         this.lastname = obj.lastname;
         this.picture = obj.picture;
-        this.history = obj.history;
         this.roles = obj.roles;
         this.attributes = obj.attributes;
     }
@@ -94,9 +88,20 @@ class User {
         this.firstname = obj.firstname;
         this.lastname = obj.lastname;
         this.picture = obj.picture;
-        this.history = obj.history;
         this.roles = obj.roles;
         this.attributes = obj.attributes;
+    }
+
+
+    /**
+     * Check roles from permission string
+     * @param role
+     * @returns Boolean
+     */
+    hasPermission(/*String*/role) {
+        if (this.roles === null || this.roles === undefined)
+            return false;
+        return this.roles.includes(role);
     }
 
     /**
