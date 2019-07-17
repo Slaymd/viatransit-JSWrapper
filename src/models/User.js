@@ -64,7 +64,7 @@ class User {
      */
     fillFromAPI(/*Object*/obj)
     {
-        this.id = obj.id;
+        this.id = JSON.stringify(obj.id);
         this.email = obj.email;
         this.password = obj.password;
         this.username = obj.username;
@@ -81,7 +81,7 @@ class User {
      */
     fillFromDatabase(/*Object*/obj)
     {
-        this.id = obj._id;
+        this.id = JSON.stringify(obj._id);
         this.email = obj.email;
         this.password = obj.password;
         this.username = obj.username;
