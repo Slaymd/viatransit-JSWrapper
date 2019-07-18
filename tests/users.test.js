@@ -26,8 +26,6 @@ describe('Users', () => {
             assert.strictEqual(user.firstname, "");
             assert.typeOf(user.lastname, 'string');
             assert.strictEqual(user.lastname, "");
-            assert.typeOf(user.picture, 'string');
-            assert.strictEqual(user.picture, "");
             assert.isArray(user.roles);
             for (let role of user.roles) {
                 //     //TODO Vérifier le nombre d'attributs que l'object a
@@ -50,8 +48,6 @@ describe('Users', () => {
             assert.strictEqual(user.firstname, "Camille");
             assert.typeOf(user.lastname, 'string');
             assert.strictEqual(user.lastname, "Monjo");
-            assert.typeOf(user.picture, 'string');
-            assert.strictEqual(user.picture, "http://viatransit.fr/img/cmonjo.png");
             assert.isArray(user.roles);
             for (let role of user.roles) {
                 //     //TODO Vérifier le nombre d'attributs que l'object a

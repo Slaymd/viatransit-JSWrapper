@@ -42,11 +42,6 @@ class User {
          */
         this.lastname = "";
         /**
-         * Picture
-         * @type {string}
-         */
-        this.picture = "";
-        /**
          * Permissions
          * @type {Array<String>}
          */
@@ -70,7 +65,6 @@ class User {
         this.username = obj.username;
         this.firstname = obj.firstname;
         this.lastname = obj.lastname;
-        this.picture = obj.picture;
         this.roles = obj.roles;
         this.attributes = obj.attributes;
     }
@@ -87,7 +81,6 @@ class User {
         this.username = obj.username;
         this.firstname = obj.firstname;
         this.lastname = obj.lastname;
-        this.picture = obj.picture;
         this.roles = obj.roles;
         this.attributes = obj.attributes;
     }

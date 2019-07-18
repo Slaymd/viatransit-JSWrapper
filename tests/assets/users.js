@@ -6,7 +6,6 @@ module.exports = {
         "username": "CMonjo",
         "firstname": "",
         "lastname": "",
-        "picture": "",
         "roles": ["user.update.all", "user.get.all", "user.remove.self"],
         "attributes": {}
     },
@@ -17,7 +16,6 @@ module.exports = {
         "username": "CMonjo",
         "firstname": "Camille",
         "lastname": "Monjo",
-        "picture": "http://viatransit.fr/img/cmonjo.png",
         "history": [{
             "status": "info",
             "type": "register",
@@ -25,6 +23,8 @@ module.exports = {
             "date": "2019-06-25T18:25:43.511Z"
         }],
         "roles": ["user.update.all", "user.get.all", "user.remove.self"],
-        "attributes": {}
+        "attributes": {
+            "picture": "http://viatransit.fr/img/cmonjo.png",
+        }
     }
 };
