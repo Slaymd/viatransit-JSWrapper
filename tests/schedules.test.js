@@ -9,6 +9,7 @@ describe('Schedules', () => {
 
     describe('API', () => {
         it('should throw an error because wrong parameters');
+
         it('should receive schedules on normal format', async () => {
             const schedules = await viatransit.API.getSchedules('tam', 'S5472');
 
@@ -19,6 +20,7 @@ describe('Schedules', () => {
                 assert.instanceOf(schedule, viatransit.Schedule);
             }
         });
+
         it('should receive schedules on clusterized format', async () => {
             const clusters = await viatransit.API.getClusterizedSchedules('tam', 'S5472');
 
@@ -37,6 +39,25 @@ describe('Schedules', () => {
                 }
             }
         });
+
+        it('should receive schedules on by-line format', async () => {
+            const clusters = await viatransit.API.getByLineSchedules('tam', 'S5472');
+
+            assert.isArray(clusters);
+            if (clusters.length === 0)
+                return;
+            for (let cluster of clusters) {
+                assert.nestedProperty(cluster, 'line', 'A cluster should have a line property');
+                assert.nestedProperty(cluster, 'line.id', 'A cluster line should have an id property');
+                assert.nestedProperty(cluster, 'line.network', 'A cluster line should have a network property');
+                assert.nestedProperty(cluster, 'schedules', 'A cluster should have a schedules property');
+                assert.isArray(cluster.schedules, 'Cluster schedules should be an Array');
+                for (let schedule of cluster.schedules) {
+                    assert.instanceOf(schedule, viatransit.Schedule, 'Cluster schedules should be an Array of Schedule class');
+                }
+            }
+        });
+
     });
 
     describe('Model', () => {
