@@ -23,4 +23,5 @@ module.exports.API = {
     ...require('./api/disruptions'),
     ...require('./api/zones'),
     ...require('./api/networks'),
+    ...require('./api/search'),
 };
