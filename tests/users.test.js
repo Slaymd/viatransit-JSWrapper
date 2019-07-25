@@ -26,10 +26,9 @@ describe('Users', () => {
             assert.strictEqual(user.firstname, "");
             assert.typeOf(user.lastname, 'string');
             assert.strictEqual(user.lastname, "");
-            assert.isArray(user.roles);
-            for (let role of user.roles) {
-                //     //TODO Vérifier le nombre d'attributs que l'object a
-                assert.typeOf(role, 'string');
+            assert.isArray(user.permissions);
+            for (let perm of user.permissions) {
+                assert.typeOf(perm, 'string');
             }
             assert.isObject(user.attributes);
         });
@@ -48,10 +47,9 @@ describe('Users', () => {
             assert.strictEqual(user.firstname, "Camille");
             assert.typeOf(user.lastname, 'string');
             assert.strictEqual(user.lastname, "Monjo");
-            assert.isArray(user.roles);
-            for (let role of user.roles) {
-                //     //TODO Vérifier le nombre d'attributs que l'object a
-                assert.typeOf(role, 'string');
+            assert.isArray(user.permissions);
+            for (let perm of user.permissions) {
+                assert.typeOf(perm, 'string');
             }
             assert.isObject(user.attributes);
         });

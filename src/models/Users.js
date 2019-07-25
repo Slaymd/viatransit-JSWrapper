@@ -45,7 +45,7 @@ class User {
          * Permissions
          * @type {Array<String>}
          */
-        this.roles = [];
+        this.permissions = [];
         /**
          * Attributes
          * @type {Object|null}
@@ -65,7 +65,7 @@ class User {
         this.username = obj.username;
         this.firstname = obj.firstname;
         this.lastname = obj.lastname;
-        this.roles = obj.roles;
+        this.permissions = obj.permissions;
         this.attributes = obj.attributes;
     }
 
@@ -81,20 +81,20 @@ class User {
         this.username = obj.username;
         this.firstname = obj.firstname;
         this.lastname = obj.lastname;
-        this.roles = obj.roles;
+        this.permissions = obj.permissions;
         this.attributes = obj.attributes;
     }
 
 
     /**
-     * Check roles from permission string
-     * @param role
+     * Check permissions from string
+     * @param permission
      * @returns Boolean
      */
-    hasPermission(/*String*/role) {
-        if (this.roles === null || this.roles === undefined)
+    hasPermission(/*String*/permission) {
+        if (this.permissions === null || this.permissions === undefined)
             return false;
-        return this.roles.includes(role);
+        return this.permissions.includes(permission);
     }
 
     /**

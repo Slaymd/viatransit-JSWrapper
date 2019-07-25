@@ -2,7 +2,7 @@
 const axios = require('axios');
 
 //Models
-const User = require('../models/User');
+const User = require('../models/Users');
 
 //Utils
 const apiRoot = require('./utils').getAPIRoot();
