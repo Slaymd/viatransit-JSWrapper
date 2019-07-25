@@ -13,7 +13,7 @@ describe('Permissions', () => {
 
     describe('Model', () => {
         it('should be properly filled from Database', () => {
-            let permission = new viatransit.Permissions();
+            let permission = new viatransit.Permission();
 
             permission.fillFromDatabase(permissionAssets.dbFormat);
             assert.typeOf(permission.id, 'string');
