@@ -26,7 +26,7 @@ describe('Permissions', () => {
         });
 
         it('should be properly filled from API', () => {
-            let permission = new viatransit.Permissions();
+            let permission = new viatransit.Permission();
 
             permission.fillFromAPI(permissionAssets.apiFormat);
             assert.typeOf(permission.id, 'string');
