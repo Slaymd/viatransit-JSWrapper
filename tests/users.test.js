@@ -53,19 +53,5 @@ describe('Users', () => {
             assert.strictEqual(user.logId, "6237980422");
             assert.isObject(user.attributes);
         });
-
-        // it('should return false because of user does\'nt have permission', () => {
-        //     let user = new viatransit.User();
-        //
-        //     user.fillFromAPI(userAssets.apiFormat);
-        //     assert.strictEqual(user.hasPermission("user.remove.all"), false);
-        // });
-        //
-        // it('should return true because of user have permission', () => {
-        //     let user = new viatransit.User();
-        //
-        //     user.fillFromAPI(userAssets.apiFormat);
-        //     assert.strictEqual(user.hasPermission("user.remove.self"), true);
-        // });
     });
 });

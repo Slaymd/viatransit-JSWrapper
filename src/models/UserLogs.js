@@ -2,7 +2,7 @@ const dataUtils = require("../api/utils");
 
 /**
  * @class UserLogs
- * @classdesc All properties of one user
+ * @classdesc All properties of one userLogs
  */
 class UserLogs {
 

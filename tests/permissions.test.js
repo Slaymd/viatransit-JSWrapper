@@ -36,5 +36,19 @@ describe('Permissions', () => {
             }
             assert.isObject(permission.attributes);
         });
+
+        it('should return false because of user does\'nt have permission', () => {
+            let permission = new viatransit.Permission();
+
+            permission.fillFromAPI(permissionAssets.dbFormat);
+            assert.strictEqual(permission.hasPermission("user.remove.all"), false);
+        });
+
+        it('should return true because of user have permission', () => {
+            let permission = new viatransit.Permission();
+
+            permission.fillFromAPI(permissionAssets.dbFormat);
+            assert.strictEqual(permission.hasPermission("user.remove.self"), true);
+        });
     });
 });

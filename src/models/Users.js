@@ -92,17 +92,6 @@ class User {
         this.attributes = obj.attributes;
     }
 
-    // /**
-    //  * Check permissions from string
-    //  * @param permission
-    //  * @returns Boolean
-    //  */
-    // hasPermission(/*String*/permission) {
-    //     if (this.permissions === null || this.permissions === undefined)
-    //         return false;
-    //     return this.permissions.includes(permission);
-    // }
-
     /**
      * Get attribute value from key
      * @param key
