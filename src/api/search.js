@@ -20,8 +20,6 @@ async function search(/*String*/query, /*[Number]*/nearbyCoords = null)
     return axios.get(url).then(res => {
         let result = {};
 
-        console.log(res.data);
-
         for (let type of Object.keys(res.data)) {
             result[type] = res.data[type].map(apiObject => {
                 if (type === 'public_transit' || type === 'trains') {
