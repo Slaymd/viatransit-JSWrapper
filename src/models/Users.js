@@ -43,9 +43,14 @@ class User {
         this.lastname = "";
         /**
          * Permissions
-         * @type {Array<String>}
+         * @type String
          */
-        this.permissions = [];
+        this.permissionId = "";
+        /**
+         * Logs
+         * @type String
+         */
+        this.logId = "";
         /**
          * Attributes
          * @type {Object|null}
@@ -65,7 +70,8 @@ class User {
         this.username = obj.username;
         this.firstname = obj.firstname;
         this.lastname = obj.lastname;
-        this.permissions = obj.permissions;
+        this.permissionId = obj.permissionId;
+        this.logId = obj.logId;
         this.attributes = obj.attributes;
     }
 
@@ -81,21 +87,21 @@ class User {
         this.username = obj.username;
         this.firstname = obj.firstname;
         this.lastname = obj.lastname;
-        this.permissions = obj.permissions;
+        this.permissionId = obj.permissionId;
+        this.logId = obj.logId;
         this.attributes = obj.attributes;
     }
 
-
-    /**
-     * Check permissions from string
-     * @param permission
-     * @returns Boolean
-     */
-    hasPermission(/*String*/permission) {
-        if (this.permissions === null || this.permissions === undefined)
-            return false;
-        return this.permissions.includes(permission);
-    }
+    // /**
+    //  * Check permissions from string
+    //  * @param permission
+    //  * @returns Boolean
+    //  */
+    // hasPermission(/*String*/permission) {
+    //     if (this.permissions === null || this.permissions === undefined)
+    //         return false;
+    //     return this.permissions.includes(permission);
+    // }
 
     /**
      * Get attribute value from key

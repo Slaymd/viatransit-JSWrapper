@@ -26,10 +26,10 @@ describe('Users', () => {
             assert.strictEqual(user.firstname, "");
             assert.typeOf(user.lastname, 'string');
             assert.strictEqual(user.lastname, "");
-            assert.isArray(user.permissions);
-            for (let perm of user.permissions) {
-                assert.typeOf(perm, 'string');
-            }
+            assert.typeOf(user.permissionId, 'string');
+            assert.strictEqual(user.permissionId, "");
+            assert.typeOf(user.logId, 'string');
+            assert.strictEqual(user.logId, "");
             assert.isObject(user.attributes);
         });
 
@@ -47,25 +47,25 @@ describe('Users', () => {
             assert.strictEqual(user.firstname, "Camille");
             assert.typeOf(user.lastname, 'string');
             assert.strictEqual(user.lastname, "Monjo");
-            assert.isArray(user.permissions);
-            for (let perm of user.permissions) {
-                assert.typeOf(perm, 'string');
-            }
+            assert.typeOf(user.permissionId, 'string');
+            assert.strictEqual(user.permissionId, "3467890");
+            assert.typeOf(user.logId, 'string');
+            assert.strictEqual(user.logId, "6237980422");
             assert.isObject(user.attributes);
         });
 
-        it('should return false because of user does\'nt have permission', () => {
-            let user = new viatransit.User();
-
-            user.fillFromAPI(userAssets.apiFormat);
-            assert.strictEqual(user.hasPermission("user.remove.all"), false);
-        });
-
-        it('should return true because of user have permission', () => {
-            let user = new viatransit.User();
-
-            user.fillFromAPI(userAssets.apiFormat);
-            assert.strictEqual(user.hasPermission("user.remove.self"), true);
-        });
+        // it('should return false because of user does\'nt have permission', () => {
+        //     let user = new viatransit.User();
+        //
+        //     user.fillFromAPI(userAssets.apiFormat);
+        //     assert.strictEqual(user.hasPermission("user.remove.all"), false);
+        // });
+        //
+        // it('should return true because of user have permission', () => {
+        //     let user = new viatransit.User();
+        //
+        //     user.fillFromAPI(userAssets.apiFormat);
+        //     assert.strictEqual(user.hasPermission("user.remove.self"), true);
+        // });
     });
 });

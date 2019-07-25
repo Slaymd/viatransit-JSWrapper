@@ -6,7 +6,8 @@ module.exports = {
         "username": "CMonjo",
         "firstname": "",
         "lastname": "",
-        "permissions": ["user.update.all", "user.get.all", "user.remove.self"],
+        "permissionId": "",
+        "logId": "",
         "attributes": {}
     },
     apiFormat: {
@@ -16,7 +17,8 @@ module.exports = {
         "username": "CMonjo",
         "firstname": "Camille",
         "lastname": "Monjo",
-        "permissions": ["user.update.all", "user.get.all", "user.remove.self"],
+        "permissionId": "3467890",
+        "logId": "6237980422",
         "attributes": {
             "picture": "http://viatransit.fr/img/cmonjo.png",
         }
