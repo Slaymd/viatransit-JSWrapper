@@ -56,6 +56,24 @@ describe('Networks', () => {
             assert.deepStrictEqual(network.services[1], {"key": "velomagg", "type": "bike_share", "name": "Velomagg", "attributes": null});
         });
 
+        it('should check network service key properly', () => {
+            let network = new viatransit.Network();
+            network.fillFromAPI(networkAssets.apiFormat);
+
+            assert.isTrue(network.hasServiceKey('velomagg'));
+            assert.isTrue(network.hasServiceKey('tam'));
+            assert.isFalse(network.hasServiceKey('ratp'));
+        });
+
+        it('should get network service properly', () => {
+            let network = new viatransit.Network();
+            network.fillFromAPI(networkAssets.apiFormat);
+
+            assert.deepStrictEqual(network.getService('tam'), {"key": "tam", "type": "public_transit", "name": "TaM", "attributes": null});
+            assert.isNull(network.getService('tcra'));
+            assert.deepStrictEqual(network.getService('velomagg'), {"key": "velomagg", "type": "bike_share", "name": "Velomagg", "attributes": null});
+        });
+
         it('should works with attributes', () => {
             let network = new viatransit.Network();
             let network2 = new viatransit.Network();

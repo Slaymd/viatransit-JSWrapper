@@ -78,6 +78,32 @@ class Network {
     }
 
     /**
+     * Check if network service key exist.
+     * @param key
+     * @return {boolean}
+     */
+    hasServiceKey(/*String*/key)
+    {
+        for (let service of this.services) {
+            if (service.key === key)
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Get service by key
+     * @param key
+     * @return {{key: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), name: String, attributes: (Object|null)}|null}
+     */
+    getService(/*String*/key)
+    {
+        if (!this.hasServiceKey(key))
+            return null;
+        return this.services.find(el => el.key === key);
+    }
+
+    /**
      * Get attribute value from key
      * @param key
      * @returns {*}
