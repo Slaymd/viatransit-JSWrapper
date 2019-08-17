@@ -1,6 +1,3 @@
-//Imports
-const dataUtils = require("../api/utils");
-
 /**
  * @class Network
  * @classdesc All properties of one network
@@ -18,11 +15,6 @@ class Network {
          */
         this.id = "";
         /**
-         * Key
-         * @type {string}
-         */
-        this.key = "";
-        /**
          * Name
          * @type {string}
          */
@@ -38,29 +30,15 @@ class Network {
          */
         this.description = "";
         /**
-         * Cities
-         * @deprecated Subject to change
-         * @type {Array<String>}
+         * Services
+         * @type {Array<{key: String, type: 'public_transit'|'bike_share'|'trains'|'car_park'|'unknown', name: String, attributes: Object|null}>}
          */
-        this.cities = [];
+        this.services = [];
         /**
-         * Types
-         * @deprecated Will be removed or moved
-         * @type {{modes: string[], attributes: null, type: string}[]}
+         * Status
+         * @type {'enabled'|'disabled'}
          */
-        this.types = [];
-        /**
-         * Agency website
-         * @deprecated Will be moved to attributes
-         * @type {string}
-         */
-        this.agencyWebsite = "";
-        /**
-         * Information types
-         * @deprecated Subject to change
-         * @type {Array<String>}
-         */
-        this.informationTypes = [];
+        this.status = "enabled";
         /**
          * Attributes
          * @type {Object|null}
@@ -78,11 +56,8 @@ class Network {
         this.name = obj.name;
         this.shortName = obj.short_name;
         this.description = obj.description;
-        this.cities = obj.cities;
-        this.key = obj.key;
-        this.types = obj.types;
-        this.agencyWebsite = obj.agency_website;
-        this.informationTypes = obj.information_types;
+        this.services = obj.services;
+        this.status = obj.status;
         this.attributes = obj.attributes;
     }
 
@@ -97,10 +72,8 @@ class Network {
         this.shortName = apiObject.shortName;
         this.description = apiObject.description;
         this.cities = apiObject.cities;
-        this.key = apiObject.key;
-        this.types = apiObject.types;
-        this.agencyWebsite = apiObject.agencyWebsite;
-        this.informationTypes = apiObject.informationTypes;
+        this.services = apiObject.services;
+        this.status = apiObject.status;
         this.attributes = apiObject.attributes;
     }
 
