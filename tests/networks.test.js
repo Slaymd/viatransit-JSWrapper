@@ -30,21 +30,13 @@ describe('Networks', () => {
             assert.strictEqual(network.id, '5cc472bfad0bdb2fd679cac8');
             assert.strictEqual(network.name, 'Transports de l\'Agglomération Montpelliéraine');
             assert.strictEqual(network.shortName, 'TaM');
-            assert.strictEqual(network.key, 'tam');
             assert.strictEqual(network.description, 'Go Wikipedia');
-            assert.strictEqual(network.agencyWebsite, 'https://tam-voyages.com/');
-            //Cities
-            assert.isArray(network.cities);
-            assert.lengthOf(network.cities, 1);
-            assert.deepStrictEqual(network.cities, ['Montpellier']);
-            //Information types
-            assert.isArray(network.informationTypes);
-            assert.lengthOf(network.informationTypes, 2);
-            assert.deepStrictEqual(network.informationTypes, ["realtime", "theorical"]);
-            //Types
-            assert.isArray(network.types);
-            assert.lengthOf(network.types, 1);
-            assert.deepStrictEqual(network.types, [{"modes": ["tramway", "bus"], "type": "public_transit", "attributes": null}]);
+            assert.strictEqual(network.status, 'enabled');
+            //Services
+            assert.isArray(network.services);
+            assert.lengthOf(network.services, 2);
+            assert.deepStrictEqual(network.services[0], {"key": "tam", "type": "public_transit", "name": "TaM", "attributes": null});
+            assert.deepStrictEqual(network.services[1], {"key": "velomagg", "type": "bike_share", "name": "Velomagg", "attributes": null});
         });
 
         it('should be properly filled from viaTransit API format', () => {
@@ -55,21 +47,31 @@ describe('Networks', () => {
             assert.strictEqual(network.id, '5cc472bfad0bdb2fd679cac8');
             assert.strictEqual(network.name, 'Transports de l\'Agglomération Montpelliéraine');
             assert.strictEqual(network.shortName, 'TaM');
-            assert.strictEqual(network.key, 'tam');
             assert.strictEqual(network.description, 'Go Wikipedia');
-            assert.strictEqual(network.agencyWebsite, 'https://tam-voyages.com/');
-            //Cities
-            assert.isArray(network.cities);
-            assert.lengthOf(network.cities, 1);
-            assert.deepStrictEqual(network.cities, ['Montpellier']);
-            //Information types
-            assert.isArray(network.informationTypes);
-            assert.lengthOf(network.informationTypes, 2);
-            assert.deepStrictEqual(network.informationTypes, ["realtime", "theorical"]);
-            //Types
-            assert.isArray(network.types);
-            assert.lengthOf(network.types, 1);
-            assert.deepStrictEqual(network.types, [{"modes": ["tramway", "bus"], "type": "public_transit", "attributes": null}]);
+            assert.strictEqual(network.status, 'enabled');
+            //Services
+            assert.isArray(network.services);
+            assert.lengthOf(network.services, 2);
+            assert.deepStrictEqual(network.services[0], {"key": "tam", "type": "public_transit", "name": "TaM", "attributes": null});
+            assert.deepStrictEqual(network.services[1], {"key": "velomagg", "type": "bike_share", "name": "Velomagg", "attributes": null});
+        });
+
+        it('should check network service key properly', () => {
+            let network = new viatransit.Network();
+            network.fillFromAPI(networkAssets.apiFormat);
+
+            assert.isTrue(network.hasServiceKey('velomagg'));
+            assert.isTrue(network.hasServiceKey('tam'));
+            assert.isFalse(network.hasServiceKey('ratp'));
+        });
+
+        it('should get network service properly', () => {
+            let network = new viatransit.Network();
+            network.fillFromAPI(networkAssets.apiFormat);
+
+            assert.deepStrictEqual(network.getService('tam'), {"key": "tam", "type": "public_transit", "name": "TaM", "attributes": null});
+            assert.isNull(network.getService('tcra'));
+            assert.deepStrictEqual(network.getService('velomagg'), {"key": "velomagg", "type": "bike_share", "name": "Velomagg", "attributes": null});
         });
 
         it('should works with attributes', () => {
@@ -80,7 +82,7 @@ describe('Networks', () => {
 
             assert.isNull(network2.getAttribute('blabla'));
             assert.isNull(network.getAttribute('lang'));
-            assert.strictEqual(network.getAttribute('country'), 'fr');
+            assert.strictEqual(network.getAttribute('website'), 'https://tam-voyages.com/');
         });
 
     });
