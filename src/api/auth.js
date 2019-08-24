@@ -10,6 +10,26 @@ const apiRoot = require('./utils').getAPIRoot();
  */
 
 /**
+ * Create an user
+ * @async
+ * @exports viatransit.API.register
+ * @param email
+ * @param password
+ * @return {Promise<String>}
+ */
+async function register(/*String*/email, /*String*/password)
+{
+    const url = apiRoot + "/users/register/";
+    const data = {email, password};
+
+    return await axios.post(url, data).then(res => {
+        return res.data.success;
+    }).catch(e => {
+        return e.response.data.error;
+    });
+}
+
+/**
  * Get jwt_token from API
  * @async
  * @exports viatransit.API.login
@@ -23,27 +43,7 @@ async function login(/*String*/email, /*String*/password)
     const data = {email, password};
 
     return await axios.post(url, data).then(res => {
-        return res.data.token;
-    }).catch(e => {
-        return e.response.data.error;
-    });
-}
-
-/**
- * Create new account
- * @async
- * @exports viatransit.API.register
- * @param email
- * @param password
- * @return {Promise<String>}
- */
-async function register(/*String*/email, /*String*/password)
-{
-    const url = apiRoot + "/users/register/";
-    const data = {email, password};
-
-    return await axios.post(url, data).then(res => {
-        return res;
+        return res.data;
     }).catch(e => {
         return e.response.data.error;
     });

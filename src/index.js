@@ -18,6 +18,7 @@ module.exports.Network = require('./models/Network');
 //API namespace
 module.exports.API = {
     ...require('./api/auth'),
+    ...require('./api/users'),
     ...require('./api/stations'),
     ...require('./api/schedules'),
     ...require('./api/disruptions'),

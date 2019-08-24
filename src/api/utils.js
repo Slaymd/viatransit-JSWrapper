@@ -3,7 +3,9 @@
  * @return {string}
  */
 module.exports.getAPIRoot = function() {
-    return ('https://viatransit.fr/api/v1');
+    const local = 'http://localhost/api/v1';
+    const network = 'https://viatransit.fr/api/v1';
+    return (network);
 };
 
 /**
