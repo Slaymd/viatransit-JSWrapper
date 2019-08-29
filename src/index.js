@@ -19,6 +19,7 @@ module.exports.Network = require('./models/Network');
 module.exports.API = {
     ...require('./api/auth'),
     ...require('./api/users'),
+    ...require('./api/permissions'),
     ...require('./api/stations'),
     ...require('./api/schedules'),
     ...require('./api/disruptions'),

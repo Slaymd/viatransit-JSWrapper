@@ -25,7 +25,7 @@ async function getProfile(/*String*/token, /*String*/id)
 
     return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}, data: data})
         .then((res) => {
-            return res.data.user;
+            return res.data;
         }).catch((e) => {
                 return e.response.data.error;
             }
