@@ -4,9 +4,6 @@ const axios = require('axios');
 //Models
 const Disruption = require('../models/Disruption');
 
-//Utils
-const apiRoot = require('./utils').getAPIRoot();
-
 /**
  * viaTransit schedules
  * @module viatransit
@@ -17,11 +14,12 @@ const apiRoot = require('./utils').getAPIRoot();
  * @async
  * @exports viatransit.API.getNetworkDisruptions
  * @param networkKey
+ * @param apiUrl
  * @return {Promise<{dataUpdateDate: String, disruptions: Array<Disruption>}>}
  */
-async function getNetworkDisruptions(/*String*/networkKey)
+async function getNetworkDisruptions(/*String*/networkKey, /*String*/apiUrl)
 {
-    const url = apiRoot + '/disruptions?network=' + networkKey;
+    const url = apiUrl + '/disruptions?network=' + networkKey;
 
     return axios.get(url).then(res => {
         try {
@@ -44,22 +42,28 @@ async function getNetworkDisruptions(/*String*/networkKey)
  * @async
  * @exports viatransit.API.getNetworkZoneDisruptions
  * @param zoneKey
+ * @param apiUrl
  * @return {Promise<Array<Disruption>>}
  */
-async function getNetworkZoneDisruptions(/*String*/zoneKey) {
-    const url = apiRoot + '/disruptions?networkZone=' + zoneKey;
+async function getNetworkZoneDisruptions(/*String*/zoneKey, /*String*/apiUrl)
+{
+    const url = apiUrl + '/disruptions?networkZone=' + zoneKey;
 
     return axios.get(url).then(res => {
-        if (!(res.data instanceof Array))
-            return [];
-        let disruptions = [];
+        try {
+            if (!(res.data instanceof Array))
+                return [];
+            let disruptions = [];
 
-        for (let disruptionApiObj of res.data) {
-            let disruption = new Disruption();
-            disruption.fillFromAPI(disruptionApiObj);
-            disruptions.push(disruption);
+            for (let disruptionApiObj of res.data) {
+                let disruption = new Disruption();
+                disruption.fillFromAPI(disruptionApiObj);
+                disruptions.push(disruption);
+            }
+            return disruptions;
+        } catch {
+            return null;
         }
-        return disruptions;
     });
 }
 

@@ -1,11 +1,11 @@
 /**
- * Get api root link
+ * Get API root link
  * @return {string}
  */
 module.exports.getAPIRoot = function() {
     const local = 'http://localhost/api/v1';
     const network = 'https://viatransit.fr/api/v1';
-    return (network);
+    return (local);
 };
 
 /**

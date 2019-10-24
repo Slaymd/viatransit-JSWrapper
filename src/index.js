@@ -3,6 +3,9 @@
  * @module viatransit
  */
 
+//Controllers
+module.exports.API = require('./controllers/api').API;
+
 //Models
 module.exports.Schedule = require('./models/Schedule');
 module.exports.DayDate = require('./models/DayDate');
@@ -14,16 +17,3 @@ module.exports.Permission = require('./models/Permissions');
 module.exports.Station = require('./models/Station');
 module.exports.Zone = require('./models/Zone');
 module.exports.Network = require('./models/Network');
-
-//API namespace
-module.exports.API = {
-    ...require('./api/auth'),
-    ...require('./api/users'),
-    ...require('./api/permissions'),
-    ...require('./api/stations'),
-    ...require('./api/schedules'),
-    ...require('./api/disruptions'),
-    ...require('./api/zones'),
-    ...require('./api/networks'),
-    ...require('./api/search'),
-};

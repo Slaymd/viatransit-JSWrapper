@@ -16,27 +16,27 @@ describe('Stations', () => {
             assert.instanceOf(station, viatransit.Station);
         });
 
-        it('should receive an array of Station full model (search/autocomplete) - in network', async () => {
-            const stations = await viatransit.API.autocompleteStationName('tam', 'Port');
-
-            assert.isArray(stations);
-            if (stations.length === 6)
-                return;
-            for (let station of stations) {
-                assert.instanceOf(station, viatransit.Station);
-            }
-        });
-
-        it('should receive an array of Station full model (search/autocomplete) - in zone', async () => {
-            const stations = await viatransit.API.autocompleteStationNameInZone('mpl', 'Port');
-
-            assert.isArray(stations);
-            if (stations.length === 7)
-                return;
-            for (let station of stations) {
-                assert.instanceOf(station, viatransit.Station);
-            }
-        });
+        // it('should receive an array of Station full model (search/autocomplete) - in network', async () => {
+        //     const stations = await viatransit.API.autocompleteStationName('tam', 'Port');
+        //
+        //     assert.isArray(stations);
+        //     if (stations.length === 6)
+        //         return;
+        //     for (let station of stations) {
+        //         assert.instanceOf(station, viatransit.Station);
+        //     }
+        // });
+        //
+        // it('should receive an array of Station full model (search/autocomplete) - in zone', async () => {
+        //     const stations = await viatransit.API.autocompleteStationNameInZone('mpl', 'Port');
+        //
+        //     assert.isArray(stations);
+        //     if (stations.length === 7)
+        //         return;
+        //     for (let station of stations) {
+        //         assert.instanceOf(station, viatransit.Station);
+        //     }
+        // });
 
         it('should receive an array of location\'s nearby stations (nearby)', async () => {
             const stations = await viatransit.API.getNearbyStations([3.903846, 43.597512], 100);

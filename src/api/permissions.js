@@ -4,9 +4,6 @@ const axios = require('axios');
 //Models
 const Permissions = require('../models/Permissions');
 
-//Utils
-const apiRoot = require('./utils').getAPIRoot();
-
 /**
  * viaTransit permissions
  * @module viatransit
@@ -16,11 +13,12 @@ const apiRoot = require('./utils').getAPIRoot();
  *
  * @param token
  * @param userId
+ * @param apiUrl
  * @returns {Promise<*>}
  */
-async function getPermissions(/*String*/token, /*String*/userId)
+async function getPermissions(/*String*/token, /*String*/userId, /*String*/apiUrl)
 {
-    const url = apiRoot + "/users/permissions/";
+    const url = apiUrl + "/users/permissions/";
     const data = {id: userId};
 
     return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}, data: data})
@@ -37,11 +35,12 @@ async function getPermissions(/*String*/token, /*String*/userId)
  * @param token
  * @param userId
  * @param permissions
+ * @param apiUrl
  * @returns {Promise<*>}
  */
-async function updatePermissions(/*String*/token, /*userId*/userId, /*Permissions*/permissions)
+async function updatePermissions(/*String*/token, /*userId*/userId, /*Permissions*/permissions, /*String*/apiUrl)
 {
-    const url = apiRoot + "/users/permissions/";
+    const url = apiUrl + "/users/permissions/";
 
     return await axios.put(url, { id : userId, permissions }, { headers: { Authorization: 'Bearer '.concat(token)}})
         .then((res) => {

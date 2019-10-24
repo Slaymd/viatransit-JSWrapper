@@ -4,9 +4,6 @@ const axios = require('axios');
 //Models
 const User = require('../models/Users');
 
-//Utils
-const apiRoot = require('./utils').getAPIRoot();
-
 /**
  * viaTransit users
  * @module viatransit
@@ -16,11 +13,12 @@ const apiRoot = require('./utils').getAPIRoot();
  *
  * @param token
  * @param id
+ * @param apiUrl
  * @returns {Promise<*>}
  */
-async function getProfile(/*String*/token, /*String*/id)
+async function getProfile(/*String*/token, /*String*/id, /*String*/apiUrl)
 {
-    const url = apiRoot + "/users/profile/";
+    const url = apiUrl + "/users/profile/";
     const data = {id};
 
     return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}, data: data})
@@ -36,11 +34,12 @@ async function getProfile(/*String*/token, /*String*/id)
  *
  * @param token
  * @param user
+ * @param apiUrl
  * @returns {Promise<*>}
  */
-async function updateProfile(/*String*/token, /*User*/user)
+async function updateProfile(/*String*/token, /*User*/user, /*String*/apiUrl)
 {
-    const url = apiRoot + "/users/profile/";
+    const url = apiUrl + "/users/profile/";
 
     return await axios.put(url, { user }, { headers: { Authorization: 'Bearer '.concat(token)}})
         .then((res) => {
@@ -55,11 +54,12 @@ async function updateProfile(/*String*/token, /*User*/user)
  *
  * @param token
  * @param id
+ * @param apiUrl
  * @returns {Promise<*>}
  */
-async function deleteProfile(/*String*/token, /*String*/id)
+async function deleteProfile(/*String*/token, /*String*/id, /*String*/apiUrl)
 {
-    const url = apiRoot + "/users/profile/";
+    const url = apiUrl + "/users/profile/";
     const data = {id};
 
     return await axios.delete(url, { headers: { Authorization: 'Bearer '.concat(token)}, data: data})

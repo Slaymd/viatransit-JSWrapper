@@ -16,11 +16,12 @@ const apiRoot = require('./utils').getAPIRoot();
  * Get networks from API
  * @async
  * @exports viatransit.API.getNetworks
+ * @param apiUrl
  * @return {Promise<{dataUpdateDate: String, zones: Array<Network>}>}
  */
-async function getNetworks()
+async function getNetworks(/*String*/apiUrl)
 {
-    const url = apiRoot + '/networks/agencies/';
+    const url = apiUrl + '/networks/agencies/';
 
     return axios.get(url).then(res => {
         let networks = [];

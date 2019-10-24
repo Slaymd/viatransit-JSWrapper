@@ -4,9 +4,6 @@ const axios = require('axios');
 //Models
 const Zone = require('../models/Zone');
 
-//Utils
-const apiRoot = require('./utils').getAPIRoot();
-
 /**
  * viaTransit zones
  * @module viatransit
@@ -15,12 +12,13 @@ const apiRoot = require('./utils').getAPIRoot();
 /**
  * Get zones from API
  * @async
+ * @param apiUrl
  * @exports viatransit.API.getZones
  * @return {Promise<{dataUpdateDate: String, zones: Array<Zone>}>}
  */
-async function getZones()
+async function getZones(/*String*/apiUrl)
 {
-    const url = apiRoot + '/networks/zones/';
+    const url = apiUrl + '/networks/zones/';
 
     return axios.get(url).then(res => {
         let zones = [];

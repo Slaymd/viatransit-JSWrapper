@@ -4,9 +4,6 @@ const axios = require('axios');
 //Models
 const Station = require('../models/Station');
 
-//Utils
-const apiRoot = require('./utils').getAPIRoot();
-
 /**
  * viaTransit stations
  * @module viatransit
@@ -18,11 +15,12 @@ const apiRoot = require('./utils').getAPIRoot();
  * @exports viatransit.API.getStation
  * @param networkKey
  * @param stationId
+ * @param apiUrl
  * @return {Promise<Station>}
  */
-async function getStation(/*String*/networkKey, /*String*/stationId)
+async function getStation(/*String*/networkKey, /*String*/stationId, /*String*/apiUrl)
 {
-    const url = apiRoot + '/stations/details?network=' + networkKey + '&id=' + stationId;
+    const url = apiUrl + '/stations/details?network=' + networkKey + '&id=' + stationId;
 
     return axios.get(url).then(res => {
         if (!(res.data instanceof Object))
@@ -38,12 +36,14 @@ async function getStation(/*String*/networkKey, /*String*/stationId)
  * Get API autocomplete result from a string
  * @async
  * @exports viatransit.API.autocompleteStationName
+ * @param networkKey
  * @param query
+ * @param apiUrl
  * @return {Promise<Array<Station>>}
  */
-async function autocompleteStationName(/*String*/networkKey, /*String*/query)
+async function autocompleteStationName(/*String*/networkKey, /*String*/query, /*String*/apiUrl)
 {
-    const url = apiRoot + '/stations/autocomplete?network=' + networkKey + '&str=' + query;
+    const url = apiUrl + '/stations/autocomplete?network=' + networkKey + '&str=' + query;
 
     return axios.get(url).then(res => {
         if (!(res.data instanceof Array))
@@ -63,12 +63,14 @@ async function autocompleteStationName(/*String*/networkKey, /*String*/query)
  * Get API autocomplete result from a string
  * @async
  * @exports viatransit.API.autocompleteStationNameInZone
+ * @param zoneKey
  * @param query
+ * @param apiUrl
  * @return {Promise<Array<Station>>}
  */
-async function autocompleteStationNameInZone(/*String*/zoneKey, /*String*/query)
+async function autocompleteStationNameInZone(/*String*/zoneKey, /*String*/query, /*String*/apiUrl)
 {
-    const url = apiRoot + '/stations/autocomplete?networkZone=' + zoneKey + '&str=' + query;
+    const url = apiUrl + '/stations/autocomplete?networkZone=' + zoneKey + '&str=' + query;
 
     return axios.get(url).then(res => {
         if (!(res.data instanceof Array))
@@ -90,11 +92,12 @@ async function autocompleteStationNameInZone(/*String*/zoneKey, /*String*/query)
  * @exports viatransit.API.getNearbyStations
  * @param coordinates
  * @param radius
+ * @param apiUrl
  * @return {Promise<Array<Station>>}
  */
-async function getNearbyStations(/*[Float, Float*/coordinates, /*Number*/radius = 1000)
+async function getNearbyStations(/*[Float, Float*/coordinates, /*Number*/radius = 1000, /*String*/apiUrl)
 {
-    const url = apiRoot + '/stations/nearby?lon=' + coordinates[0] + '&lat=' + coordinates[1] + '&r=' + radius;
+    const url = apiUrl + '/stations/nearby?lon=' + coordinates[0] + '&lat=' + coordinates[1] + '&r=' + radius;
 
     return axios.get(url).then(res => {
         let stations = [];
@@ -114,11 +117,12 @@ async function getNearbyStations(/*[Float, Float*/coordinates, /*Number*/radius 
  * @exports viatransit.API.getNearbyStations
  * @param coordinates
  * @param radius
+ * @param apiUrl
  * @return {Promise<{public_transit?: Array<Station>, trains?: Array<Station>}>}
  */
-async function getNearbyStationsByType(/*[Float, Float*/coordinates, /*Number*/radius = 1000)
+async function getNearbyStationsByType(/*[Float, Float*/coordinates, /*Number*/radius = 1000, /*String*/apiUrl)
 {
-    const url = apiRoot + '/stations/nearby?lon=' + coordinates[0] + '&lat=' + coordinates[1] + '&r=' + radius + '&format=by-type';
+    const url = apiUrl + '/stations/nearby?lon=' + coordinates[0] + '&lat=' + coordinates[1] + '&r=' + radius + '&format=by-type';
 
     return axios.get(url).then(res => {
         let result = {};

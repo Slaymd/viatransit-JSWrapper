@@ -4,18 +4,16 @@ const axios = require('axios');
 //Models
 const Station = require('../models/Station');
 
-//Utils
-const apiRoot = require('./utils').getAPIRoot();
-
 /**
  * Search in database
  * @param query
  * @param nearbyCoords
+ * @param apiUrl
  * @return {Promise<{public_transit?: [Station], trains?: [Station], places?: [{id: String, types: [String], name: String, location: [Number], attributes: Object|null}]}>}
  */
-async function search(/*String*/query, /*[Number]*/nearbyCoords = null)
+async function search(/*String*/query, /*[Number]*/nearbyCoords = null, /*String*/apiUrl)
 {
-    const url = apiRoot + '/search?q=' + query + (nearbyCoords === null ? '' : '&lon=' + nearbyCoords[0] + '&lat=' + nearbyCoords[1]);
+    const url = apiUrl + '/search?q=' + query + (nearbyCoords === null ? '' : '&lon=' + nearbyCoords[0] + '&lat=' + nearbyCoords[1]);
 
     return axios.get(url).then(res => {
         let result = {};

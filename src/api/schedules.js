@@ -4,9 +4,6 @@ const axios = require('axios');
 //Models
 const Schedule = require('../models/Schedule');
 
-//Utils
-const apiRoot = require('./utils').getAPIRoot();
-
 /**
  * viaTransit schedules
  * @module viatransit
@@ -19,11 +16,12 @@ const apiRoot = require('./utils').getAPIRoot();
  * @exports viatransit.API.getByLineSchedules
  * @param networkKey
  * @param stationId
+ * @param apiUrl
  * @return {Promise<Array<{line: {id: String, network: String}, schedules: Array<Schedule>}>>}
  */
-async function getByLineSchedules(/*String*/networkKey, /*String*/stationId)
+async function getByLineSchedules(/*String*/networkKey, /*String*/stationId, /*String*/apiUrl)
 {
-    const url = apiRoot + '/stations/schedules?network=' + networkKey + '&id=' + stationId + '&format=by-line';
+    const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId + '&format=by-line';
 
     return axios.get(url).then(res => {
         if (!(res.data instanceof Array))
@@ -53,11 +51,12 @@ async function getByLineSchedules(/*String*/networkKey, /*String*/stationId)
  * @exports viatransit.API.getClusterizedSchedules
  * @param networkKey
  * @param stationId
+ * @param apiUrl
  * @return {Promise<Array<{line: {id: String, network: String}, headsign: String, schedules: Array<Schedule>}>>}
  */
-async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId)
+async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId, /*String*/apiUrl)
 {
-    const url = apiRoot + '/stations/schedules?network=' + networkKey + '&id=' + stationId + '&format=cluster';
+    const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId + '&format=cluster';
 
     return axios.get(url).then(res => {
         if (!(res.data instanceof Array))
@@ -87,11 +86,12 @@ async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId
  * @exports viatransit.API.getSchedules
  * @param networkKey
  * @param stationId
+ * @param apiUrl
  * @return {Promise<Array<Schedule>>}
  */
-async function getSchedules(/*String*/networkKey, /*String*/stationId)
+async function getSchedules(/*String*/networkKey, /*String*/stationId, /*String*/apiUrl)
 {
-    const url = apiRoot + '/stations/schedules?network=' + networkKey + '&id=' + stationId;
+    const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId;
 
     return axios.get(url).then(res => {
         if (!(res.data instanceof Array))
