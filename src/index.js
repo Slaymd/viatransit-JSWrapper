@@ -17,3 +17,5 @@ module.exports.Permission = require('./models/Permissions');
 module.exports.Station = require('./models/Station');
 module.exports.Zone = require('./models/Zone');
 module.exports.Network = require('./models/Network');
+module.exports.TransitLink = require('./models/TransitLink');
+module.exports.TransitLinkArray = require('./models/TransitLinkArray');

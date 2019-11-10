@@ -54,7 +54,6 @@ describe('Stations', () => {
 
             assert.lengthOf(Object.keys(res), 2);
             for (let station of res.public_transit) {
-                console.log(station.name);
                 assert.instanceOf(station, viatransit.Station);
             }
         });
