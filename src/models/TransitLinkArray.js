@@ -5,19 +5,21 @@ const TransitLink = require('./TransitLink');
  */
 class TransitLinkArray extends Array {
 
-    constructor() {
+    constructor(/*(Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>|null)*/apiObjects = null) {
         super();
+        if (apiObjects instanceof Array)
+            this.fillArray(apiObjects);
     }
 
     /**
      * Fill properties from viaTransit API return format
      * @param apiObjects
      */
-    fillFromAPI(/*Object[]*/apiObjects)
+    fillArray(/*Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>*/apiObjects)
     {
         for (let apiObject of apiObjects) {
             let link = new TransitLink();
-            link.fillFromAPI(apiObject);
+            link.fill(apiObject);
             this.push(link);
         }
     }

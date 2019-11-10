@@ -4,16 +4,15 @@ const viatransit = require('../src/index');
 
 //Assets
 const transitLinksAssets = require('./assets/transitLinks.js');
-let link1 = new viatransit.TransitLink();
-link1.fillFromAPI(transitLinksAssets.link1);
+let link1 = new viatransit.TransitLink(transitLinksAssets.link1);
 let link2 = new viatransit.TransitLink();
-link2.fillFromAPI(transitLinksAssets.link2);
+link2.fill(transitLinksAssets.link2);
 let link3 = new viatransit.TransitLink();
-link3.fillFromAPI(transitLinksAssets.link3);
+link3.fill(transitLinksAssets.link3);
 let link4 = new viatransit.TransitLink();
-link4.fillFromAPI(transitLinksAssets.link4);
+link4.fill(transitLinksAssets.link4);
 let link5 = new viatransit.TransitLink();
-link5.fillFromAPI(transitLinksAssets.link5);
+link5.fill(transitLinksAssets.link5);
 
 describe('TransitLinks', () => {
 

@@ -9,7 +9,7 @@ class TransitLink {
     /**
      * Create an instance of TransitLink
      */
-    constructor()
+    constructor(/*({network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}|null)*/apiObject = null)
     {
         /**
          * Network
@@ -34,13 +34,16 @@ class TransitLink {
          * }}
          */
         this.attributes = null;
+        //Constructor fill
+        if (apiObject !== null)
+            this.fill(apiObject);
     }
 
     /**
      * Fill properties from viaTransit API return format
      * @param apiObject
      */
-    fillFromAPI(/*Object*/apiObject)
+    fill(/*{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}*/apiObject)
     {
         this.network = apiObject.network;
         this.service = apiObject.service;

@@ -4,10 +4,9 @@ const viatransit = require('../src/index');
 
 //Assets
 const transitLinkArraysAssets = require('./assets/transitLinkArrays.js');
-let array1 = new viatransit.TransitLinkArray();
-array1.fillFromAPI(transitLinkArraysAssets.array1);
+let array1 = new viatransit.TransitLinkArray(transitLinkArraysAssets.array1);
 let array2 = new viatransit.TransitLinkArray();
-array2.fillFromAPI(transitLinkArraysAssets.array2);
+array2.fillArray(transitLinkArraysAssets.array2);
 
 describe('TransitLinkArrays', () => {
 
