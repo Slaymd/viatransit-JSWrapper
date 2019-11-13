@@ -1,16 +1,17 @@
 //Imports
 const dataUtils = require("../api/utils");
+const TransitLinkArray = require("./TransitLinkArray");
+const Announcement = require('./Announcement');
 
 /**
  * @class Disruption
- * @classdesc All properties of one disruption
  */
 class Disruption {
 
     /**
      * Create an instance of Disruption
      */
-    constructor()
+    constructor(/*({id: String, links: Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>, type: String, status: String, startDate: String, endDate: String, attributes: (Object|null), announcements: Array<{id: String, links: Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>, authorId: String, startDate: Date, endDate: Date, priority: Number, lang: String, type: String, title: String, description: String, attributes: (Object|null)}>}|null)*/object = null)
     {
         /**
          * Id
@@ -19,9 +20,9 @@ class Disruption {
         this.id = "";
         /**
          * Links
-         * @type {Array<{network: String, lines: Array<String>, stations: Array<String>}>}
+         * @type {TransitLinkArray}
          */
-        this.links = [];
+        this.links = new TransitLinkArray();
         /**
          * Type
          * @type {string}
@@ -49,56 +50,28 @@ class Disruption {
         this.attributes = null;
         /**
          * Announcements
-         * @type {Array<{
-         *     id: String,
-         *     links: Array<{network: String, lines: Array<String>, stations: Array<String>}>,
-         *     authorId: String,
-         *     startDate: Date,
-         *     endDate: Date,
-         *     priority: Number,
-         *     lang: String,
-         *     type: String,
-         *     title: String,
-         *     description: String,
-         * }>}
+         * @type {Array<Announcement>}
          */
         this.announcements = [];
+        //Constructor optional fill
+        if (object !== null)
+            this.fill(object);
     }
 
     /**
      * Fill properties from viaTransit API return format
-     * @param apiObject
+     * @param object
      */
-    fillFromAPI(/*Object*/apiObject)
+    fill(/*{id: String, links: Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>, type: String, status: String, startDate: String, endDate: String, attributes: (Object|null), announcements: Array<{id: String, links: Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>, authorId: String, startDate: Date, endDate: Date, priority: Number, lang: String, type: String, title: String, description: String, attributes: (Object|null)}>}*/object)
     {
-        this.id = apiObject.id;
-        this.links = apiObject.links;
-        this.type = apiObject.type;
-        this.status = apiObject.status;
-        this.startDate = new Date(apiObject.startDate);
-        this.endDate = new Date(apiObject.endDate);
-        this.attributes = apiObject.attributes;
-        this.announcements = apiObject.announcements;
-        this.announcements.forEach(announcement => {
-            announcement.startDate = new Date(announcement.startDate);
-            announcement.endDate = new Date(announcement.endDate);
-        });
-    }
-
-    /**
-     * Fill properties from database
-     * @param obj Disruption database object
-     */
-    fillFromDatabase(/*Object*/obj)
-    {
-        this.id = obj._id;
-        this.links = dataUtils.reformatNetworkLinks(obj.links);
-        this.type = obj.type;
-        this.status = obj.status;
-        this.startDate = new Date(obj.start_date);
-        this.endDate = new Date(obj.end_date);
-        this.attributes = obj.attributes;
-        this.announcements = dataUtils.reformatDisruptionAnnouncements(obj.announcements);
+        this.id = object.id;
+        this.links = new TransitLinkArray(object.links);
+        this.type = object.type;
+        this.status = object.status;
+        this.startDate = new Date(object.startDate);
+        this.endDate = new Date(object.endDate);
+        this.attributes = object.attributes;
+        this.announcements = object.announcements.map(objectAnnouncement => new Announcement(objectAnnouncement));
     }
 
     /**
@@ -106,31 +79,48 @@ class Disruption {
      */
     isComplete()
     {
-        if (this.links instanceof Array && this.links.length > 0 && this.startDate instanceof Date && this.endDate instanceof Date)
-            return true;
-        return false;
+        return this.links instanceof TransitLinkArray && this.links.length >= 1 && this.startDate instanceof Date
+            && this.endDate instanceof Date && this.announcements instanceof Array;
     }
 
     /**
      * Check if network is linked to this disruption
-     * @param networkKey The network key
+     * @param networkId The network id
      * @param config Configure what you want to check (by default: disruption and announcements)
      * @return {boolean} is linked or not
      */
-    isLinkedToNetwork(/*String*/networkKey, /*{checkDisruption: Boolean, checkAnnouncements: Boolean}*/config = {checkAnnouncements: true, checkDisruption: true})
+    isLinkedToNetwork(/*String*/networkId, /*{checkDisruption: Boolean, checkAnnouncements: Boolean}*/config = {checkAnnouncements: true, checkDisruption: true})
     {
         let isLinked = false;
 
         if (config.checkAnnouncements) {
-            for (let announcement of this.announcements) {
-                if (dataUtils.isNetworkLinked(announcement.links, networkKey)) {
-                    isLinked = true;
-                    break;
-                }
-            }
+            if (this.announcements.flatMap(announcement => announcement.links).map(links => links.isLinkedToNetwork(networkId)).filter(el => el === true).length >= 1)
+                isLinked = true;
         }
         if (config.checkDisruption) {
-            if (dataUtils.isNetworkLinked(this.links, networkKey))
+            if (this.links.isLinkedToNetwork(networkId))
+                isLinked = true;
+        }
+        return isLinked;
+    }
+
+    /**
+     * Check if network' service is linked to this disruption
+     * @param networkId The network id
+     * @param serviceId The network' service id
+     * @param config Configure what you want to check (by default: disruption and announcements)
+     * @return {boolean} is linked or not
+     */
+    isLinkedToService(/*String*/networkId, /*String*/serviceId, /*{checkDisruption: Boolean, checkAnnouncements: Boolean}*/config = {checkAnnouncements: true, checkDisruption: true})
+    {
+        let isLinked = false;
+
+        if (config.checkAnnouncements) {
+            if (this.announcements.flatMap(announcement => announcement.links).map(links => links.isLinkedToService(networkId, serviceId)).filter(el => el === true).length >= 1)
+                isLinked = true;
+        }
+        if (config.checkDisruption) {
+            if (this.links.isLinkedToService(networkId, serviceId))
                 isLinked = true;
         }
         return isLinked;
@@ -138,25 +128,22 @@ class Disruption {
 
     /**
      * Check if line is linked to this disruption
-     * @param networkKey The line network key
+     * @param networkId The line network id
+     * @param serviceId The network' service id
      * @param lineId The line id
      * @param config Configure what you want to check (by default: disruption and announcements)
      * @return {boolean} is linked or not
      */
-    isLinkedToLine(/*String*/networkKey, /*String*/lineId, /*{checkDisruption: Boolean, checkAnnouncements: Boolean}*/config = {checkAnnouncements: true, checkDisruption: true})
+    isLinkedToLine(/*String*/networkId, /*String*/serviceId, /*String*/lineId, /*{checkDisruption: Boolean, checkAnnouncements: Boolean}*/config = {checkAnnouncements: true, checkDisruption: true})
     {
         let isLinked = false;
 
         if (config.checkAnnouncements) {
-            for (let announcement of this.announcements) {
-                if (dataUtils.isNetworkLinked(announcement.links, networkKey) && dataUtils.isLineLinked(announcement.links, networkKey, lineId)) {
-                    isLinked = true;
-                    break;
-                }
-            }
+            if (this.announcements.flatMap(announcement => announcement.links).map(links => links.isLinkedToLine(networkId, serviceId, lineId)).filter(el => el === true).length >= 1)
+                isLinked = true;
         }
         if (config.checkDisruption) {
-            if (dataUtils.isNetworkLinked(this.links, networkKey) && dataUtils.isLineLinked(this.links, networkKey, lineId))
+            if (this.links.isLinkedToLine(networkId, serviceId, lineId))
                 isLinked = true;
         }
         return isLinked;
@@ -164,28 +151,48 @@ class Disruption {
 
     /**
      * Check if station is linked to this disruption
-     * @param networkKey The station network key
+     * @param networkId The station network id
+     * @param serviceId The network' service id
      * @param lineId The line id (can also be 'all' to be line independent)
      * @param stationId The station id
      * @param config Configure what you want to check (by default: disruption and announcements)
      * @return {boolean} is linked or not
      */
-    isLinkedToStation(/*String*/networkKey, /*String*/lineId, /*String*/stationId, /*{checkDisruption: Boolean, checkAnnouncements: Boolean}*/config = {checkAnnouncements: true, checkDisruption: true})
+    isLinkedToStation(/*String*/networkId, /*String*/serviceId, /*String*/lineId, /*String*/stationId, /*{checkDisruption: Boolean, checkAnnouncements: Boolean}*/config = {checkAnnouncements: true, checkDisruption: true})
     {
         let isLinked = false;
 
         if (config.checkAnnouncements) {
-            for (let announcement of this.announcements) {
-                if (dataUtils.isNetworkLinked(announcement.links, networkKey) && (lineId === 'all' || dataUtils.isLineLinked(announcement.links, networkKey, lineId)) && dataUtils.isStationLinked(announcement.links, networkKey, lineId, stationId)) {
-                    isLinked = true;
-                    break;
-                }
-            }
+            if (this.announcements.flatMap(announcement => announcement.links).map(links => links.isLinkedToStation(networkId, serviceId, lineId, stationId)).filter(el => el === true).length >= 1)
+                isLinked = true;
         }
         if (config.checkDisruption) {
-            if (dataUtils.isNetworkLinked(this.links, networkKey) &&
-                (lineId === 'all' || dataUtils.isLineLinked(this.links, networkKey, lineId)) &&
-                dataUtils.isStationLinked(this.links, networkKey, lineId, stationId))
+            if (this.links.isLinkedToStation(networkId, serviceId, lineId, stationId))
+                isLinked = true;
+        }
+        return isLinked;
+    }
+
+    /**
+     * Check if station is linked to this disruption
+     * @param networkId The station network id
+     * @param serviceId The network' service id
+     * @param lineId The line id (can also be 'all' to be line independent)
+     * @param stationId The station id
+     * @param stopId The stop id
+     * @param config Configure what you want to check (by default: disruption and announcements)
+     * @return {boolean} is linked or not
+     */
+    isLinkedToStop(/*String*/networkId, /*String*/serviceId, /*String*/lineId, /*String*/stationId, /*String*/stopId, /*{checkDisruption: Boolean, checkAnnouncements: Boolean}*/config = {checkAnnouncements: true, checkDisruption: true})
+    {
+        let isLinked = false;
+
+        if (config.checkAnnouncements) {
+            if (this.announcements.flatMap(announcement => announcement.links).map(links => links.isLinkedToStop(networkId, serviceId, lineId, stationId, stopId)).filter(el => el === true).length >= 1)
+                isLinked = true;
+        }
+        if (config.checkDisruption) {
+            if (this.links.isLinkedToStop(networkId, serviceId, lineId, stationId, stopId))
                 isLinked = true;
         }
         return isLinked;
@@ -193,33 +200,16 @@ class Disruption {
 
     /**
      * Get linked announcements
-     * @param networkKey
+     * @param networkId
+     * @param serviceId
      * @param lineId
      * @param stationId
-     * @return {Array<{
-     *     id: String,
-     *     links: Array<{network: String, lines: Array<String>, stations: Array<String>}>,
-     *     authorId: String,
-     *     startDate: Date,
-     *     endDate: Date,
-     *     priority: Number,
-     *     lang: String,
-     *     type: String,
-     *     title: String,
-     *     description: String,
-     * }>}
+     * @param stopId
+     * @return {Array<Announcement>}
      */
-    getLinkedAnnouncements(/*String*/networkKey, /*String*/lineId = 'all', /*String*/stationId = 'all')
+    getLinkedAnnouncements(/*String*/networkId, /*String*/serviceId = 'all', /*String*/lineId = 'all', /*String*/stationId = 'all', /*String*/stopId = 'all')
     {
-        let linkedAnnouncements = [];
-
-        for (let announcement of this.announcements) {
-            if ((networkKey === 'all' || dataUtils.isNetworkLinked(announcement.links, networkKey)) &&
-                (lineId === 'all' || dataUtils.isLineLinked(announcement.links, networkKey, lineId)) &&
-                (stationId === 'all' || dataUtils.isStationLinked(announcement.links, networkKey, lineId, stationId)))
-                linkedAnnouncements.push(announcement);
-        }
-        return linkedAnnouncements;
+        return this.announcements.filter(announcement => announcement.links.isLinkedToStop(networkId, serviceId, lineId, stationId, stopId));
     }
 
     /**

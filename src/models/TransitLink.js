@@ -9,7 +9,7 @@ class TransitLink {
     /**
      * Create an instance of TransitLink
      */
-    constructor(/*({network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}|null)*/apiObject = null)
+    constructor(/*({network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}|null)*/object = null)
     {
         /**
          * Network
@@ -35,20 +35,20 @@ class TransitLink {
          */
         this.attributes = null;
         //Constructor fill
-        if (apiObject !== null)
-            this.fill(apiObject);
+        if (object !== null)
+            this.fill(object);
     }
 
     /**
      * Fill properties from viaTransit API return format
      * @param apiObject
      */
-    fill(/*{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}*/apiObject)
+    fill(/*{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}*/object)
     {
-        this.network = apiObject.network;
-        this.service = apiObject.service;
-        this.type = apiObject.type;
-        this.attributes = apiObject.attributes;
+        this.network = object.network;
+        this.service = object.service;
+        this.type = object.type;
+        this.attributes = object.attributes;
     }
 
     /**

@@ -5,19 +5,20 @@ const TransitLink = require('./TransitLink');
  */
 class TransitLinkArray extends Array {
 
-    constructor(/*(Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>|null)*/apiObjects = null) {
+    constructor(/*(Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>|null)*/objects = null) {
         super();
-        if (apiObjects instanceof Array)
-            this.fillArray(apiObjects);
+        //Optional constructor fill
+        if (objects instanceof Array)
+            this.fillArray(objects);
     }
 
     /**
      * Fill properties from viaTransit API return format
-     * @param apiObjects
+     * @param objects
      */
-    fillArray(/*Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>*/apiObjects)
+    fillArray(/*Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>*/objects)
     {
-        for (let apiObject of apiObjects) {
+        for (let apiObject of objects) {
             let link = new TransitLink();
             link.fill(apiObject);
             this.push(link);
