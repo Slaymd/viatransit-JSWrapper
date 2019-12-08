@@ -1,6 +1,3 @@
-//Imports
-const dataUtils = require("../api/utils");
-
 /**
  * @class TransitLink
  */

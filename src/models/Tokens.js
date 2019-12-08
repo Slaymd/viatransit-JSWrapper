@@ -1,5 +1,3 @@
-const dataUtils = require("../api/utils");
-
 /**
  * @class Token
  * @classdesc All properties of one token

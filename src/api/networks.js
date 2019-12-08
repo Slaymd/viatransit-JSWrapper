@@ -4,9 +4,6 @@ const axios = require('axios');
 //Models
 const Network = require('../models/Network');
 
-//Utils
-const apiRoot = require('./utils').getAPIRoot();
-
 /**
  * viaTransit zones
  * @module viatransit

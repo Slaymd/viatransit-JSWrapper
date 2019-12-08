@@ -1,5 +1,3 @@
-const dataUtils = require("../api/utils");
-
 /**
  * @class UserLogs
  * @classdesc All properties of one userLogs

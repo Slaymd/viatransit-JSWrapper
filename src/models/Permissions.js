@@ -1,5 +1,3 @@
-const dataUtils = require("../api/utils");
-
 /**
  * @class Permissions
  * @classdesc All properties of one permissions

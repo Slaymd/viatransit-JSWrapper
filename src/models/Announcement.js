@@ -1,5 +1,4 @@
 //Imports
-const dataUtils = require("../api/utils");
 const TransitLinkArray = require("./TransitLinkArray");
 
 /**
