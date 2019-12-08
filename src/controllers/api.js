@@ -7,7 +7,6 @@ let schedulesMethods = require('../api/schedules');
 let searchMethods = require('../api/search');
 let stationsMethods = require('../api/stations');
 let usersMethods = require('../api/users');
-let zonesMethods = require('../api/zones');
 
 API = (function() {
     let apiRoot = "https://viatransit.fr/api/v1";
@@ -237,18 +236,6 @@ API = (function() {
         deleteProfile: function(/*String*/token, /*String*/id) {
             return usersMethods.deleteProfile(token, id, this.getAPIRoot())
         },
-
-        //ZONES
-
-        /**
-         * Get zones from API
-         * @async
-         * @exports viatransit.API.getZones
-         * @return {Promise<{dataUpdateDate: String, zones: Array<Zone>}>}
-         */
-        getZones: function() {
-            return zonesMethods.getZones(this.getAPIRoot())
-        }
     }
 }());
 
