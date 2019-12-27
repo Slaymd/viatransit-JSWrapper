@@ -19,6 +19,7 @@ describe('Lines', () => {
             assert.strictEqual(line1.name, 'T1 Mosson <> Odysseum');
             assert.strictEqual(line1.shortName, '1');
             assert.strictEqual(line1.type, 0);
+            assert.strictEqual(line1.displayOrder, 1);
             //Style
             assert.strictEqual(line1.style.backgroundColor, '0055A0');
             assert.strictEqual(line1.style.foregroundColor, 'FFFFFF');

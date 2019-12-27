@@ -10,7 +10,7 @@ class Line {
     /**
      * Create an instance of Line
      */
-    constructor(/*({id: String, networkId: String, networkServiceKey: String, name: String, shortName: String, type: number, style: {backgroundColor: string, foregroundColor: string, attributes: Object|null}, stopSequences: [{sequence: Array<{stopId: String, stationId: String}>, direction: number, main: boolean, attributes: Object|null}], attributes: Object|null}|null)*/object= null)
+    constructor(/*({id: String, networkId: String, networkServiceKey: String, name: String, shortName: String, type: number, displayOrder: number, style: {backgroundColor: string, foregroundColor: string, attributes: Object|null}, stopSequences: [{sequence: Array<{stopId: String, stationId: String}>, direction: number, main: boolean, attributes: Object|null}], attributes: Object|null}|null)*/object= null)
     {
         /**
          * Id
@@ -43,6 +43,11 @@ class Line {
          */
         this.type = -1;
         /**
+         * Display Order
+         * @type {number}
+         */
+        this.displayOrder = -1;
+        /**
          * Style
          * @type {{backgroundColor: string, foregroundColor: string, attributes: Object|null}}
          */
@@ -70,7 +75,7 @@ class Line {
      * Fill properties from viaTransit API return format
      * @param object
      */
-    fill(/*{id: String, networkId: String, networkServiceKey: String, name: String, shortName: String, type: number, style: {backgroundColor: string, foregroundColor: string, attributes: Object|null}, stopSequences: [{sequence: Array<{stopId: String, stationId: String}>, direction: number, main: boolean, attributes: Object|null}], attributes: Object|null}*/object)
+    fill(/*{id: String, networkId: String, networkServiceKey: String, name: String, shortName: String, type: number, displayOrder: number, style: {backgroundColor: string, foregroundColor: string, attributes: Object|null}, stopSequences: [{sequence: Array<{stopId: String, stationId: String}>, direction: number, main: boolean, attributes: Object|null}], attributes: Object|null}*/object)
     {
         this.id = object.id;
         this.networkId = object.networkId;
@@ -78,6 +83,7 @@ class Line {
         this.name = object.name;
         this.shortName =  object.shortName;
         this.type = object.type;
+        this.displayOrder = object.displayOrder;
         this.style = object.style;
         this.stopSequences = object.stopSequences.map(stopSequence => new StopSequence(stopSequence));
         this.attributes = object.attributes;

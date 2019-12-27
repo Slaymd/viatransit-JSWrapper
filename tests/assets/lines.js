@@ -6,6 +6,7 @@ module.exports = {
         "name": "T1 Mosson <> Odysseum",
         "shortName": "1",
         "type": 0,
+        "displayOrder": 1,
         "style": {
             "backgroundColor": "0055A0",
             "foregroundColor": "FFFFFF",
@@ -89,6 +90,7 @@ module.exports = {
         "name": "T1 Mosson <> Odysseum",
         "shortName": "1",
         "type": 0,
+        "displayOrder": 1,
         "style": {
             "backgroundColor": "0055A0",
             "foregroundColor": "FFFFFF",
