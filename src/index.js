@@ -19,4 +19,6 @@ module.exports.Station = require('./models/Station');
 module.exports.Network = require('./models/Network');
 module.exports.NetworkService = require('./models/NetworkService');
 module.exports.TransitLink = require('./models/TransitLink');
-module.exports.TransitLinkArray = require('./models/TransitLinkArray');module.exports.StopSequence = require('./models/StopSequence');
+module.exports.TransitLinkArray = require('./models/TransitLinkArray');
+module.exports.Line = require('./models/Line');
+module.exports.StopSequence = require('./models/StopSequence');
