@@ -9,6 +9,19 @@ const line2 = new viatransit.Line(lineAssets.line2);
 
 describe('Lines', () => {
 
+    describe('API', () => {
+
+        it('should receive all lines', async () => {
+            viatransit.API.setAPIRoot('https://viatransit.fr/beta/api/v1');
+            const lines = await viatransit.API.getLines('test');
+            viatransit.API.setAPIRoot('https://viatransit.fr/api/v1');
+
+            assert.lengthOf(lines.lines, 5);
+            assert.instanceOf(lines.lines[0], viatransit.Line);
+        });
+
+    });
+
     describe('Model', () => {
 
         it('should be properly filled from viaTransit API format', () => {

@@ -7,6 +7,7 @@ let schedulesMethods = require('../api/schedules');
 let searchMethods = require('../api/search');
 let stationsMethods = require('../api/stations');
 let usersMethods = require('../api/users');
+let linesMethods = require('../api/lines');
 
 API = (function() {
     let apiRoot = "https://viatransit.fr/api/v1";
@@ -76,6 +77,19 @@ API = (function() {
          */
         getNetworks: function() {
             return networksMethods.getNetworks(this.getAPIRoot());
+        },
+
+        //LINES
+
+        /**
+         * Get lines from API
+         * @async
+         * @exports viatransit.API.getLines
+         * @param networkServiceKey
+         * @return {Promise<{dataUpdateDate: String, lines: Array<Line>}>}
+         */
+        getLines: function(/*String*/networkServiceKey) {
+            return linesMethods.getLines(this.getAPIRoot(), networkServiceKey);
         },
 
         //PERMISSIONS
