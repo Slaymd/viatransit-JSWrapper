@@ -8,6 +8,7 @@ let searchMethods = require('../api/search');
 let stationsMethods = require('../api/stations');
 let usersMethods = require('../api/users');
 let linesMethods = require('../api/lines');
+let versionsMethods = require('../api/versions');
 
 API = (function() {
     let apiRoot = "https://viatransit.fr/api/v1";
@@ -67,6 +68,34 @@ API = (function() {
             return disruptionsMethods.getNetworkZoneDisruptions(zoneKey, this.getAPIRoot());
         },
 
+        //VERSIONS
+
+        /**
+         * Check data update availability
+         * @async
+         * @exports viatransit.API.isDataRequiringUpdate
+         * @param dataKey
+         * @param actualVersionDate
+         * @return {Promise<boolean>}
+         */
+        isDataRequiringUpdate: function(/*String*/dataKey, /*Date*/actualVersionDate)
+        {
+            return versionsMethods.isDataRequiringUpdate(this.getAPIRoot(), dataKey, actualVersionDate);
+        },
+
+        /**
+         * Get data version date
+         * @async
+         * @exports viatransit.API.getDataVersionDate
+         * @param apiUrl
+         * @param dataKey
+         * @return {Promise<Date|null>}
+         */
+        getDataVersionDate: function(/*String*/dataKey)
+        {
+            return versionsMethods.getDataVersionDate(this.getAPIRoot(), dataKey);
+        },
+
         //NETWORKS
 
         /**
@@ -75,7 +104,8 @@ API = (function() {
          * @exports viatransit.API.getNetworks
          * @return {Promise<{dataUpdateDate: String, zones: Array<Network>}>}
          */
-        getNetworks: function() {
+        getNetworks: function()
+        {
             return networksMethods.getNetworks(this.getAPIRoot());
         },
 
