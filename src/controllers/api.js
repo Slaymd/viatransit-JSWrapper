@@ -87,7 +87,6 @@ API = (function() {
          * Get data version date
          * @async
          * @exports viatransit.API.getDataVersionDate
-         * @param apiUrl
          * @param dataKey
          * @return {Promise<Date|null>}
          */
@@ -102,7 +101,7 @@ API = (function() {
          * Get networks from API
          * @async
          * @exports viatransit.API.getNetworks
-         * @return {Promise<{dataUpdateDate: String, zones: Array<Network>}>}
+         * @return {Promise<{dataUpdateDate: String, networks: Array<Network>}>}
          */
         getNetworks: function()
         {

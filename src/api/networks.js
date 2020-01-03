@@ -14,20 +14,17 @@ const Network = require('../models/Network');
  * @async
  * @exports viatransit.API.getNetworks
  * @param apiUrl
- * @return {Promise<{dataUpdateDate: String, zones: Array<Network>}>}
+ * @return {Promise<{dataUpdateDate: String, networks: Array<Network>}>}
  */
 async function getNetworks(/*String*/apiUrl)
 {
-    const url = apiUrl + '/networks/agencies/';
+    const url = apiUrl + '/networks/';
 
     return axios.get(url).then(res => {
         let networks = [];
 
         for (let networkApiObj of res.data.networks) {
-            let network = new Network();
-
-            network.fillFromAPI(networkApiObj);
-            networks.push(network);
+            networks.push(new Network(networkApiObj));
         }
         return {dataUpdateDate: res.data.dataUpdateDate, networks};
     });
