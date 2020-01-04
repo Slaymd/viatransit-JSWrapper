@@ -52,7 +52,7 @@ class Line {
          * @type {{backgroundColor: string, foregroundColor: string, attributes: Object|null}}
          */
         this.style = {
-            backgroundColor: "000000",
+            backgroundColor: "c8c8c8",
             foregroundColor: "FFFFFF",
             attributes: null
         };
