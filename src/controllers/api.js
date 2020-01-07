@@ -9,6 +9,7 @@ let stationsMethods = require('../api/stations');
 let usersMethods = require('../api/users');
 let linesMethods = require('../api/lines');
 let versionsMethods = require('../api/versions');
+let mapsMethods = require('../api/maps');
 
 API = (function() {
     let apiRoot = "https://viatransit.fr/api/v1";
@@ -94,6 +95,22 @@ API = (function() {
         {
             return versionsMethods.getDataVersionDate(this.getAPIRoot(), dataKey);
         },
+
+        //MAP
+
+        /**
+         * Get line map from API
+         * @async
+         * @exports viatransit.API.getLines
+         * @param networkServiceKey
+         * @param lineId
+         * @return {Promise<{lineSegments: [{id: String, networkId: String, networkServiceKey: String, lineId: String, fromStopId: String, toStopId: String, directionId: Number, shape: [ [ Number ] ], attributes: Object|null}], stations: [{stopId: String, stationId: String, location: {type: String, coordinates: [ Number ]}, name: String, lines: [ {network: String, id: String} ]}]}>}
+         */
+        getLineMap: function(/*String*/networkServiceKey, /*String*/lineId)
+        {
+            return mapsMethods.getLineMap(this.getAPIRoot(), networkServiceKey, lineId);
+        },
+
 
         //NETWORKS
 

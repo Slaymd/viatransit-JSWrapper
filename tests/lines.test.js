@@ -13,10 +13,10 @@ describe('Lines', () => {
 
         it('should receive all lines', async () => {
             viatransit.API.setAPIRoot('https://viatransit.fr/beta/api/v1');
-            const lines = await viatransit.API.getLines('test');
+            const lines = await viatransit.API.getLines('tam');
             viatransit.API.setAPIRoot('https://viatransit.fr/api/v1');
 
-            assert.lengthOf(lines.lines, 5);
+            assert.lengthOf(lines.lines, 45);
             assert.instanceOf(lines.lines[0], viatransit.Line);
         });
 
