@@ -18,10 +18,9 @@ const User = require('../models/Users');
  */
 async function getProfile(/*String*/token, /*String*/id, /*String*/apiUrl)
 {
-    const url = apiUrl + "/users/profile/";
-    const data = {id};
+    const url = apiUrl + "/users/profile?id=" + id;
 
-    return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}, data: data})
+    return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}})
         .then((res) => {
             return res.data;
         }).catch((e) => {
