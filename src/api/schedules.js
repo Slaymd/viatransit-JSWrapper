@@ -84,14 +84,15 @@ async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId
  * Get schedules from API
  * @async
  * @exports viatransit.API.getSchedules
+ * @param apiUrl
  * @param networkKey
  * @param stationId
- * @param apiUrl
+ * @param fromDate
  * @return {Promise<Array<Schedule>>}
  */
-async function getSchedules(/*String*/networkKey, /*String*/stationId, /*String*/apiUrl)
+async function getSchedules(/*String*/apiUrl, /*String*/networkKey, /*String*/stationId, /*(Date|null)*/fromDate = null)
 {
-    const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId;
+    const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId + (fromDate ? '&fromDate=' + fromDate.toISOString() : '');
 
     return axios.get(url).then(res => {
         if (!(res.data instanceof Array))

@@ -191,10 +191,11 @@ API = (function() {
          * @exports viatransit.API.getSchedules
          * @param networkKey
          * @param stationId
+         * @param fromDate
          * @return {Promise<Array<Schedule>>}
          */
-        getSchedules: function(/*String*/networkKey, /*String*/stationId) {
-            return schedulesMethods.getSchedules(networkKey, stationId, this.getAPIRoot())
+        getSchedules: function(/*String*/networkKey, /*String*/stationId, /*Date*/fromDate = null) {
+            return schedulesMethods.getSchedules(this.getAPIRoot(), networkKey, stationId, fromDate)
         },
 
         //SEARCH
