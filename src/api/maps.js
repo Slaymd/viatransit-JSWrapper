@@ -11,13 +11,13 @@ const axios = require('axios');
  * @async
  * @exports viatransit.API.getLineMap
  * @param apiUrl
- * @param networkServiceKey
+ * @param networkKey
  * @param lineId
- * @return {Promise<{lineSegments: [{id: String, networkId: String, networkServiceKey: String, lineId: String, fromStopId: String, toStopId: String, directionId: Number, shape: [ [ Number ] ], attributes: Object|null}], stations: [{stopId: String, stationId: String, location: {type: String, coordinates: [ Number ]}, name: String, lines: [ {network: String, id: String} ]}]}>}
+ * @return {Promise<{lineSegments: [{id: String, networkKey: String, lineId: String, fromStopId: String, toStopId: String, directionId: Number, shape: [ [ Number ] ], attributes: Object|null}], stations: [{stopId: String, stationId: String, location: {type: String, coordinates: [ Number ]}, name: String, lines: [ {network: String, id: String} ]}]}>}
  */
-async function getLineMap(/*String*/apiUrl, /*String*/networkServiceKey, /*String*/lineId)
+async function getLineMap(/*String*/apiUrl, /*String*/networkKey, /*String*/lineId)
 {
-    const url = apiUrl + '/map/line?serviceKey=' + networkServiceKey + '&lineId=' + lineId;
+    const url = apiUrl + '/map/line?networkKey=' + networkKey + '&lineId=' + lineId;
 
     return axios.get(url).then(res => {
         return res.data;
