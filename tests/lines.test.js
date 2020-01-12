@@ -27,8 +27,7 @@ describe('Lines', () => {
         it('should be properly filled from viaTransit API format', () => {
             //Generic properties
             assert.strictEqual(line1.id, '1');
-            assert.strictEqual(line1.networkId, '5cc472bfad0bdb2fd679cac8');
-            assert.strictEqual(line1.networkServiceKey, 'tam');
+            assert.strictEqual(line1.networkKey, 'tam');
             assert.strictEqual(line1.name, 'T1 Mosson <> Odysseum');
             assert.strictEqual(line1.shortName, '1');
             assert.strictEqual(line1.type, 0);

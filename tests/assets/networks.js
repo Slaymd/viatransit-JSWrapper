@@ -1,8 +1,9 @@
 module.exports = {
     network1: {
-        "id": "5cc472bfad0bdb2fd679cac8",
+        "key": "tam",
         "name": "TaM",
         "status": "enabled",
+        "type": "public_transit",
         "map": {
             "area": {
                 "type": "Polygon",
@@ -18,37 +19,20 @@ module.exports = {
         },
         "services": [
             {
-                "key": "tam",
-                "type": "public_transit",
+                "gtfsId": "1",
                 "name": "TaM",
+                "status": "enabled",
                 "links": [
                     {
-                        "network": "5cc472bfad0bdb2fd679cac8",
-                        "service": "tam",
-                        "type": "public_transit",
-                        "attributes": {
-                            "lines": ["all"]
-                        }
+                        "network": "tam",
+                        "lines": ["all"],
+                        "stations": [],
+                        "trips": [],
+                        "attributes": null
                     },
                 ],
                 "attributes": {icon: 'tam-mini'}
             },
-            {
-                "key": "velomagg",
-                "type": "bike_share",
-                "name": "Velomagg",
-                "links": [
-                    {
-                        "network": "5cc472bfad0bdb2fd679cac8",
-                        "service": "velomagg",
-                        "type": "bike_share",
-                        "attributes": {
-                            "lines": ["all"]
-                        }
-                    },
-                ],
-                "attributes": null
-            }
         ],
         "attributes": {
             "cities": ["Montpellier", "Lattes"],
@@ -56,26 +40,41 @@ module.exports = {
         }
     },
     network2: {
-        "id": "7c3472bfad3bdb2pd679dad3",
+        "key": "sncf",
         "name": "SNCF",
         "status": "hidden",
+        "type": "trains",
         "map": {
             "area": null,
             "center": null
         },
         "services": [
             {
-                "key": "sncf",
-                "type": "trains",
-                "name": "SNCF",
+                "gtfsId": "ter",
+                "status": "hidden",
+                "name": "TER",
                 "links": [
                     {
-                        "network": "7c3472bfad3bdb2pd679dad3",
-                        "service": "sncf",
-                        "type": "trains",
-                        "attributes": {
-                            "lines": ["all"]
-                        }
+                        "network": "sncf",
+                        "lines": ["TER_MARS_CERB", "TER_NARB_CARC"],
+                        "stations": [],
+                        "trips": [],
+                        "attributes": null
+                    },
+                ],
+                "attributes": null
+            },
+            {
+                "gtfsId": "tgv",
+                "status": "hidden",
+                "name": "TGV INOUÏ",
+                "links": [
+                    {
+                        "network": "sncf",
+                        "lines": ["TGV_PERP_PGLY", "TGV_BORD_PMON"],
+                        "stations": [],
+                        "trips": [],
+                        "attributes": null
                     },
                 ],
                 "attributes": null

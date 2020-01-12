@@ -1,5 +1,7 @@
 //Imports
 const NetworkService = require("./NetworkService");
+const Line = require('./Line');
+const Station = require('./Station');
 const turf = require('@turf/turf');
 
 /**
@@ -11,18 +13,23 @@ class Network {
     /**
      * Create an instance of Network
      */
-    constructor(/*{id: String, name: String, status: ('enabled'|'disabled'|'hidden'), map: {area: Object|null, center: Object|null}, services: Array<{key: String, status: ('enabled'|'disabled'|'hidden'), type: 'public_transit'|'bike_share'|'trains'|'car_park'|'unknown', name: String, links: Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>, attributes: Object|null}>, attributes: Object|null}*/object= null)
+    constructor(/*({key: String, name: String, type: 'public_transit'|'bike_share'|'trains'|'car_park'|'unknown', status: ('enabled'|'disabled'|'hidden'), map: {area: Object|null, center: Object|null}, services: Array<{gtfsId: String, status: ('enabled'|'disabled'|'hidden'), name: String, links: Array<{network: string, lines: [string], stations: [{stationId: string, stopId: string}], trips: [string], attributes: Object|null}>, attributes: Object|null}>, attributes: Object|null}|null)*/object= null)
     {
         /**
-         * Id
+         * Key
          * @type {string}
          */
-        this.id = "";
+        this.key = "";
         /**
          * Name
          * @type {string}
          */
         this.name = "";
+        /**
+         * Type
+         * @type {('public_transit'|'bike_share'|'trains'|'car_park'|'unknown')}
+         */
+        this.type = "unknown";
         /**
          * Status
          * @type {'enabled'|'disabled'|'hidden'}
@@ -55,10 +62,11 @@ class Network {
      * Fill properties from viaTransit API return format
      * @param object
      */
-    fill(/*{id: String, name: String, status: ('enabled'|'disabled'|'hidden'), map: {area: Object|null, center: Object|null}, services: Array<{key: String, status: ('enabled'|'disabled'|'hidden'), type: 'public_transit'|'bike_share'|'trains'|'car_park'|'unknown', name: String, links: Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>, attributes: Object|null}>, attributes: Object|null}*/object)
+    fill(/*{key: String, name: String, type: 'public_transit'|'bike_share'|'trains'|'car_park'|'unknown', status: ('enabled'|'disabled'|'hidden'), map: {area: Object|null, center: Object|null}, services: Array<{gtfsId: String, status: ('enabled'|'disabled'|'hidden'), name: String, links: Array<{network: string, lines: [string], stations: [{stationId: string, stopId: string}], trips: [string], attributes: Object|null}>, attributes: Object|null}>, attributes: Object|null}*/object)
     {
-        this.id = object.id;
+        this.key = object.key;
         this.name = object.name;
+        this.type = object.type;
         this.status = object.status;
         this.map = object.map;
         this.services = object.services.map(service => new NetworkService(service));
@@ -66,29 +74,18 @@ class Network {
     }
 
     /**
-     * Check if network service key exist.
-     * @param key
-     * @return {boolean}
-     */
-    hasServiceKey(/*String*/key)
-    {
-        for (let service of this.services) {
-            if (service.key === key)
-                return true;
-        }
-        return false;
-    }
-
-    /**
      * Get service by key
-     * @param key
-     * @return {NetworkService}
+     * @param networkObject
+     * @return {(NetworkService|null)}
      */
-    getService(/*String*/key)
+    getService(/*(Station|Line)*/networkObject)
     {
-        if (!this.hasServiceKey(key))
+        if (networkObject instanceof Line) {
+            return this.services.find(el => el.links.isLinkedToLine(networkObject.networkKey, networkObject.id));
+        } else if (networkObject instanceof Station) {
+            return this.services.find(el => el.links.isLinkedToLine(networkObject.network, networkObject.id));
+        } else
             return null;
-        return this.services.find(el => el.key === key);
     }
 
     /**

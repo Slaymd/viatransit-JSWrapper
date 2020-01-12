@@ -1,8 +1,7 @@
 module.exports = {
     line1: {
         "id": "1",
-        "networkId": "5cc472bfad0bdb2fd679cac8",
-        "networkServiceKey": "tam",
+        "networkKey": "tam",
         "name": "T1 Mosson <> Odysseum",
         "shortName": "1",
         "type": 0,
@@ -85,8 +84,7 @@ module.exports = {
     },
     line2: {
         "id": "1",
-        "networkId": "5cc472bfad0bdb2fd679cac8",
-        "networkServiceKey": "tam",
+        "networkKey": "tam",
         "name": "T1 Mosson <> Odysseum",
         "shortName": "1",
         "type": 0,

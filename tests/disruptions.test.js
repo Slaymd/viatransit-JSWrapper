@@ -21,15 +21,6 @@ describe('Disruptions', () => {
             // }
         /*}*/);
 
-        it('should receive network zones disruptions'/*, async () => {*/
-            // let disruptions = await viatransit.API.getNetworkZoneDisruptions('mpl');
-            //
-            // assert.isArray(disruptions);
-            // for (let disruption of disruptions) {
-            //     assert.instanceOf(disruption, viatransit.Disruption);
-            // }
-        /*}*/);
-
     });
 
     describe('Model', () => {
@@ -78,50 +69,46 @@ describe('Disruptions', () => {
     describe('Links', () => {
 
         it('should be linked to a network', () => {
-            assert.isTrue(disruption1.isLinkedToNetwork('5d8a85de477a0f6728a53b17'));
-            assert.isTrue(disruption1.isLinkedToNetwork('5d8a85de477a0f6728a53b17', {checkDisruption: false, checkAnnouncements: true}));
-            assert.isTrue(disruption1.isLinkedToNetwork('5d8a85de477a0f6728a53b17', {checkDisruption: true, checkAnnouncements: false}));
-            assert.isFalse(disruption1.isLinkedToNetwork('5d8a85de477a028a53b214'));
-            assert.isFalse(disruption3.isLinkedToNetwork('5d8a85de477a028a53b214', {checkDisruption: true, checkAnnouncements: false}));
-            assert.isTrue(disruption3.isLinkedToNetwork('5d8a85de477a028a53b214', {checkDisruption: false, checkAnnouncements: true}));
-        });
-
-        it('should be linked to a service', () => {
-            assert.isTrue(disruption1.isLinkedToService('5d8a85de477a0f6728a53b17', 'tam'));
-            assert.isTrue(disruption1.isLinkedToService('5d8a85de477a0f6728a53b17', 'public_transit'));
-            assert.isTrue(disruption1.isLinkedToService('5d8a85de477a0f6728a53b17', 'tam', {checkDisruption: false, checkAnnouncements: true}));
-            assert.isTrue(disruption1.isLinkedToService('5d8a85de477a0f6728a53b17','tam', {checkDisruption: true, checkAnnouncements: false}));
-            assert.isFalse(disruption1.isLinkedToService('5d8a85de477a0f6728a53b17', 'transpor'));
-            assert.isFalse(disruption3.isLinkedToService('5d8a85de477a0f6728a53b17', 'transpor', {checkDisruption: true, checkAnnouncements: false}));
-            assert.isTrue(disruption3.isLinkedToService('5d8a85de477a028a53b214', 'transpor', {checkDisruption: false, checkAnnouncements: true}));
+            assert.isTrue(disruption1.isLinkedToNetwork('tam'));
+            assert.isTrue(disruption1.isLinkedToNetwork('tam', {checkDisruption: false, checkAnnouncements: true}));
+            assert.isTrue(disruption1.isLinkedToNetwork('tam', {checkDisruption: true, checkAnnouncements: false}));
+            assert.isFalse(disruption1.isLinkedToNetwork('transpor'));
+            assert.isFalse(disruption3.isLinkedToNetwork('transpor', {checkDisruption: true, checkAnnouncements: false}));
+            assert.isTrue(disruption3.isLinkedToNetwork('transpor', {checkDisruption: false, checkAnnouncements: true}));
         });
 
         it('should be linked to a line', () => {
-            assert.isTrue(disruption1.isLinkedToLine('5d8a85de477a0f6728a53b17', 'tam', '7'));
-            assert.isTrue(disruption1.isLinkedToLine('5d8a85de477a0f6728a53b17', 'public_transit', '6'));
-            assert.isTrue(disruption1.isLinkedToLine('5d8a85de477a0f6728a53b17', 'tam', '8', {checkDisruption: false, checkAnnouncements: true}));
-            assert.isTrue(disruption1.isLinkedToLine('5d8a85de477a0f6728a53b17','tam', '7', {checkDisruption: true, checkAnnouncements: false}));
-            assert.isFalse(disruption1.isLinkedToLine('5d8a85de477a0f6728a53b17', 'tam', '9'));
-            assert.isFalse(disruption3.isLinkedToLine('5d8a85de477a0f6728a53b17', 'tam','8', {checkDisruption: true, checkAnnouncements: false}));
-            assert.isTrue(disruption3.isLinkedToLine('5d8a85de477a028a53b214', 'transpor','A', {checkDisruption: false, checkAnnouncements: true}));
-            assert.isFalse(disruption3.isLinkedToLine('5d8a85de477a028a53b214', 'transpor','B', {checkDisruption: false, checkAnnouncements: true}));
+            assert.isTrue(disruption1.isLinkedToLine('tam', '7'));
+            assert.isTrue(disruption1.isLinkedToLine('tam', '8', {checkDisruption: false, checkAnnouncements: true}));
+            assert.isTrue(disruption1.isLinkedToLine('tam', '7', {checkDisruption: true, checkAnnouncements: false}));
+            assert.isFalse(disruption1.isLinkedToLine('tam', '9'));
+            assert.isFalse(disruption3.isLinkedToLine('tam','8', {checkDisruption: true, checkAnnouncements: false}));
+            assert.isTrue(disruption3.isLinkedToLine('transpor','A', {checkDisruption: false, checkAnnouncements: true}));
+            assert.isFalse(disruption3.isLinkedToLine('transpor','B', {checkDisruption: false, checkAnnouncements: true}));
         });
 
         it('should be linked to a station', () => {
-            assert.isTrue(disruption1.isLinkedToStation('5d8a85de477a0f6728a53b17', 'tam', '7', 'S5570'));
-            assert.isFalse(disruption1.isLinkedToStation('5d8a85de477a0f6728a53b17', 'tam', '7', 'S55789', {checkAnnouncements: false, checkDisruption: true}));
-            assert.isTrue(disruption1.isLinkedToStation('5d8a85de477a0f6728a53b17', 'tam', '7', 'S55789', {checkAnnouncements: true, checkDisruption: false}));
+            assert.isTrue(disruption1.isLinkedToStation('tam', '7', 'S5570'));
+            assert.isFalse(disruption1.isLinkedToStation('tam', '7', 'S55789', {checkAnnouncements: false, checkDisruption: true}));
+            assert.isTrue(disruption1.isLinkedToStation('tam', '7', 'S55789', {checkAnnouncements: true, checkDisruption: false}));
         });
 
         it('should be linked to a stop', () => {
-            assert.isTrue(disruption1.isLinkedToStop('5d8a85de477a0f6728a53b17', 'tam', '7', 'S5570', '51'));
-            assert.isFalse(disruption1.isLinkedToStop('5d8a85de477a0f6728a53b17', 'tam', '7', 'S5570', '53', {checkDisruption: true, checkAnnouncements: false}));
-            assert.isTrue(disruption1.isLinkedToStop('5d8a85de477a0f6728a53b17', 'tam', '6', 'S5570', '53', {checkDisruption: true, checkAnnouncements: false}));
-            assert.isTrue(disruption1.isLinkedToStop('5d8a85de477a0f6728a53b17', 'tam', '7', 'S55789', '12313', {checkAnnouncements: true, checkDisruption: false}));
+            assert.isTrue(disruption1.isLinkedToStop('tam', '7', 'S5570', '51'));
+            assert.isFalse(disruption1.isLinkedToStop('tam', '7', 'S5570', '53', {checkDisruption: true, checkAnnouncements: false}));
+            assert.isTrue(disruption1.isLinkedToStop('tam', '6', 'S5570', '53', {checkDisruption: true, checkAnnouncements: false}));
+            assert.isTrue(disruption1.isLinkedToStop('tam', '7', 'S55789', '12313', {checkAnnouncements: true, checkDisruption: false}));
+        });
+
+        it('should be linked to a trip', () => {
+            assert.isTrue(disruption1.isLinkedToTrip('tam', 'S5570', '51', 'TRIP1'));
+            assert.isFalse(disruption1.isLinkedToTrip('tam', 'S5570', '53', 'TRIP2', {checkDisruption: true, checkAnnouncements: false}));
+            assert.isTrue(disruption1.isLinkedToTrip('tam', 'S5570', '53', 'TRIP1',{checkDisruption: true, checkAnnouncements: false}));
+            assert.isTrue(disruption1.isLinkedToTrip('tam', 'S5570', '53', 'TRIP4543', {checkAnnouncements: true, checkDisruption: false}));
         });
 
         it('should get linked announcements', () => {
-            assert.lengthOf(disruption3.getLinkedAnnouncements('5d8a85de477a028a53b214', 'transpor', 'L2', 'S5570', '42'), 1);
+            assert.lengthOf(disruption3.getLinkedAnnouncements('transpor', 'L2', 'S5570', '42'), 1);
         });
 
     });
