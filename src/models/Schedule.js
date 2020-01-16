@@ -1,6 +1,3 @@
-//Models
-const DayDate = require('./DayDate');
-
 /**
  * @class Schedule
  * @classdesc All properties of one schedule
@@ -10,13 +7,18 @@ class Schedule {
     /**
      * Create an instance of Schedule
      */
-    constructor()
+    constructor(/*({id: String, networkKey: String, lineId: String, stopId: String, destinationId: String, directionId: Number, headsign: String, arrivalDate: String, departureDate: String, theorical: Boolean, attributes: Object|null}|null)*/object = null)
     {
         /**
          * Id
          * @type {string}
          */
         this.id = "";
+        /**
+         * Network
+         * @type {string}
+         */
+        this.networkKey = "";
         /**
          * Line id
          * @type {string}
@@ -43,132 +45,93 @@ class Schedule {
          */
         this.headsign = "";
         /**
-         * Waiting time in seconds
-         * @type {number}
+         * Arrival date
+         * @type {string}
          */
-        this.waitingTime = 0;
+        this.arrivalDate = "";
         /**
-         * Departure time
-         * @type {DayDate}
+         * Departure date
+         * @type {string}
          */
-        this.departureTime = new DayDate();
+        this.departureDate = "";
         /**
          * Is theorical
          * @type {boolean}
          */
         this.theorical = true;
         /**
-         * Is day last schedule
-         * @type {boolean}
-         */
-        this.isLast = false;
-        /**
-         * Delay time in seconds (compared to the theorical schedule)
-         * @type {number}
-         */
-        this.delayTime = 0;
-        /**
-         * Network
-         * @type {string}
-         */
-        this.network = "";
-        /**
          * Attributes
          * @type {Object|null}
          */
         this.attributes = null;
-    }
-
-    /**
-     * Fill properties
-     * @param network
-     * @param id
-     * @param lineId
-     * @param stopId
-     * @param destinationId
-     * @param directionId
-     * @param headsign
-     * @param departureTime
-     * @param waitingTime
-     * @param theorical
-     * @param delayTime
-     */
-    fill(/*String*/network, /*String*/id, /*String*/lineId, /*String*/stopId,
-         /*String*/destinationId, /*Number*/directionId, /*String*/headsign,
-         /*DayDate*/departureTime, /*Number*/waitingTime, /*boolean*/theorical,
-         /*Number*/delayTime)
-    {
-        this.network = network;
-        this.id = id;
-        this.lineId = lineId;
-        this.stopId = stopId;
-        this.destinationId = destinationId;
-        this.directionId = directionId;
-        this.headsign = headsign;
-        this.departureTime = departureTime;
-        this.waitingTime = waitingTime;
-        this.theorical = theorical;
-        this.delayTime = delayTime;
+        //Optional constructor fill
+        if (object !== null)
+            this.fill(object);
     }
 
     /**
      * Fill properties from viaTransit API return format
-     * @param apiObject
+     * @param object
      */
-    fillFromAPI(/*Object*/apiObject)
-    {
-        this.network = apiObject.network;
-        this.departureTime.fill(apiObject.departureTime.hour, apiObject.departureTime.min, apiObject.departureTime.sec);
-        this.isLast = apiObject.isLast;
-        this.waitingTime = apiObject.waitingTime;
-        this.lineId = apiObject.lineId;
-        this.network = apiObject.network;
-        this.delayTime = apiObject.delayTime;
-        this.stopId = apiObject.stopId;
-        this.id = apiObject.id;
-        this.theorical = apiObject.theorical;
-        this.directionId = apiObject.directionId;
-        this.headsign = apiObject.headsign;
-        this.destinationId = apiObject.destinationId;
-        this.attributes = apiObject.attributes;
-        if (apiObject.theoricalDepartureTime !== undefined)
-            this.attributes = {...this.attributes, ...{theoricalDepartureTime: apiObject.theoricalDepartureTime}};
+    fill(/*{id: String, networkKey: String, lineId: String, stopId: String, destinationId: String, directionId: Number, headsign: String, arrivalDate: String, departureDate: String, theorical: Boolean, attributes: Object|null}*/object) {
+        this.id = object.id;
+        this.networkKey = object.networkKey;
+        this.lineId = object.lineId;
+        this.stopId = object.stopId;
+        this.destinationId = object.destinationId;
+        this.directionId = object.directionId;
+        this.headsign = object.headsign;
+        this.arrivalDate = object.arrivalDate;
+        this.departureDate = object.departureDate;
+        this.theorical = object.theorical;
+        this.attributes = object.attributes;
     }
 
     /**
-     * Fill from TaM CSV format array
-     * @param tamArray
-     * @return {boolean}
+     * Get decomposed date
+     * @param dateString
+     * @return {{hours: number, seconds: number, minutes: number}|null}
      */
-    fillFromTaMArray(/*[String]*/tamArray)
+    getDecomposedTime(/*String|null*/dateString= null)
     {
-        if (tamArray.length !== 11)
-            return false;
-        let tripId = tamArray[0];
-        let lineId = tamArray[4];
-        let stopId = tamArray[2];
-        let directionId = parseInt(tamArray[6]);
-        let destinationId = tamArray[10];
-        let tripHeadsign = tamArray[5];
-        let departureTime = tamArray[7];
-        let theorical = parseInt(tamArray[8]);
+        let date = new Date(!dateString ? this.departureDate : dateString);
 
-        if (Number.isNaN(directionId) || Number.isNaN(theorical))
-            return false;
-        this.id = tripId;
-        this.lineId = lineId;
-        this.stopId = stopId;
-        this.destinationId = destinationId;
-        this.directionId = directionId;
-        this.headsign = tripHeadsign;
-        this.departureTime.fillFromColonString(departureTime);
-        this.waitingTime = this.departureTime.getWaitingTime();
-        this.theorical = theorical === 1;
-        if (this.waitingTime < 86300 && this.waitingTime > 7200)
-            return false;
-        else if (this.waitingTime >= 86300)
-            this.waitingTime = 0;
-        return true;
+        if (isNaN(date.getTime()))
+            return null;
+        return {
+            hours: date.getHours(),
+            minutes: date.getMinutes(),
+            seconds: date.getSeconds(),
+        };
+    }
+
+    /**
+     * Get waiting time in seconds
+     * @param of departure or arrival
+     * @param fromDate
+     * @return {number}
+     */
+    getWaitingTime(/*('departure'|'arrival')*/of = 'departure', /*Date|null*/fromDate = null)
+    {
+        let now = !fromDate ? new Date() : fromDate;
+        let futureDate = new Date(of === 'departure' ? this.departureDate : this.arrivalDate);
+
+        return Math.round((futureDate - now) / 1000) + this.getDelayTime();
+    }
+
+    /**
+     * Get delay time
+     * @param fromDate
+     * @return {number}
+     */
+    getDelayTime(/*Date|null*/fromDate = null)
+    {
+        let realtimeDate = this.departureDate ? new Date(this.departureDate) : this.arrivalDate ? new Date(this.arrivalDate) : null;
+        let baseDate = this.departureDate && this.getAttribute('baseDepartureDate') ? new Date(this.getAttribute('baseDepartureDate')) : this.arrivalDate && this.getAttribute('baseArrivalDate') ? new Date(this.getAttribute('baseArrivalDate')) : null;
+
+        if (!realtimeDate || !baseDate)
+            return 0;
+        return Math.round((realtimeDate - baseDate) / 1000);
     }
 
     /**

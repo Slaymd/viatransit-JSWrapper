@@ -35,7 +35,7 @@ async function getByLineSchedules(/*String*/networkKey, /*String*/stationId, /*S
                 continue;
             for (let scheduleApiObj of cluster.schedules) {
                 let schedule = new Schedule();
-                schedule.fillFromAPI(scheduleApiObj);
+                schedule.fill(scheduleApiObj);
                 schedules.push(schedule);
             }
             cluster.schedules = schedules;
@@ -70,7 +70,7 @@ async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId
                 continue;
             for (let scheduleApiObj of cluster.schedules) {
                 let schedule = new Schedule();
-                schedule.fillFromAPI(scheduleApiObj);
+                schedule.fill(scheduleApiObj);
                 schedules.push(schedule);
             }
             cluster.schedules = schedules;
@@ -101,7 +101,7 @@ async function getSchedules(/*String*/apiUrl, /*String*/networkKey, /*String*/st
 
         for (let scheduleApiObj of res.data) {
             let schedule = new Schedule();
-            schedule.fillFromAPI(scheduleApiObj);
+            schedule.fill(scheduleApiObj);
             schedules.push(schedule);
         }
         return schedules;
