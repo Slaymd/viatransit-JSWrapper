@@ -97,8 +97,9 @@ describe('Schedules', () => {
 
         it('should get decomposed time', () => {
             let decomposedTime = schedule1.getDecomposedTime();
+            let departureDate = new Date(schedule1.departureDate);
 
-            assert.deepStrictEqual(decomposedTime, {hours: 15, minutes: 24, seconds: 22});
+            assert.deepStrictEqual(decomposedTime, {hours: departureDate.getHours(), minutes: departureDate.getMinutes(), seconds: departureDate.getSeconds()});
             assert.isNull(schedule2.getDecomposedTime("DAZDAZD21"));
         });
 
