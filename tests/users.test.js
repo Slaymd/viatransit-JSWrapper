@@ -8,6 +8,7 @@ const userAssets = require('./assets/users.js');
 describe('Users', () => {
 
     describe('API', () => {
+
         // //GET
         // it('should get own profile', async () => {
         //     const log = await viatransit.API.login('user-test@viatransit.fr', 'Test12345');
@@ -54,6 +55,11 @@ describe('Users', () => {
         //     const ret = await viatransit.API.getProfile(log.token, "wrongId");
         //
         //     assert.strictEqual(ret, "Wrong parameters.");
+        // });
+        // it('get all profile', async () => {
+        //     const logAdmin = await viatransit.API.login('admin-test@viatransit.fr', 'Test12345');
+        //     const allUsers = await viatransit.API.getAllUsers(logAdmin.token);
+        //     //TODO
         // });
         //
         // //DELETE

@@ -281,6 +281,14 @@ API = (function() {
         /**
          *
          * @param token
+         * @returns {Promise<*>}
+         */
+        getAllUsers: function(/*String*/token) {
+            return usersMethods.getAllUsers(token, this.getAPIRoot())
+        },
+        /**
+         *
+         * @param token
          * @param user
          * @returns {Promise<*>}
          */

@@ -32,6 +32,25 @@ async function getProfile(/*String*/token, /*String*/id, /*String*/apiUrl)
 /**
  *
  * @param token
+ * @param apiUrl
+ * @returns {Promise<*>}
+ */
+async function getAllUsers(/*String*/token, /*String*/apiUrl)
+{
+    const url = apiUrl + "/users/";
+
+    return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}})
+        .then((res) => {
+            return res.data;
+        }).catch((e) => {
+                return e.response.data.error;
+            }
+        );
+}
+
+/**
+ *
+ * @param token
  * @param user
  * @param apiUrl
  * @returns {Promise<*>}
@@ -70,4 +89,4 @@ async function deleteProfile(/*String*/token, /*String*/id, /*String*/apiUrl)
         );
 }
 
-module.exports = { getProfile, updateProfile, deleteProfile };
+module.exports = { getProfile, getAllUsers, updateProfile, deleteProfile };
