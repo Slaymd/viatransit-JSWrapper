@@ -35,7 +35,7 @@ async function getByLineSchedules(/*String*/networkKey, /*String*/stationId, /*S
                 continue;
             for (let scheduleApiObj of cluster.schedules) {
                 let schedule = new Schedule();
-                schedule.fillFromAPI(scheduleApiObj);
+                schedule.fill(scheduleApiObj);
                 schedules.push(schedule);
             }
             cluster.schedules = schedules;
@@ -70,7 +70,7 @@ async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId
                 continue;
             for (let scheduleApiObj of cluster.schedules) {
                 let schedule = new Schedule();
-                schedule.fillFromAPI(scheduleApiObj);
+                schedule.fill(scheduleApiObj);
                 schedules.push(schedule);
             }
             cluster.schedules = schedules;
@@ -84,14 +84,15 @@ async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId
  * Get schedules from API
  * @async
  * @exports viatransit.API.getSchedules
+ * @param apiUrl
  * @param networkKey
  * @param stationId
- * @param apiUrl
+ * @param fromDate
  * @return {Promise<Array<Schedule>>}
  */
-async function getSchedules(/*String*/networkKey, /*String*/stationId, /*String*/apiUrl)
+async function getSchedules(/*String*/apiUrl, /*String*/networkKey, /*String*/stationId, /*(Date|null)*/fromDate = null)
 {
-    const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId;
+    const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId + (fromDate ? '&fromDate=' + fromDate.toISOString() : '');
 
     return axios.get(url).then(res => {
         if (!(res.data instanceof Array))
@@ -100,7 +101,7 @@ async function getSchedules(/*String*/networkKey, /*String*/stationId, /*String*
 
         for (let scheduleApiObj of res.data) {
             let schedule = new Schedule();
-            schedule.fillFromAPI(scheduleApiObj);
+            schedule.fill(scheduleApiObj);
             schedules.push(schedule);
         }
         return schedules;

@@ -9,7 +9,7 @@ class Announcement {
     /**
      * Create an instance of Announcement
      */
-    constructor(/*({id: String, links: Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>, authorId: String, startDate: Date, endDate: Date, priority: Number, lang: String, type: String, title: String, description: String, attributes: (Object|null)}|null)*/object = null)
+    constructor(/*({id: String, links: Array<{network: string, lines: [string], stations: [{stationId: string, stopId: string}], trips: [string], attributes: Object|null}>, authorId: String, startDate: Date, endDate: Date, priority: Number, lang: String, type: String, title: String, description: String, attributes: (Object|null)}|null)*/object = null)
     {
         /**
          * Id
@@ -75,7 +75,7 @@ class Announcement {
      * Fill from viaTransit API return format
      * @param object
      */
-    fill(/*{id: String, links: Array<{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}>, authorId: String, startDate: Date, endDate: Date, priority: Number, lang: String, type: String, title: String, description: String, attributes: (Object|null)}*/object) {
+    fill(/*{id: String, links: Array<{network: string, lines: [string], stations: [{stationId: string, stopId: string}], trips: [string], attributes: Object|null}>, authorId: String, startDate: Date, endDate: Date, priority: Number, lang: String, type: String, title: String, description: String, attributes: (Object|null)}*/object) {
         this.id = object.id;
         this.links = new TransitLinkArray(object.links);
         this.authorId = object.authorId;

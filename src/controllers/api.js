@@ -102,13 +102,13 @@ API = (function() {
          * Get line map from API
          * @async
          * @exports viatransit.API.getLines
-         * @param networkServiceKey
+         * @param networkKey
          * @param lineId
-         * @return {Promise<{lineSegments: [{id: String, networkId: String, networkServiceKey: String, lineId: String, fromStopId: String, toStopId: String, directionId: Number, shape: [ [ Number ] ], attributes: Object|null}], stations: [{stopId: String, stationId: String, location: {type: String, coordinates: [ Number ]}, name: String, lines: [ {network: String, id: String} ]}]}>}
+         * @return {Promise<{lineSegments: [{id: String, networkKey: String, lineId: String, fromStopId: String, toStopId: String, directionId: Number, shape: [ [ Number ] ], attributes: Object|null}], stations: [{stopId: String, stationId: String, location: {type: String, coordinates: [ Number ]}, name: String, lines: [ {network: String, id: String} ]}]}>}
          */
-        getLineMap: function(/*String*/networkServiceKey, /*String*/lineId)
+        getLineMap: function(/*String*/networkKey, /*String*/lineId)
         {
-            return mapsMethods.getLineMap(this.getAPIRoot(), networkServiceKey, lineId);
+            return mapsMethods.getLineMap(this.getAPIRoot(), networkKey, lineId);
         },
 
 
@@ -131,11 +131,11 @@ API = (function() {
          * Get lines from API
          * @async
          * @exports viatransit.API.getLines
-         * @param networkServiceKey
+         * @param networkKey
          * @return {Promise<{dataUpdateDate: String, lines: Array<Line>}>}
          */
-        getLines: function(/*String*/networkServiceKey) {
-            return linesMethods.getLines(this.getAPIRoot(), networkServiceKey);
+        getLines: function(/*String*/networkKey) {
+            return linesMethods.getLines(this.getAPIRoot(), networkKey);
         },
 
         //PERMISSIONS
@@ -191,10 +191,11 @@ API = (function() {
          * @exports viatransit.API.getSchedules
          * @param networkKey
          * @param stationId
+         * @param fromDate
          * @return {Promise<Array<Schedule>>}
          */
-        getSchedules: function(/*String*/networkKey, /*String*/stationId) {
-            return schedulesMethods.getSchedules(networkKey, stationId, this.getAPIRoot())
+        getSchedules: function(/*String*/networkKey, /*String*/stationId, /*Date*/fromDate = null) {
+            return schedulesMethods.getSchedules(this.getAPIRoot(), networkKey, stationId, fromDate)
         },
 
         //SEARCH

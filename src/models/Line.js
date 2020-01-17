@@ -10,23 +10,18 @@ class Line {
     /**
      * Create an instance of Line
      */
-    constructor(/*({id: String, networkId: String, networkServiceKey: String, name: String, shortName: String, type: number, displayOrder: number, style: {backgroundColor: string, foregroundColor: string, attributes: Object|null}, stopSequences: [{sequence: Array<{stopId: String, stationId: String}>, direction: number, main: boolean, attributes: Object|null}], attributes: Object|null}|null)*/object= null)
+    constructor(/*({id: String, networkKey: String, name: String, shortName: String, type: number, displayOrder: number, style: {backgroundColor: string, foregroundColor: string, attributes: Object|null}, stopSequences: [{sequence: Array<{stopId: String, stationId: String}>, direction: number, main: boolean, attributes: Object|null}], attributes: Object|null}|null)*/object= null)
     {
+        /**
+         * Network Id
+         * @type {string}
+         */
+        this.networkKey = "";
         /**
          * Id
          * @type {string}
          */
         this.id = "";
-        /**
-         * Network Id
-         * @type {string}
-         */
-        this.networkId = "";
-        /**
-         * Network Service Key
-         * @type {string}
-         */
-        this.networkServiceKey = "";
         /**
          * Name
          * @type {string}
@@ -75,11 +70,10 @@ class Line {
      * Fill properties from viaTransit API return format
      * @param object
      */
-    fill(/*{id: String, networkId: String, networkServiceKey: String, name: String, shortName: String, type: number, displayOrder: number, style: {backgroundColor: string, foregroundColor: string, attributes: Object|null}, stopSequences: [{sequence: Array<{stopId: String, stationId: String}>, direction: number, main: boolean, attributes: Object|null}], attributes: Object|null}*/object)
+    fill(/*{id: String, networkKey: String, name: String, shortName: String, type: number, displayOrder: number, style: {backgroundColor: string, foregroundColor: string, attributes: Object|null}, stopSequences: [{sequence: Array<{stopId: String, stationId: String}>, direction: number, main: boolean, attributes: Object|null}], attributes: Object|null}*/object)
     {
         this.id = object.id;
-        this.networkId = object.networkId;
-        this.networkServiceKey = object.networkServiceKey;
+        this.networkKey = object.networkKey;
         this.name = object.name;
         this.shortName =  object.shortName;
         this.type = object.type;

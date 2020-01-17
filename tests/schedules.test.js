@@ -3,7 +3,9 @@ const assert = require('chai').assert;
 const viatransit = require('../src/index');
 
 //Assets
-const scheduleAPIFormatAsset = require('./assets/scheduleAPIFormat.json');
+const scheduleAssets = require('./assets/schedules');
+const schedule1 = new viatransit.Schedule(scheduleAssets.schedule1);
+const schedule2 = new viatransit.Schedule(scheduleAssets.schedule2);
 
 describe('Schedules', () => {
 
@@ -61,118 +63,50 @@ describe('Schedules', () => {
     });
 
     describe('Model', () => {
-        it('should be properly filled', () => {
-            let schedule = new viatransit.Schedule();
-            schedule.fill('tam', 'S5472', '1', 'S5472', 'S5472', 0, 'Odysseum', new viatransit.DayDate(8, 45, 12), 42, false, 42);
-            assert.instanceOf(schedule.departureTime, viatransit.DayDate);
-            assert.strictEqual(schedule.departureTime.hour, 8);
-            assert.strictEqual(schedule.departureTime.min, 45);
-            assert.strictEqual(schedule.departureTime.sec, 12);
-            assert.typeOf(schedule.destinationId, 'string');
-            assert.strictEqual(schedule.destinationId, 'S5472');
-            assert.typeOf(schedule.headsign, 'string');
-            assert.strictEqual(schedule.headsign, 'Odysseum');
-            assert.typeOf(schedule.directionId, 'number');
-            assert.strictEqual(schedule.directionId, 0);
-            assert.typeOf(schedule.theorical, 'boolean');
-            assert.strictEqual(schedule.theorical, false);
-            assert.typeOf(schedule.id, 'string');
-            assert.strictEqual(schedule.id, 'S5472');
-            assert.typeOf(schedule.stopId, 'string');
-            assert.strictEqual(schedule.stopId, 'S5472');
-            assert.typeOf(schedule.delayTime, 'number');
-            assert.strictEqual(schedule.delayTime, 42);
-            assert.typeOf(schedule.network, 'string');
-            assert.strictEqual(schedule.network, 'tam');
-            assert.typeOf(schedule.lineId, 'string');
-            assert.strictEqual(schedule.lineId, '1');
-            assert.typeOf(schedule.waitingTime, 'number');
-            assert.strictEqual(schedule.waitingTime, 42);
-            assert.typeOf(schedule.isLast, 'boolean');
-            assert.strictEqual(schedule.isLast, false);
-            assert.property(schedule, 'attributes');
+
+        it('should be properly filled from viaTransit API format', () => {
+            //Generic properties
+            assert.strictEqual(schedule1.id, '268435908');
+            assert.strictEqual(schedule1.networkKey, 'tam');
+            assert.strictEqual(schedule1.lineId, '2');
+            assert.strictEqual(schedule1.stopId, '41221');
+            assert.strictEqual(schedule1.destinationId, '42169');
+            assert.strictEqual(schedule1.directionId, 0);
+            assert.strictEqual(schedule1.headsign, 'Jacou');
+            assert.strictEqual(schedule1.theorical, false);
+            assert.strictEqual(schedule1.departureDate, '2020-01-16T14:24:22.462Z');
+            assert.strictEqual(schedule1.arrivalDate, '2020-01-16T14:22:22.462Z');
         });
 
-        it('should be properly filled from viaTransit API Format', () => {
-            let schedule = new viatransit.Schedule();
-            schedule.fillFromAPI(scheduleAPIFormatAsset);
-            assert.instanceOf(schedule.departureTime, viatransit.DayDate);
-            assert.strictEqual(schedule.departureTime.hour, 16);
-            assert.strictEqual(schedule.departureTime.min, 46);
-            assert.strictEqual(schedule.departureTime.sec, 29);
-            assert.typeOf(schedule.destinationId, 'string');
-            assert.strictEqual(schedule.destinationId, '42169');
-            assert.typeOf(schedule.headsign, 'string');
-            assert.strictEqual(schedule.headsign, 'Jacou');
-            assert.typeOf(schedule.directionId, 'number');
-            assert.strictEqual(schedule.directionId, 0);
-            assert.typeOf(schedule.theorical, 'boolean');
-            assert.strictEqual(schedule.theorical, false);
-            assert.typeOf(schedule.id, 'string');
-            assert.strictEqual(schedule.id, '268435908');
-            assert.typeOf(schedule.stopId, 'string');
-            assert.strictEqual(schedule.stopId, '41221');
-            assert.typeOf(schedule.delayTime, 'number');
-            assert.strictEqual(schedule.delayTime, 0);
-            assert.typeOf(schedule.network, 'string');
-            assert.strictEqual(schedule.network, 'tam');
-            assert.typeOf(schedule.lineId, 'string');
-            assert.strictEqual(schedule.lineId, '2');
-            assert.typeOf(schedule.waitingTime, 'number');
-            assert.strictEqual(schedule.waitingTime, 0);
-            assert.typeOf(schedule.isLast, 'boolean');
-            assert.strictEqual(schedule.isLast, false);
-            assert.property(schedule, 'attributes');
+        it('should get waiting time', () => {
+            let tmpDate = schedule1.departureDate;
+            let tmpBaseDate = schedule1.attributes.baseDepartureDate;
+            let newDate = new Date();
+
+            newDate.setSeconds(newDate.getSeconds() + 45);
+            schedule1.departureDate = newDate.toISOString();
+            schedule1.attributes.baseDepartureDate = newDate.toISOString();
+            assert.strictEqual(schedule1.getWaitingTime(), 45);
+            schedule1.attributes.baseDepartureDate = null;
+            schedule1.attributes.baseArrivalDate = null;
+            assert.strictEqual(schedule1.getWaitingTime(), 45);
+            schedule1.departureDate = tmpDate;
+            schedule1.attributes.baseDepartureDate = tmpBaseDate;
+            schedule1.attributes.baseArrivalDate = schedule1.arrivalDate;
         });
 
-        it('should be properly filled from TaM array format', () => {
-            let schedule = new viatransit.Schedule();
-            let tamSchedule = ['268435729','ANTIGRTW','41217','ANTIGONE','1','MOSSON','1','17:26:46','0','661','41101'];
-            schedule.fillFromTaMArray(tamSchedule);
-            assert.instanceOf(schedule.departureTime, viatransit.DayDate);
-            assert.strictEqual(schedule.departureTime.hour, 17);
-            assert.strictEqual(schedule.departureTime.min, 26);
-            assert.strictEqual(schedule.departureTime.sec, 46);
-            assert.typeOf(schedule.destinationId, 'string');
-            assert.strictEqual(schedule.destinationId, '41101');
-            assert.typeOf(schedule.headsign, 'string');
-            assert.strictEqual(schedule.headsign, 'MOSSON');
-            assert.typeOf(schedule.directionId, 'number');
-            assert.strictEqual(schedule.directionId, 1);
-            assert.typeOf(schedule.theorical, 'boolean');
-            assert.strictEqual(schedule.theorical, false);
-            assert.typeOf(schedule.id, 'string');
-            assert.strictEqual(schedule.id, '268435729');
-            assert.typeOf(schedule.stopId, 'string');
-            assert.strictEqual(schedule.stopId, '41217');
-            assert.typeOf(schedule.delayTime, 'number');
-            assert.strictEqual(schedule.delayTime, 0);
-            assert.typeOf(schedule.network, 'string');
-            assert.typeOf(schedule.lineId, 'string');
-            assert.strictEqual(schedule.lineId, '1');
-            assert.typeOf(schedule.waitingTime, 'number');
-            assert.typeOf(schedule.isLast, 'boolean');
-            assert.strictEqual(schedule.isLast, false);
-            assert.property(schedule, 'attributes');
-        });
+        it('should get decomposed time', () => {
+            let decomposedTime = schedule1.getDecomposedTime();
+            let departureDate = new Date(schedule1.departureDate);
 
-        it('should fail because of bad TaM array format', () => {
-            let schedule = new viatransit.Schedule();
-            let tamSchedule = ['268435729','ANTIGRTW','41217','ANTIGONE','1','MOSSON','1','17:26:46','0','661','41101','viatransit'];
-            assert.strictEqual(schedule.fillFromTaMArray(tamSchedule), false, 'TaM Array too long');
-            tamSchedule = ['268435729','ANTIGRTW','41217','ANTIGONE','1','MOSSON','A','17:26:46','0','661','41101'];
-            assert.strictEqual(schedule.fillFromTaMArray(tamSchedule), false, 'TaM Array direction ID is wrong!');
+            assert.deepStrictEqual(decomposedTime, {hours: departureDate.getHours(), minutes: departureDate.getMinutes(), seconds: departureDate.getSeconds()});
+            assert.isNull(schedule2.getDecomposedTime("DAZDAZD21"));
         });
 
         it('should works with attributes', () => {
-           let schedule = new viatransit.Schedule();
-
-           assert.isNull(schedule.getAttribute('icon'));
-           schedule.attributes = {icon: '42'};
-           assert.strictEqual(schedule.getAttribute('icon'), '42');
-           schedule.attributes = {style: {padding: 42}};
-           assert.deepEqual(schedule.getAttribute('style'), {padding: 42});
-           assert.isNull(schedule.getAttribute('icon'));
+            assert.isNull(schedule2.getAttribute('baseArrivalDate'));
+            assert.isNull(schedule1.getAttribute('deleted'));
+            assert.strictEqual(schedule1.getAttribute('baseDepartureDate'), '2020-01-16T14:24:22.462Z');
         });
     });
 

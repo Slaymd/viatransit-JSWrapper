@@ -8,13 +8,17 @@
 
 A nodejs package that includes a **wrapper** of the public **[viatransit](https://viatransit.fr) API**.
 
-## Services
+## Available services
 
 * Schedules
 * Disruptions
 * Users
 * Stations
+* Lines
+* Maps
 * Networks
+* Data versions
+
 ## Usage
 
 Coming soon.

@@ -3,28 +3,24 @@ module.exports = {
         "id": "5cd09bdc87387472c1fa6198",
         "links": [
             {
-                "network": "5d8a85de477a0f6728a53b17",
-                "service": "tam",
-                "type": "public_transit",
-                "attributes": {
-                    "lines": ["7"],
-                    "stations": [
-                        {"stationId": "S5570", "stopId": "51"},
-                        {"stationId": "S5571", "stopId": "53"},
-                        {"stationId": "S5572", "stopId": "55"}
-                    ]
-                }
+                "network": "tam",
+                "lines": ["7"],
+                "stations": [
+                    {"stationId": "S5570", "stopId": "51"},
+                    {"stationId": "S5571", "stopId": "53"},
+                    {"stationId": "S5572", "stopId": "55"}
+                ],
+                "trips": ['TRIP1'],
+                "attributes": null
             },
             {
-                "network": "5d8a85de477a0f6728a53b17",
-                "service": "tam",
-                "type": "public_transit",
-                "attributes": {
-                    "lines": ["6"],
-                    "stations": [
-                        {"stationId": "all", "stopId": "all"}
-                    ]
-                }
+                "network": "tam",
+                "lines": ["6"],
+                "stations": [
+                    {"stationId": "all", "stopId": "all"}
+                ],
+                "trips": ['TRIP1'],
+                "attributes": null
             },
         ],
         "type": "works",
@@ -41,15 +37,13 @@ module.exports = {
                 "id": "5cd09bdc87387472c1fa6199",
                 "links": [
                     {
-                        "network": "5d8a85de477a0f6728a53b17",
-                        "service": "tam",
-                        "type": "public_transit",
-                        "attributes": {
-                            "lines": ["6", "8", "7"],
-                            "stations": [
-                                {"stationId": "all", "stopId": "all"}
-                            ]
-                        }
+                        "network": "tam",
+                        "lines": ["6", "8", "7"],
+                        "stations": [
+                            {"stationId": "all", "stopId": "all"}
+                        ],
+                        "trips": [],
+                        "attributes": null
                     },
                 ],
                 "authorId": "5c61cc3363939c74bdcfde35",
@@ -79,15 +73,13 @@ module.exports = {
                 "id": "5cd09bdc87387472c1fa6199",
                 "links": [
                     {
-                        "network": "5d8a85de477a0f6728a53b17",
-                        "service": "tam",
-                        "type": "public_transit",
-                        "attributes": {
-                            "lines": ["6", "7"],
-                            "stations": [
-                                {"stationId": "all", "stopId": "all"}
-                            ]
-                        }
+                        "network": "tam",
+                        "lines": ["6", "7"],
+                        "stations": [
+                            {"stationId": "all", "stopId": "all"}
+                        ],
+                        "trips": [],
+                        "attributes": null
                     },
                 ],
                 "authorId": "5c61cc3363939c74bdcfde35",
@@ -106,17 +98,15 @@ module.exports = {
         "id": "5cd09bdc87387472c1fa6198",
         "links": [
             {
-                "network": "5d8a85de477a0f6728a53b17",
-                "service": "tam",
-                "type": "public_transit",
-                "attributes": {
-                    "lines": ["7"],
-                    "stations": [
-                        {"stationId": "S5570", "stopId": "51"},
-                        {"stationId": "S5571", "stopId": "53"},
-                        {"stationId": "S5572", "stopId": "55"}
-                    ]
-                }
+                "network": "tam",
+                "lines": ["7"],
+                "stations": [
+                    {"stationId": "S5570", "stopId": "51"},
+                    {"stationId": "S5571", "stopId": "53"},
+                    {"stationId": "S5572", "stopId": "55"}
+                ],
+                "trips": [],
+                "attributes": null
             },
         ],
         "type": "works",
@@ -133,15 +123,13 @@ module.exports = {
                 "id": "5cd09bdc87387472c1fa6199",
                 "links": [
                     {
-                        "network": "5d8a85de477a028a53b214",
-                        "service": "transpor",
-                        "type": "public_transit",
-                        "attributes": {
-                            "lines": ["L2", "L3", "A"],
-                            "stations": [
-                                {"stationId": "all", "stopId": "all"}
-                            ]
-                        }
+                        "network": "transpor",
+                        "lines": ["L2", "L3", "A"],
+                        "stations": [
+                            {"stationId": "all", "stopId": "all"}
+                        ],
+                        "trips": [],
+                        "attributes": null
                     },
                 ],
                 "authorId": "5c61cc3363939c74bdcfde35",

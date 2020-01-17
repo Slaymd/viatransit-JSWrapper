@@ -14,12 +14,12 @@ const Line = require('../models/Line');
  * @async
  * @exports viatransit.API.getLines
  * @param apiUrl
- * @param networkServiceKey
+ * @param networkKey
  * @return {Promise<{dataUpdateDate: String, lines: Array<Line>}>}
  */
-async function getLines(/*String*/apiUrl, /*String*/networkServiceKey)
+async function getLines(/*String*/apiUrl, /*String*/networkKey)
 {
-    const url = apiUrl + '/lines?serviceKey=' + networkServiceKey;
+    const url = apiUrl + '/lines?networkKey=' + networkKey;
 
     return axios.get(url).then(res => {
         let lines = [];

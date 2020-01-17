@@ -6,7 +6,7 @@ class TransitLink {
     /**
      * Create an instance of TransitLink
      */
-    constructor(/*({network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}|null)*/object = null)
+    constructor(/*({network: string, lines: [string], stations: [{stationId: string, stopId: string}], trips: [string], attributes: Object|null}|null)*/object = null)
     {
         /**
          * Network
@@ -14,21 +14,23 @@ class TransitLink {
          */
         this.network = "";
         /**
-         * Service
-         * @type {string}
+         * Lines
+         * @type {[string]}
          */
-        this.service = "";
+        this.lines = [];
         /**
-         * Service type
-         * @type {("public_transit"|"bike_share"|"trains"|"car_park"|"unknown")}
+         * Stations
+         * @type {[{stationId: String, stopId: String}]}
          */
-        this.type = "unknown";
+        this.stations = [];
+        /**
+         * Trips
+         * @type {[string]}
+         */
+        this.trips = [];
         /**
          * Attributes
-         * @type {?{
-         *     lines: ?[String],
-         *     stations: ?[{stationId: String, stopId: String}]
-         * }}
+         * @type {(Object|null)}
          */
         this.attributes = null;
         //Constructor fill
@@ -38,88 +40,84 @@ class TransitLink {
 
     /**
      * Fill properties from viaTransit API return format
-     * @param apiObject
+     * @param object
      */
-    fill(/*{network: String, service: String, type: ("public_transit"|"bike_share"|"trains"|"car_park"|"unknown"), attributes: ?{lines: ([String]|null), stations: ([{stationId: String, stopId: String}]|null)}}*/object)
+    fill(/*{network: string, lines: [string], stations: [{stationId: string, stopId: string}], trips: [string], attributes: Object|null}*/object)
     {
         this.network = object.network;
-        this.service = object.service;
-        this.type = object.type;
+        this.lines = object.lines;
+        this.stations = object.stations;
+        this.trips = object.trips;
         this.attributes = object.attributes;
     }
 
     /**
      * Check if network is linked
-     * @param networkId The network id
+     * @param networkKey The network key
      * @return {boolean} is linked or not
      */
-    isLinkedToNetwork(/*String*/networkId)
+    isLinkedToNetwork(/*String*/networkKey)
     {
-        return this.network === 'all' || this.network === networkId || networkId === 'all';
-    }
-
-    /**
-     * Check if service is linked
-     * @param networkId The network id
-     * @param serviceId The network' service id (can also be a service type)
-     * @return {boolean}
-     */
-    isLinkedToService(/*String*/networkId, /*String*/serviceId)
-    {
-        if (this.network === 'all' || this.service === 'all')
-            return true;
-        return this.isLinkedToNetwork(networkId) && (this.service === 'all' || this.service === serviceId || serviceId === 'all' || this.type === serviceId);
+        return this.network === 'all' || this.network === networkKey || networkKey === 'all';
     }
 
     /**
      * Check if line is linked
-     * @param networkId The network id
-     * @param serviceId The network' service id
+     * @param networkKey
      * @param lineId The line id
      * @return {boolean} is linked or not
      */
-    isLinkedToLine(/*String*/networkId, /*String*/serviceId, /*String*/lineId)
+    isLinkedToLine(/*String*/networkKey, /*String*/lineId)
     {
-        if (this.network === 'all' || this.service === 'all' || (lineId === 'all' && this.isLinkedToService(networkId, serviceId)))
+        if (this.network === 'all' || (lineId === 'all' && this.isLinkedToNetwork(networkKey)))
             return true;
-        return this.isLinkedToService(networkId, serviceId) && (this.attributes !== null && this.attributes !== undefined)
-            && this.attributes.lines instanceof Array && (this.attributes.lines.includes('all') || this.attributes.lines.includes(lineId) || lineId === 'all');
+        return this.isLinkedToNetwork(networkKey) && (this.lines.includes('all') || this.lines.length === 0 || this.lines.includes(lineId) || lineId === 'all');
     }
 
     /**
      * Check if station is linked
-     * @param networkId The network id
-     * @param serviceId The network' service id
+     * @param networkKey
      * @param lineId The line id (can also be 'all' to be line independent)
      * @param stationId The station id
      * @return {boolean} is linked or not
      */
-    isLinkedToStation(/*String*/networkId, /*String*/serviceId, /*String*/lineId, /*String*/stationId)
+    isLinkedToStation(/*String*/networkKey, /*String*/lineId, /*String*/stationId)
     {
-        if (this.network === 'all' || this.service === 'all')
+        if (this.network === 'all')
             return true;
-        return this.isLinkedToLine(networkId, serviceId, lineId) && (this.attributes !== null && this.attributes !== undefined)
-            && this.attributes.stations instanceof Array && (!!(this.attributes.stations.find(el => el.stationId === 'all')) ||
-            !!(this.attributes.stations.find(el => el.stationId === stationId)) ||
-            stationId === 'all')
+        return this.isLinkedToLine(networkKey, lineId) && (!!(this.stations.find(el => el.stationId === 'all')) ||
+            !!(this.stations.find(el => el.stationId === stationId)) || stationId === 'all' || this.stations.length === 0)
     }
 
     /**
      * Check if stop is linked
-     * @param networkId The network id
-     * @param serviceId The network' service id
+     * @param networkKey
      * @param lineId The line id (can also be 'all' to be line independent)
      * @param stationId The station id
      * @param stopId The stop id
      * @return {boolean} is linked or not
      */
-    isLinkedToStop(/*String*/networkId, /*String*/serviceId, /*String*/lineId, /*String*/stationId, /*String*/stopId)
+    isLinkedToStop(/*String*/networkKey, /*String*/lineId, /*String*/stationId, /*String*/stopId)
     {
-        if (this.network === 'all' || this.service === 'all')
+        if (this.network === 'all')
             return true;
-        return this.isLinkedToStation(networkId, serviceId, lineId, stationId) && (this.attributes !== null && this.attributes !== undefined)
-            && this.attributes.stations instanceof Array &&
-            !!(stopId === 'all' || this.attributes.stations.filter(el => (el.stationId === stationId || el.stationId === 'all')).find(el => (el.stopId === stopId || el.stopId === 'all')))
+        return this.isLinkedToStation(networkKey, lineId, stationId) &&
+            !!(stopId === 'all' || this.stations.length === 0 || this.stations.filter(el => (el.stationId === stationId || el.stationId === 'all')).find(el => (el.stopId === stopId || el.stopId === 'all')))
+    }
+
+    /**
+     * Check if trip is linked
+     * @param networkKey
+     * @param stationId
+     * @param stopId
+     * @param tripId
+     * @return {boolean}
+     */
+    isLinkedToTrip(/*String*/networkKey, /*String*/stationId, /*String*/stopId, /*String*/tripId)
+    {
+        if (this.network === 'all')
+            return true;
+        return this.isLinkedToStop(networkKey,'all', stationId, stopId) && (this.trips.includes('all') || tripId === 'all' || this.trips.length === 0 || this.trips.includes(tripId));
     }
 }
 
