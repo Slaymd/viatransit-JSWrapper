@@ -66,7 +66,7 @@ describe('Schedules', () => {
 
         it('should be properly filled from viaTransit API format', () => {
             //Generic properties
-            assert.strictEqual(schedule1.id, '268435908');
+            assert.strictEqual(schedule1.tripId, '268435908');
             assert.strictEqual(schedule1.networkKey, 'tam');
             assert.strictEqual(schedule1.lineId, '2');
             assert.strictEqual(schedule1.stopId, '41221');

@@ -7,13 +7,13 @@ class Schedule {
     /**
      * Create an instance of Schedule
      */
-    constructor(/*({id: String, networkKey: String, lineId: String, stopId: String, destinationId: String, directionId: Number, headsign: String, arrivalDate: String, departureDate: String, theorical: Boolean, attributes: Object|null}|null)*/object = null)
+    constructor(/*({tripId: String, networkKey: String, lineId: String, stopId: String, destinationId: String, directionId: Number, headsign: String, arrivalDate: String, departureDate: String, theorical: Boolean, attributes: Object|null}|null)*/object = null)
     {
         /**
          * Id
          * @type {string}
          */
-        this.id = "";
+        this.tripId = "";
         /**
          * Network
          * @type {string}
@@ -73,8 +73,8 @@ class Schedule {
      * Fill properties from viaTransit API return format
      * @param object
      */
-    fill(/*{id: String, networkKey: String, lineId: String, stopId: String, destinationId: String, directionId: Number, headsign: String, arrivalDate: String, departureDate: String, theorical: Boolean, attributes: Object|null}*/object) {
-        this.id = object.id;
+    fill(/*{tripId: String, networkKey: String, lineId: String, stopId: String, destinationId: String, directionId: Number, headsign: String, arrivalDate: String, departureDate: String, theorical: Boolean, attributes: Object|null}*/object) {
+        this.tripId = object.tripId;
         this.networkKey = object.networkKey;
         this.lineId = object.lineId;
         this.stopId = object.stopId;

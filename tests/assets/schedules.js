@@ -1,6 +1,6 @@
 module.exports = {
     schedule1: {
-        "id": "268435908",
+        "tripId": "268435908",
         "networkKey": "tam",
         "lineId": "2",
         "stopId": "41221",
@@ -17,7 +17,7 @@ module.exports = {
         },
     },
     schedule2: {
-        "id": "T2133112",
+        "tripId": "T2133112",
         "networkKey": "idfmob",
         "lineId": "M1",
         "stopId": "S21335",
