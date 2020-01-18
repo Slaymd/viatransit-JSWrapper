@@ -75,7 +75,6 @@ describe('Schedules', () => {
             assert.strictEqual(schedule1.headsign, 'Jacou');
             assert.strictEqual(schedule1.theorical, false);
             assert.strictEqual(schedule1.departureDate, '2020-01-16T14:24:22.462Z');
-            assert.strictEqual(schedule1.arrivalDate, '2020-01-16T14:22:22.462Z');
         });
 
         it('should get waiting time', () => {

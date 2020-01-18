@@ -8,12 +8,12 @@ module.exports = {
         "directionId": 0,
         "headsign": "Jacou",
         "departureDate": "2020-01-16T14:24:22.462Z",
-        "arrivalDate": "2020-01-16T14:22:22.462Z",
         "theorical": false,
         "attributes": {
             "isLast": false,
             "baseDepartureDate": "2020-01-16T14:24:22.462Z",
-            "baseArrivalDate": "2020-01-16T14:22:22.462Z"
+            "baseArrivalDate": "2020-01-16T14:22:22.462Z",
+            "arrivalDate": "2020-01-16T14:22:22.462Z",
         },
     },
     schedule2: {
@@ -25,7 +25,6 @@ module.exports = {
         "directionId": 1,
         "headsign": "La Défense (Grande Arche)",
         "departureDate": "2020-01-16T14:24:22.462Z",
-        "arrivalDate": "2020-01-16T14:22:22.462Z",
         "theorical": true,
         "attributes": null,
     }

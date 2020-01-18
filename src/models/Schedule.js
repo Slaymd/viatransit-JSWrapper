@@ -7,7 +7,7 @@ class Schedule {
     /**
      * Create an instance of Schedule
      */
-    constructor(/*({tripId: String, networkKey: String, lineId: String, stopId: String, destinationId: String, directionId: Number, headsign: String, arrivalDate: String, departureDate: String, theorical: Boolean, attributes: Object|null}|null)*/object = null)
+    constructor(/*({tripId: String, networkKey: String, lineId: String, stopId: String, destinationId: String, directionId: Number, headsign: String, departureDate: String, theorical: Boolean, attributes: Object|null}|null)*/object = null)
     {
         /**
          * Id
@@ -45,11 +45,6 @@ class Schedule {
          */
         this.headsign = "";
         /**
-         * Arrival date
-         * @type {string}
-         */
-        this.arrivalDate = "";
-        /**
          * Departure date
          * @type {string}
          */
@@ -73,7 +68,7 @@ class Schedule {
      * Fill properties from viaTransit API return format
      * @param object
      */
-    fill(/*{tripId: String, networkKey: String, lineId: String, stopId: String, destinationId: String, directionId: Number, headsign: String, arrivalDate: String, departureDate: String, theorical: Boolean, attributes: Object|null}*/object) {
+    fill(/*{tripId: String, networkKey: String, lineId: String, stopId: String, destinationId: String, directionId: Number, headsign: String, departureDate: String, theorical: Boolean, attributes: Object|null}*/object) {
         this.tripId = object.tripId;
         this.networkKey = object.networkKey;
         this.lineId = object.lineId;
@@ -81,7 +76,6 @@ class Schedule {
         this.destinationId = object.destinationId;
         this.directionId = object.directionId;
         this.headsign = object.headsign;
-        this.arrivalDate = object.arrivalDate;
         this.departureDate = object.departureDate;
         this.theorical = object.theorical;
         this.attributes = object.attributes;
@@ -114,7 +108,7 @@ class Schedule {
     getWaitingTime(/*('departure'|'arrival')*/of = 'departure', /*Date|null*/fromDate = null)
     {
         let now = !fromDate ? new Date() : fromDate;
-        let futureDate = new Date(of === 'departure' ? this.departureDate : this.arrivalDate);
+        let futureDate = new Date(of === 'departure' ? this.departureDate : this.getAttribute('arrivalDate'));
 
         return Math.round((futureDate - now) / 1000) + this.getDelayTime();
     }
@@ -126,8 +120,8 @@ class Schedule {
      */
     getDelayTime(/*Date|null*/fromDate = null)
     {
-        let realtimeDate = this.departureDate ? new Date(this.departureDate) : this.arrivalDate ? new Date(this.arrivalDate) : null;
-        let baseDate = this.departureDate && this.getAttribute('baseDepartureDate') ? new Date(this.getAttribute('baseDepartureDate')) : this.arrivalDate && this.getAttribute('baseArrivalDate') ? new Date(this.getAttribute('baseArrivalDate')) : null;
+        let realtimeDate = this.departureDate ? new Date(this.departureDate) : this.getAttribute('arrivalDate') ? new Date(this.getAttribute('arrivalDate')) : null;
+        let baseDate = this.departureDate && this.getAttribute('baseDepartureDate') ? new Date(this.getAttribute('baseDepartureDate')) : this.getAttribute('arrivalDate') && this.getAttribute('baseArrivalDate') ? new Date(this.getAttribute('baseArrivalDate')) : null;
 
         if (!realtimeDate || !baseDate)
             return 0;
