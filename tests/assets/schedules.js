@@ -11,7 +11,7 @@ module.exports = {
         "theorical": false,
         "attributes": {
             "isLast": false,
-            "baseDepartureDate": "2020-01-16T14:24:22.462Z",
+            "baseDepartureDate": "2020-01-16T14:23:22.462Z",
             "baseArrivalDate": "2020-01-16T14:22:22.462Z",
             "arrivalDate": "2020-01-16T14:22:22.462Z",
         },

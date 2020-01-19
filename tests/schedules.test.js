@@ -94,6 +94,11 @@ describe('Schedules', () => {
             schedule1.attributes.baseArrivalDate = schedule1.arrivalDate;
         });
 
+        it('should get delay time', () => {
+           assert.strictEqual(schedule1.getDelayTime(), 60);
+           assert.strictEqual(schedule2.getDelayTime(), 0);
+        });
+
         it('should get decomposed time', () => {
             let decomposedTime = schedule1.getDecomposedTime();
             let departureDate = new Date(schedule1.departureDate);
@@ -105,7 +110,7 @@ describe('Schedules', () => {
         it('should works with attributes', () => {
             assert.isNull(schedule2.getAttribute('baseArrivalDate'));
             assert.isNull(schedule1.getAttribute('deleted'));
-            assert.strictEqual(schedule1.getAttribute('baseDepartureDate'), '2020-01-16T14:24:22.462Z');
+            assert.strictEqual(schedule1.getAttribute('baseDepartureDate'), '2020-01-16T14:23:22.462Z');
         });
     });
 

@@ -110,7 +110,7 @@ class Schedule {
         let now = !fromDate ? new Date() : fromDate;
         let futureDate = new Date(of === 'departure' ? this.departureDate : this.getAttribute('arrivalDate'));
 
-        return Math.round((futureDate - now) / 1000) + this.getDelayTime();
+        return Math.round((futureDate - now) / 1000);
     }
 
     /**
