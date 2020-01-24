@@ -18,7 +18,7 @@ const Permissions = require('../models/Permissions');
  */
 async function getPermissions(/*String*/token, /*String*/userId, /*String*/apiUrl)
 {
-    const url = apiUrl + "/users/permissions/id=" + userId;
+    const url = apiUrl + "/users/permissions?id=" + userId;
 
     return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}})
         .then((res) => {
