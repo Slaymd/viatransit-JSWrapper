@@ -10,6 +10,7 @@ let usersMethods = require('../api/users');
 let linesMethods = require('../api/lines');
 let versionsMethods = require('../api/versions');
 let mapsMethods = require('../api/maps');
+let tripsMethods = require('../api/trips');
 
 API = (function() {
     let apiRoot = "https://viatransit.fr/api/v1";
@@ -136,6 +137,21 @@ API = (function() {
          */
         getLines: function(/*String*/networkKey) {
             return linesMethods.getLines(this.getAPIRoot(), networkKey);
+        },
+
+        //TRIPS
+
+        /**
+         * Get trip details from API
+         * @async
+         * @exports viatransit.API.getTrip
+         * @param networkKey
+         * @param tripId
+         * @param theorical
+         * @return {Promise<{headsign: String, directionId: number, lineId: string, stationSequence: [{stationId: String, stopId: String, name: String, lines: [ {network: String, id: String} ], travelTime: Number}], tripId: String, sequenceId: number, networkKey: String}>}
+         */
+        getTrip: function(/*String*/networkKey, /*String*/tripId, /*Boolean*/theorical = true) {
+            return tripsMethods.getTrip(this.getAPIRoot(), networkKey, tripId, theorical);
         },
 
         //PERMISSIONS
