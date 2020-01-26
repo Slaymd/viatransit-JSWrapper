@@ -18,7 +18,7 @@ const axios = require('axios');
  */
 async function getTrip(/*String*/apiUrl, /*String*/networkKey, /*String*/tripId, /*Boolean*/theorical = true)
 {
-    const url = apiUrl + '/trips?networkKey=' + networkKey + '&tripId=' + tripId + "&theorical=" + theorical;
+    const url = apiUrl + '/trips?networkKey=' + networkKey + '&id=' + tripId + "&theorical=" + theorical;
 
     return axios.get(url).then(res => {
         return res.data;
