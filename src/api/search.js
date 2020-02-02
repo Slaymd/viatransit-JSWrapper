@@ -15,7 +15,7 @@ async function search(/*String*/query, /*[Number]*/nearbyCoords = null, /*String
 {
     const url = apiUrl + '/search?q=' + query + (nearbyCoords === null ? '' : '&lon=' + nearbyCoords[0] + '&lat=' + nearbyCoords[1]);
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         let result = {};
 
         for (let type of Object.keys(res.data)) {

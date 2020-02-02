@@ -20,7 +20,7 @@ async function getProfile(/*String*/token, /*String*/id, /*String*/apiUrl)
 {
     const url = apiUrl + "/users/profile?id=" + id;
 
-    return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}})
+    return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
             return res.data;
         }).catch((e) => {
@@ -39,7 +39,7 @@ async function getAllUsers(/*String*/token, /*String*/apiUrl)
 {
     const url = apiUrl + "/users/";
 
-    return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}})
+    return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
             return res.data;
         }).catch((e) => {
@@ -59,7 +59,7 @@ async function updateProfile(/*String*/token, /*User*/user, /*String*/apiUrl)
 {
     const url = apiUrl + "/users/profile/";
 
-    return await axios.put(url, { user }, { headers: { Authorization: 'Bearer '.concat(token)}})
+    return await axios.put(url, { user }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
             return res.data.success;
         }).catch((e) => {
@@ -80,7 +80,7 @@ async function deleteProfile(/*String*/token, /*String*/id, /*String*/apiUrl)
     const url = apiUrl + "/users/profile/";
     const data = {id};
 
-    return await axios.delete(url, { headers: { Authorization: 'Bearer '.concat(token)}, data: data})
+    return await axios.delete(url, { headers: { Authorization: 'Bearer '.concat(token)}, data: data, timeout: 15000})
         .then((res) => {
             return res.data.success;
         }).catch((e) => {

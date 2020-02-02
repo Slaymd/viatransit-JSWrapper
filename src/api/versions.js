@@ -19,7 +19,7 @@ async function isDataRequiringUpdate(/*String*/apiUrl, /*String*/dataKey, /*Date
 {
     const url = apiUrl + '/versions?key=' + dataKey + "&date=" + actualVersionDate.toISOString();
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         return res.data.needsUpdate;
     });
 }
@@ -36,7 +36,7 @@ async function getDataVersionDate(/*String*/apiUrl, /*String*/dataKey)
 {
     const url = apiUrl + '/versions?key=' + dataKey;
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         if (!res.data.updateDate)
             return null;
         return new Date(res.data.updateDate);

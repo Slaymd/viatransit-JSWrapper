@@ -20,7 +20,7 @@ async function getNetworks(/*String*/apiUrl)
 {
     const url = apiUrl + '/networks/';
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         let networks = [];
 
         for (let networkApiObj of res.data.networks) {

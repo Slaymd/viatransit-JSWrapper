@@ -23,7 +23,7 @@ async function getByLineSchedules(/*String*/networkKey, /*String*/stationId, /*S
 {
     const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId + '&format=by-line';
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         if (!(res.data instanceof Array))
             return [];
         let clusters = [];
@@ -58,7 +58,7 @@ async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId
 {
     const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId + '&format=cluster';
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         if (!(res.data instanceof Array))
             return [];
         let clusters = [];
@@ -95,7 +95,7 @@ async function getSchedules(/*String*/apiUrl, /*String*/networkKey, /*String*/st
 {
     const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId + (fromDate ? '&fromDate=' + fromDate.toISOString() : '') + (depth !== 4 ? '&depth=' + depth : '');
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         if (!(res.data instanceof Array))
             return [];
         let schedules = [];

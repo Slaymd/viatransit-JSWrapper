@@ -21,7 +21,7 @@ async function getLines(/*String*/apiUrl, /*String*/networkKey)
 {
     const url = apiUrl + '/lines?networkKey=' + networkKey;
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         let lines = [];
 
         for (let lineApiObj of res.data.lines) {

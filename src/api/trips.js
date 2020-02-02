@@ -20,7 +20,7 @@ async function getTrip(/*String*/apiUrl, /*String*/networkKey, /*String*/tripId,
 {
     const url = apiUrl + '/trips?networkKey=' + networkKey + '&id=' + tripId + "&theorical=" + theorical;
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         return res.data;
     });
 }

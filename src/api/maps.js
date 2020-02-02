@@ -19,7 +19,7 @@ async function getLineMap(/*String*/apiUrl, /*String*/networkKey, /*String*/line
 {
     const url = apiUrl + '/map/line?networkKey=' + networkKey + '&lineId=' + lineId;
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         return res.data;
     });
 }

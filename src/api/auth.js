@@ -20,7 +20,7 @@ async function login(/*String*/email, /*String*/password, /*String*/apiUrl)
     const url = apiUrl + "/users/login/";
     const data = {email, password};
 
-    return await axios.post(url, data).then(res => {
+    return await axios.post(url, data, {timeout: 15000}).then(res => {
         return res.data;
     }).catch(e => {
         return e.response.data.error;
@@ -41,7 +41,7 @@ async function register(/*String*/email, /*String*/password, /*String*/apiUrl)
     const url = apiUrl + "/users/register/";
     const data = {email, password};
 
-    return await axios.post(url, data).then(res => {
+    return await axios.post(url, data, {timeout: 15000}).then(res => {
         return res.data.success;
     }).catch(e => {
         return e.response.data.error;

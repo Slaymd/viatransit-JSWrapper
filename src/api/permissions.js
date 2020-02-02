@@ -20,7 +20,7 @@ async function getPermissions(/*String*/token, /*String*/userId, /*String*/apiUr
 {
     const url = apiUrl + "/users/permissions?id=" + userId;
 
-    return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}})
+    return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
             return res.data;
         }).catch((e) => {
@@ -41,7 +41,7 @@ async function updatePermissions(/*String*/token, /*userId*/userId, /*Permission
 {
     const url = apiUrl + "/users/permissions/";
 
-    return await axios.put(url, { id : userId, permissions }, { headers: { Authorization: 'Bearer '.concat(token)}})
+    return await axios.put(url, { id : userId, permissions }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
             return res.data.success;
         }).catch((e) => {
