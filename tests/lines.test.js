@@ -16,7 +16,7 @@ describe('Lines', () => {
             const lines = await viatransit.API.getLines('tam');
             viatransit.API.setAPIRoot('https://viatransit.fr/api/v1');
 
-            assert.lengthOf(lines.lines, 45);
+            assert.lengthOf(lines.lines, 46);
             assert.instanceOf(lines.lines[0], viatransit.Line);
         });
 
