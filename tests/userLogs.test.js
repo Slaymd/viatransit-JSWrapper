@@ -8,7 +8,7 @@ const userLogsAssets = require('./assets/userLogs.js');
 describe('UserLogs', () => {
 
     describe('API', () => {
-
+    
     });
 
     describe('Model', () => {

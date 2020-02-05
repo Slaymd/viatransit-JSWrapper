@@ -7,6 +7,7 @@ let schedulesMethods = require('../api/schedules');
 let searchMethods = require('../api/search');
 let stationsMethods = require('../api/stations');
 let usersMethods = require('../api/users');
+let userLogsMethods = require('../api/userLogs');
 let linesMethods = require('../api/lines');
 let versionsMethods = require('../api/versions');
 let mapsMethods = require('../api/maps');
@@ -158,6 +159,18 @@ API = (function() {
          */
         updatePermissions: function(/*String*/token, /*userId*/userId, /*Permissions*/permissions) {
             return permissionsMethods.updatePermissions(token, userId, permissions, this.getAPIRoot())
+        },
+
+        //USERSLOGS
+
+        /**
+         *
+         * @param token
+         * @param userId
+         * @returns {Promise<*>}
+         */
+        getUserLogs: function(/*String*/token, /*String*/userId) {
+            return userLogsMethods.getUserLogs(token, userId, this.getAPIRoot())
         },
 
         //SCHEDULES
