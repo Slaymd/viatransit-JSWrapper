@@ -22,7 +22,7 @@ async function getStation(/*String*/networkKey, /*String*/stationId, /*String*/a
 {
     const url = apiUrl + '/stations/details?network=' + networkKey + '&id=' + stationId;
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         if (!(res.data instanceof Object))
             return null;
         let station = new Station();
@@ -45,7 +45,7 @@ async function autocompleteStationName(/*String*/networkKey, /*String*/query, /*
 {
     const url = apiUrl + '/stations/autocomplete?network=' + networkKey + '&str=' + query;
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         if (!(res.data instanceof Array))
             return [];
         let stations = [];
@@ -72,7 +72,7 @@ async function autocompleteStationNameInZone(/*String*/zoneKey, /*String*/query,
 {
     const url = apiUrl + '/stations/autocomplete?networkZone=' + zoneKey + '&str=' + query;
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         if (!(res.data instanceof Array))
             return [];
         let stations = [];
@@ -99,7 +99,7 @@ async function getNearbyStations(/*[Float, Float*/coordinates, /*Number*/radius 
 {
     const url = apiUrl + '/stations/nearby?lon=' + coordinates[0] + '&lat=' + coordinates[1] + '&r=' + radius;
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         let stations = [];
 
         for (let stationApiObj of res.data) {
@@ -124,7 +124,7 @@ async function getNearbyStationsByType(/*[Float, Float*/coordinates, /*Number*/r
 {
     const url = apiUrl + '/stations/nearby?lon=' + coordinates[0] + '&lat=' + coordinates[1] + '&r=' + radius + '&format=by-type';
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         let result = {};
 
         for (let type of Object.keys(res.data)) {

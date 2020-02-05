@@ -11,6 +11,7 @@ let userLogsMethods = require('../api/userLogs');
 let linesMethods = require('../api/lines');
 let versionsMethods = require('../api/versions');
 let mapsMethods = require('../api/maps');
+let tripsMethods = require('../api/trips');
 
 API = (function() {
     let apiRoot = "https://viatransit.fr/api/v1";
@@ -139,6 +140,21 @@ API = (function() {
             return linesMethods.getLines(this.getAPIRoot(), networkKey);
         },
 
+        //TRIPS
+
+        /**
+         * Get trip details from API
+         * @async
+         * @exports viatransit.API.getTrip
+         * @param networkKey
+         * @param tripId
+         * @param theorical
+         * @return {Promise<{headsign: String, directionId: number, lineId: string, stationSequence: [{stationId: String, stopId: String, name: String, lines: [ {network: String, id: String} ], travelTime: Number}], tripId: String, sequenceId: number, networkKey: String}>}
+         */
+        getTrip: function(/*String*/networkKey, /*String*/tripId, /*Boolean*/theorical = true) {
+            return tripsMethods.getTrip(this.getAPIRoot(), networkKey, tripId, theorical);
+        },
+
         //PERMISSIONS
 
         /**
@@ -205,10 +221,11 @@ API = (function() {
          * @param networkKey
          * @param stationId
          * @param fromDate
+         * @param depth
          * @return {Promise<Array<Schedule>>}
          */
-        getSchedules: function(/*String*/networkKey, /*String*/stationId, /*Date*/fromDate = null) {
-            return schedulesMethods.getSchedules(this.getAPIRoot(), networkKey, stationId, fromDate)
+        getSchedules: function(/*String*/networkKey, /*String*/stationId, /*(Date|null)*/fromDate = null, /*Number*/depth = 4) {
+            return schedulesMethods.getSchedules(this.getAPIRoot(), networkKey, stationId, fromDate, depth);
         },
 
         //SEARCH

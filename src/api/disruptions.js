@@ -21,7 +21,7 @@ async function getNetworkDisruptions(/*String*/networkKey, /*String*/apiUrl)
 {
     const url = apiUrl + '/disruptions?network=' + networkKey;
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         try {
             let disruptions = [];
 
@@ -49,7 +49,7 @@ async function getNetworkZoneDisruptions(/*String*/zoneKey, /*String*/apiUrl)
 {
     const url = apiUrl + '/disruptions?networkZone=' + zoneKey;
 
-    return axios.get(url).then(res => {
+    return axios.get(url, {timeout: 15000}).then(res => {
         try {
             if (!(res.data instanceof Array))
                 return [];
