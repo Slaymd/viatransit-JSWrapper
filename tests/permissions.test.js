@@ -8,7 +8,7 @@ const permissionAssets = require('./assets/permissions.js');
 describe('Permissions', () => {
 
     describe('API', () => {
-        //GET
+    //GET
     //     it('should get own permissions', async () => {
     //         const log = await viatransit.API.login('user-test@viatransit.fr', 'Test12345');
     //         const permission = await viatransit.API.getPermissions(log.token, log.id);

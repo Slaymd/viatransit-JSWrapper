@@ -169,6 +169,14 @@ API = (function() {
         /**
          *
          * @param token
+         * @returns {Promise<*>}
+         */
+        getAllPermissions: function(/*String*/token) {
+            return permissionsMethods.getAllPermissions(token, this.getAPIRoot())
+        },
+        /**
+         *
+         * @param token
          * @param userId
          * @param permissions
          * @returns {Promise<*>}

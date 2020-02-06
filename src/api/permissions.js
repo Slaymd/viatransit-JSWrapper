@@ -32,6 +32,25 @@ async function getPermissions(/*String*/token, /*String*/userId, /*String*/apiUr
 /**
  *
  * @param token
+ * @param apiUrl
+ * @returns {Promise<*>}
+ */
+async function getAllPermissions(/*String*/token, /*String*/apiUrl)
+{
+    const url = apiUrl + "/permissions/";
+
+    return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+        .then((res) => {
+            return res.data;
+        }).catch((e) => {
+                return e.response.data.error;
+            }
+        );
+}
+
+/**
+ *
+ * @param token
  * @param userId
  * @param permissions
  * @param apiUrl
@@ -50,4 +69,4 @@ async function updatePermissions(/*String*/token, /*userId*/userId, /*Permission
         );
 }
 
-module.exports = { getPermissions, updatePermissions };
+module.exports = { getPermissions, getAllPermissions, updatePermissions };
