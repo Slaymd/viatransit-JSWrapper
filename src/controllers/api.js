@@ -98,6 +98,17 @@ API = (function() {
             return versionsMethods.getDataVersionDate(this.getAPIRoot(), dataKey);
         },
 
+        /**
+         * Get all versions
+         * @async
+         * @exports viatransit.API.getAllVersions
+         * @return {Promise<Object|null>}
+         */
+        getAllVersions: function()
+        {
+            return versionsMethods.getAllVersions(this.getAPIRoot());
+        },
+
         //MAP
 
         /**
