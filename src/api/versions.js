@@ -55,7 +55,7 @@ async function getAllVersions(/*String*/apiUrl)
     const url = apiUrl + '/versions';
 
     return axios.get(url, {timeout: 15000}).then(res => {
-        return new Date(res.data);
+        return res.data;
     });
 }
 
