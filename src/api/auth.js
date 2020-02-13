@@ -23,7 +23,7 @@ async function login(/*String*/email, /*String*/password, /*String*/apiUrl)
     return await axios.post(url, data, {timeout: 15000}).then(res => {
         return res.data;
     }).catch(e => {
-        return e.response.data.error;
+        return e.response.data;
     });
 }
 
@@ -42,9 +42,9 @@ async function register(/*String*/email, /*String*/password, /*String*/apiUrl)
     const data = {email, password};
 
     return await axios.post(url, data, {timeout: 15000}).then(res => {
-        return res.data.success;
+        return res.data;
     }).catch(e => {
-        return e.response.data.error;
+        return e.response.data;
     });
 }
 
