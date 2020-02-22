@@ -24,7 +24,7 @@ async function getUserLogs(/*String*/token, /*String*/userId, /*String*/apiUrl)
         .then((res) => {
             return res.data;
         }).catch((e) => {
-                return e.response.data.error;
+                return e.response.data;
             }
         );
 }

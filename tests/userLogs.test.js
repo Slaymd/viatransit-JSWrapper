@@ -7,10 +7,6 @@ const userLogsAssets = require('./assets/userLogs.js');
 
 describe('UserLogs', () => {
 
-    describe('API', () => {
-    
-    });
-
     describe('Model', () => {
         it('should be properly filled from Database', () => {
             let userLog = new viatransit.UserLogs();
