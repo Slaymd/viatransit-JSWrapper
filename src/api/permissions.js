@@ -24,9 +24,29 @@ async function getPermissions(/*String*/token, /*String*/userId, /*String*/apiUr
         .then((res) => {
             return res.data;
         }).catch((e) => {
-                return e.response.data.error;
+                return e.response.data;
             }
         );
+}
+
+/**
+ *
+ * @param token
+ * @param userId
+ * @param permissions
+ * @param apiUrl
+ * @returns {Promise<*>}
+ */
+async function updatePermissions(/*String*/token, /*userId*/userId, /*Permissions*/permissions, /*String*/apiUrl)
+{
+    const url = apiUrl + "/users/permissions?id=" + userId;
+
+    return await axios.put(url, { permissions }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+        .then((res) => {
+            return res.data;
+        }).catch((e) => {
+            return e.response.data;
+        });
 }
 
 /**
@@ -43,28 +63,7 @@ async function getAllPermissions(/*String*/token, /*String*/apiUrl)
         .then((res) => {
             return res.data;
         }).catch((e) => {
-                return e.response.data.error;
-            }
-        );
-}
-
-/**
- *
- * @param token
- * @param userId
- * @param permissions
- * @param apiUrl
- * @returns {Promise<*>}
- */
-async function updatePermissions(/*String*/token, /*userId*/userId, /*Permissions*/permissions, /*String*/apiUrl)
-{
-    const url = apiUrl + "/users/permissions/";
-
-    return await axios.put(url, { id : userId, permissions }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
-        .then((res) => {
-            return res.data.success;
-        }).catch((e) => {
-                return e.response.data.error;
+                return e.response.data;
             }
         );
 }
