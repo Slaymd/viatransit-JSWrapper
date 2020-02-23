@@ -24,9 +24,8 @@ async function getProfile(/*String*/token, /*String*/id, /*String*/apiUrl)
         .then((res) => {
             return res.data;
         }).catch((e) => {
-                return e.response.data.error;
-            }
-        );
+                return e.response.data;
+        });
 }
 
 /**
@@ -43,9 +42,8 @@ async function getAllUsers(/*String*/token, /*String*/apiUrl)
         .then((res) => {
             return res.data;
         }).catch((e) => {
-                return e.response.data.error;
-            }
-        );
+                return e.response.data;
+        });
 }
 
 /**
@@ -61,11 +59,10 @@ async function updateProfile(/*String*/token, /*User*/user, /*String*/apiUrl)
 
     return await axios.put(url, { user }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
-            return res.data.success;
+            return res.data;
         }).catch((e) => {
-                return e.response.data.error;
-            }
-        );
+                return e.response.data;
+        });
 }
 
 /**
@@ -82,11 +79,10 @@ async function deleteProfile(/*String*/token, /*String*/id, /*String*/apiUrl)
 
     return await axios.delete(url, { headers: { Authorization: 'Bearer '.concat(token)}, data: data, timeout: 15000})
         .then((res) => {
-            return res.data.success;
+            return res.data;
         }).catch((e) => {
-            return e.response.data.error
-            }
-        );
+            return e.response.data
+        });
 }
 
 module.exports = { getProfile, getAllUsers, updateProfile, deleteProfile };
