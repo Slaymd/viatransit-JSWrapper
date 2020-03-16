@@ -45,7 +45,7 @@ async function updatePermissions(/*String*/token, /*userId*/userId, /*Permission
         .then((res) => {
             return res.data;
         }).catch((e) => {
-            return e.response;
+            return e.response.data;
         });
 }
 
@@ -63,7 +63,7 @@ async function getAllPermissions(/*String*/token, /*String*/apiUrl)
         .then((res) => {
             return res.data;
         }).catch((e) => {
-                return e.response;
+                return e.response.data;
             }
         );
 }
