@@ -56,7 +56,22 @@ class Permission {
     hasPermission(/*String*/permission) {
         if (this.permissions === null || this.permissions === undefined)
             return false;
-        return this.permissions.includes(permission);
+        if (this.permissions.includes('*') || this.permissions.includes(permission))
+            return true;
+        let p = permission.split('.');
+    
+        for (let i = 0; i < this.permissions.length || i.length; i++) {
+            let s = this.permissions[i].split('.');
+    
+            for (let j = 0; j < s.length; j++) {
+                if (s[j] !== p[j]) {
+                    if (s[j] === '*')
+                        return true;
+                    break;
+                }
+            };
+        };
+        return false;
     }
 
     /**
