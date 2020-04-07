@@ -74,6 +74,15 @@ class Network {
     }
 
     /**
+     * Verifying data completion of network
+     */
+    isComplete()
+    {
+        return typeof this.key == "string" && typeof this.name == "string" && typeof this.type == "string" && typeof this.status == "string" && 
+        this.map instanceof Object && this.services instanceof Array && this.attributes instanceof Object;
+    }
+
+    /**
      * Get service by key
      * @param networkObject
      * @return {(NetworkService|null)}
