@@ -78,7 +78,7 @@ class Network {
      */
     isComplete()
     {
-        return typeof this.key == "string" && typeof this.name == "string" && typeof this.type == "string" && typeof this.status == "string" && 
+        return typeof this.key == "string" && this.key.length > 0 && typeof this.name == "string" && this.name.length > 0 && typeof this.type == "string" && typeof this.status == "string" && 
         this.map instanceof Object && this.services instanceof Array && this.attributes instanceof Object;
     }
 
