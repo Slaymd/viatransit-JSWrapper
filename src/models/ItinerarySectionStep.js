@@ -49,6 +49,7 @@ class ItinerarySectionStep extends AbstractAttributes {
     fill(/*{type: ('station'|'coords'|'unknown'), name: string, coordinates: (number[]|null), departureDate: String, arrivalDate: String, attributes: (Object|null)}*/object) {
         this.type = object.type;
         this.name = object.name;
+        this.coordinates = object.coordinates;
         this.departureDate = object.departureDate;
         this.arrivalDate = object.arrivalDate;
     }
