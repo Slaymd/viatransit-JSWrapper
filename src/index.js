@@ -21,3 +21,6 @@ module.exports.TransitLink = require('./models/TransitLink');
 module.exports.TransitLinkArray = require('./models/TransitLinkArray');
 module.exports.Line = require('./models/Line');
 module.exports.StopSequence = require('./models/StopSequence');
+module.exports.Itinerary = require('./models/Itinerary');
+module.exports.ItinerarySection = require('./models/ItinerarySection');
+module.exports.ItinerarySectionStep = require('./models/ItinerarySectionStep');
