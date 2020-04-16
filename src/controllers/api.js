@@ -131,11 +131,25 @@ API = (function() {
          * Get networks from API
          * @async
          * @exports viatransit.API.getNetworks
+         * @param token
          * @return {Promise<{dataUpdateDate: String, networks: Array<Network>}>}
          */
-        getNetworks: function()
+        getNetworks: function(/*String*/token = null)
         {
-            return networksMethods.getNetworks(this.getAPIRoot());
+            return networksMethods.getNetworks(this.getAPIRoot(), token);
+        },
+
+        /**
+         * Create network from API
+         * @async
+         * @exports viatransit.API.createNetwork
+         * @param token
+         * @param network
+         * @return {Promise<{id: String}>}
+         */
+        getNetworks: function(/*String*/token, /*Network*/network)
+        {
+            return networksMethods.createNetwork(this.getAPIRoot(), token, network);
         },
 
         //LINES
