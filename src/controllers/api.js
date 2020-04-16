@@ -147,7 +147,7 @@ API = (function() {
          * @param network
          * @return {Promise<{id: String}>}
          */
-        getNetworks: function(/*String*/token, /*Network*/network)
+        createNetwork: function(/*String*/token, /*Network*/network)
         {
             return networksMethods.createNetwork(this.getAPIRoot(), token, network);
         },

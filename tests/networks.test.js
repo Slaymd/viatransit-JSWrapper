@@ -14,12 +14,14 @@ describe('Networks', () => {
     describe('API', () => {
 
         it('should receive all networks', async () => {
+            viatransit.API.setAPIRoot("http://localhost/api/v1");
             let networks = await viatransit.API.getNetworks();
 
             assert.isArray(networks.networks);
             for (let network of networks.networks) {
                 assert.instanceOf(network, viatransit.Network);
             }
+            viatransit.API.setAPIRoot("http://viatransit.fr/api/v1");
         });
 
     });
