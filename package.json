@@ -1,6 +1,6 @@
 {
   "name": "viatransit",
-  "version": "0.18.0",
+  "version": "0.18.3",
   "description": "viaTransit API wrapper and usefull tools",
   "main": "src/index.js",
   "scripts": {

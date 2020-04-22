@@ -12,7 +12,7 @@ class Itinerary extends AbstractAttributes {
      */
     constructor(/*({departureDate: string, arrivalDate: string, sections: [{departureDate: string, arrivalDate: string, type: ('walking'|'waiting'|'public_transit'|'trains'|'car'|'unknown'), steps: [ {type: ('station'|'coords'|'unknown'), name: string, coordinates: (number[]|null), departureDate: String, arrivalDate: String, attributes: (Object|null)} ], shape: [ [ number ] ], attributes: (Object|null)}], attributes: (Object|null)}|null)*/object = null)
     {
-        super(typeof object === 'object' ? object.attributes : null);
+        super(object instanceof Object ? object.attributes : null);
         /**
          * departureDate
          * @type {string}

@@ -11,7 +11,7 @@ class ItinerarySectionStep extends AbstractAttributes {
      */
     constructor(/*({type: ('station'|'coords'|'unknown'), name: string, coordinates: (number[]|null), departureDate: String, arrivalDate: String, attributes: (Object|null)}|null)*/object = null)
     {
-        super(typeof object === 'object' ? object.attributes : null);
+        super(object instanceof Object ? object.attributes : null);
         /**
          * type
          * @type {('station'|'coords'|'unknown')}

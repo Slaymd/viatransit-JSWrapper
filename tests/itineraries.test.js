@@ -23,6 +23,12 @@ describe('Itineraries', () => {
 
     describe('Model', () => {
 
+        it('should be properly created without constructor', () => {
+            assert.instanceOf(new viatransit.Itinerary(), viatransit.Itinerary);
+            assert.instanceOf(new viatransit.ItinerarySection(), viatransit.ItinerarySection);
+            assert.instanceOf(new viatransit.ItinerarySectionStep(), viatransit.ItinerarySectionStep);
+        });
+
         it('should be properly filled from viaTransit API format', () => {
             //Generic properties
             assert.strictEqual(itinerary1.arrivalDate, "2020-04-06T17:41:00.000Z");
