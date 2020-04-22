@@ -3,8 +3,8 @@
 # viatransit
 
 [![npm version](https://badge.fury.io/js/viatransit.svg)](https://www.npmjs.com/package/viatransit)
-[![CircleCI branch](https://img.shields.io/circleci/project/github/viaTransit/viatransit-SDK/master.svg?style=flat)](https://circleci.com/gh/Slaymd/viatransit-SDK)
-[![Codecov](https://img.shields.io/codecov/c/github/viaTransit/viatransit-SDK.svg)](https://codecov.io/gh/Slaymd/viatransit-SDK)
+[![CircleCI branch](https://img.shields.io/circleci/project/github/viaTransit/viatransit-SDK/master.svg?style=flat)](https://circleci.com/gh/viaTransit/viatransit-SDK)
+[![Codecov](https://img.shields.io/codecov/c/github/viaTransit/viatransit-SDK.svg)](https://codecov.io/gh/viaTransit/viatransit-SDK)
 
 A nodejs package that includes a **wrapper** of the public **[viatransit](https://viatransit.fr) API**.
 
