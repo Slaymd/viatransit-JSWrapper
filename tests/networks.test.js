@@ -14,7 +14,7 @@ describe('Networks', () => {
     describe('API', () => {
 
         it('should receive all networks', async () => {
-            viatransit.API.setAPIRoot("http://localhost/api/v1");
+            viatransit.API.setAPIRoot("https://viatransit.fr/api/v1");
             let networks = await viatransit.API.getNetworks();
 
             assert.isArray(networks.networks);
