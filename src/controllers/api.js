@@ -12,6 +12,7 @@ let linesMethods = require('../api/lines');
 let versionsMethods = require('../api/versions');
 let mapsMethods = require('../api/maps');
 let tripsMethods = require('../api/trips');
+let itinerariesMethods = require('../api/itineraries');
 
 API = (function() {
     let apiRoot = "https://viatransit.fr/api/v1";
@@ -122,6 +123,22 @@ API = (function() {
         getLineMap: function(/*String*/networkKey, /*String*/lineId)
         {
             return mapsMethods.getLineMap(this.getAPIRoot(), networkKey, lineId);
+        },
+
+        //ITINERARIES
+
+        /**
+         * Get itineraries between two coordinates
+         * @async
+         * @exports viatransit.API.getItineraries
+         * @param fromCoordinates
+         * @param toCoordinates
+         * @param fromDate
+         * @return {Promise<Itinerary>}
+         */
+        getItineraries: function(/*number[]*/fromCoordinates, /*number[]*/toCoordinates, /*(Date|null)*/fromDate)
+        {
+            return itinerariesMethods.getItineraries(this.getAPIRoot(), fromCoordinates, toCoordinates, fromDate);
         },
 
 
