@@ -41,7 +41,7 @@ async function getNetworks(/*String*/apiUrl, token)
  * @param network
  * @return {Promise<{id: String}>}
  */
-async function createNetwork(/*String*/apiUrl, /*String*/token, /*String*/network)
+async function createNetwork(/*String*/apiUrl, /*String*/token, /*Network*/network)
 {
     const url = apiUrl + '/networks/';
     const data = {network};
@@ -54,4 +54,47 @@ async function createNetwork(/*String*/apiUrl, /*String*/token, /*String*/networ
     });
 }
 
-module.exports = { getNetworks, createNetwork };
+/**
+ * Update network from API
+ * @async
+ * @exports viatransit.API.updateNetwork
+ * @param apiUrl
+ * @param token
+ * @param key
+ * @param network
+ * @return {Promise<{String: String}>}
+ */
+async function updateNetwork(/*String*/apiUrl, /*String*/token, /*String*/key, /*Network*/network)
+{
+    const url = apiUrl + "/networks?key=" + key;
+
+    return await axios.put(url, { network }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+        .then((res) => {
+            return res.data;
+        }).catch((e) => {
+            return e.response.data;
+        });
+}
+
+/**
+ * Delete network from API
+ * @async
+ * @exports viatransit.API.deleteNetwork
+ * @param apiUrl
+ * @param token
+ * @param key
+ * @return {Promise<{String: String}>}
+ */
+async function deleteNetwork(/*String*/apiUrl, /*String*/token, /*String*/key)
+{
+    const url = apiUrl + "/networks/";
+
+    return await axios.delete(url, { key }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+        .then((res) => {
+            return res.data;
+        }).catch((e) => {
+            return e.response.data;
+        });
+}
+
+module.exports = { getNetworks, createNetwork, updateNetwork, deleteNetwork };

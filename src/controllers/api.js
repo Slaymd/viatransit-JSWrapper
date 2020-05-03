@@ -152,6 +152,33 @@ API = (function() {
             return networksMethods.createNetwork(this.getAPIRoot(), token, network);
         },
 
+        /**
+         * Update network from API
+         * @async
+         * @exports viatransit.API.updateNetwork
+         * @param token
+         * @param key
+         * @param network
+         * @return {Promise<{String: String}>}
+         */
+        updateNetwork: function(/*String*/token, /*String*/key, /*Network*/network)
+        {
+            return networksMethods.updateNetwork(this.getAPIRoot(), token, key, network);
+        },
+
+        /**
+         * Delete network from API
+         * @async
+         * @exports viatransit.API.deleteNetwork
+         * @param token
+         * @param key
+         * @return {Promise<{String: String}>}
+         */
+        deleteNetwork: function(/*String*/token, /*String*/key)
+        {
+            return networksMethods.deleteNetwork(this.getAPIRoot(), token, key);
+        },
+
         //LINES
 
         /**
