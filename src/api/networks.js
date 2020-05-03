@@ -88,8 +88,9 @@ async function updateNetwork(/*String*/apiUrl, /*String*/token, /*String*/key, /
 async function deleteNetwork(/*String*/apiUrl, /*String*/token, /*String*/key)
 {
     const url = apiUrl + "/networks/";
+    const data = {key};
 
-    return await axios.delete(url, { key }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+    return await axios.delete(url, { headers: { Authorization: 'Bearer '.concat(token)}, data, timeout: 15000})
         .then((res) => {
             return res.data;
         }).catch((e) => {
