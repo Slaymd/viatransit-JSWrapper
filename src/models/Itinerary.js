@@ -4,6 +4,9 @@ const ItinerarySection = require('./ItinerarySection');
 
 /**
  * @class Itinerary
+ * @property {string} departureDate
+ * @property {string} arrivalDate
+ * @property {ItinerarySection[]} sections
  */
 class Itinerary extends AbstractAttributes {
 

@@ -1,5 +1,6 @@
 /**
  * @class AbstractAttributes
+ * @property {Object} attributes
  */
 class AbstractAttributes {
 

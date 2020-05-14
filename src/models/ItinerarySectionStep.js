@@ -3,6 +3,11 @@ const AbstractAttributes = require('./abstracts/AbstractAttributes');
 
 /**
  * @class ItinerarySectionStep
+ * @property {('station'|'coords'|'unknown')} type
+ * @property {string} name
+ * @property {(number[]|null)} coordinates
+ * @property {string} departureDate
+ * @property {string} arrivalDate
  */
 class ItinerarySectionStep extends AbstractAttributes {
 

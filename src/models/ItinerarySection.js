@@ -4,6 +4,11 @@ const ItinerarySectionStep = require('./ItinerarySectionStep');
 
 /**
  * @class ItinerarySection
+ * @property {string} departureDate
+ * @property {string} arrivalDate
+ * @property {('walking'|'waiting'|'public_transit'|'trains'|'car'|'unknown')} type
+ * @property {ItinerarySectionStep[]} steps
+ * @property {[[number]]} shape
  */
 class ItinerarySection extends AbstractAttributes {
 
