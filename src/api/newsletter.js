@@ -22,7 +22,7 @@ async function subscribeNewsletter(/*String*/email, /*String*/apiUrl)
     return await axios.post(url, data, {timeout: 15000}).then(res => {
         return res.data;
     }).catch(e => {
-        return e.response.data;
+        return e.response;
     });
 }
 
