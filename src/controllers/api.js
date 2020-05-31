@@ -13,6 +13,7 @@ let versionsMethods = require('../api/versions');
 let mapsMethods = require('../api/maps');
 let tripsMethods = require('../api/trips');
 let itinerariesMethods = require('../api/itineraries');
+let newsletterMethods = require('../api/newsletter');
 
 API = (function() {
     let apiRoot = "https://viatransit.fr/api/v1";
@@ -411,6 +412,17 @@ API = (function() {
          */
         deleteProfile: function(/*String*/token, /*String*/id) {
             return usersMethods.deleteProfile(token, id, this.getAPIRoot())
+        },
+
+        //NEWSLETTER
+
+         /**
+         *
+         * @param email
+         * @returns {Promise<*>}
+         */
+        subscribeNewsletter: function(/*String*/email) {
+            return newsletterMethods.subscribeNewsletter(email, this.getAPIRoot())
         },
     }
 }());
