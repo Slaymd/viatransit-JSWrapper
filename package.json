@@ -17,7 +17,7 @@
     "api",
     "gtfs"
   ],
-  "author": "viaTransit",
+  "author": "",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/viaTransit/SDK/issues"
