@@ -1,6 +1,6 @@
 {
   "name": "viatransit",
-  "version": "0.18.8",
+  "version": "0.18.11",
   "description": "viaTransit API wrapper and usefull tools",
   "main": "src/index.js",
   "scripts": {
@@ -8,20 +8,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Slaymd/viatransit-SDK.git"
+    "url": "git+https://github.com/viaTransit/SDK"
   },
   "keywords": [
     "viatransit",
     "public",
     "transit",
+    "api",
     "gtfs"
   ],
-  "author": "",
+  "author": "viaTransit",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/Slaymd/viatransit-SDK/issues"
+    "url": "https://github.com/viaTransit/SDK/issues"
   },
-  "homepage": "https://github.com/Slaymd/viatransit-SDK#readme",
+  "homepage": "https://viatransit.fr",
   "dependencies": {
     "@turf/turf": "^5.1.6",
     "axios": "^0.19.2"
