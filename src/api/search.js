@@ -21,9 +21,7 @@ async function search(/*String*/query, /*[Number]*/nearbyCoords = null, /*String
         for (let type of Object.keys(res.data)) {
             result[type] = res.data[type].map(apiObject => {
                 if (type === 'public_transit' || type === 'trains') {
-                    let station = new Station();
-                    station.fillFromAPI(apiObject);
-                    return station;
+                    return new Station(apiObject);
                 } else
                     return apiObject;
             })

@@ -5,6 +5,7 @@ const Point = require('@turf/turf').point;
 
 //Assets
 const stationAssets = require('./assets/stations.js');
+const station1 = new viatransit.Station(stationAssets.station1);
 
 describe('Stations', () => {
 
@@ -15,28 +16,6 @@ describe('Stations', () => {
 
             assert.instanceOf(station, viatransit.Station);
         });
-
-        // it('should receive an array of Station full model (search/autocomplete) - in network', async () => {
-        //     const stations = await viatransit.API.autocompleteStationName('tam', 'Port');
-        //
-        //     assert.isArray(stations);
-        //     if (stations.length === 6)
-        //         return;
-        //     for (let station of stations) {
-        //         assert.instanceOf(station, viatransit.Station);
-        //     }
-        // });
-        //
-        // it('should receive an array of Station full model (search/autocomplete) - in zone', async () => {
-        //     const stations = await viatransit.API.autocompleteStationNameInZone('mpl', 'Port');
-        //
-        //     assert.isArray(stations);
-        //     if (stations.length === 7)
-        //         return;
-        //     for (let station of stations) {
-        //         assert.instanceOf(station, viatransit.Station);
-        //     }
-        // });
 
         it('should receive an array of location\'s nearby stations (nearby)', async () => {
             const stations = await viatransit.API.getNearbyStations([3.903846, 43.597512], 100);
@@ -61,95 +40,46 @@ describe('Stations', () => {
     });
 
     describe('Model', () => {
-        it('should be properly filled from database format', () => {
-            let station = new viatransit.Station();
-            station.fillFromDatabase(stationAssets.dbFormat);
 
-            //Generic properties
-            assert.strictEqual(station.name, 'Gare Montpellier Sud de France');
-            assert.strictEqual(station.type, 'public_transit');
-            assert.strictEqual(station.id, 'S5844');
-            assert.strictEqual(station.network, 'tam');
-            assert.deepStrictEqual(station.location, Point([3.92230177, 43.59628404]));
-            //Services
-            assert.isArray(station.services);
-            assert.lengthOf(station.services, 3);
-            assert.deepStrictEqual(station.services, [{"network": "heraulttransport", "id": "HT120"},
-                {"network": "tam", "id": "50"}, {"network": "sncf", "id": "sncf"}]);
-            //Stops
-            assert.isArray(station.stops);
-            assert.lengthOf(station.stops, 2);
-            assert.deepStrictEqual(station.stops, [{"services": ["50"], "id": "1461", "location":
-                    Point([3.92230177, 43.59628404])}, {"services": ["50"], "id": "1460",
-                    "location": Point([3.92230177, 43.59628404])}]);
-            //Linked stations
-            assert.isArray(station.linkedStations);
-            assert.lengthOf(station.linkedStations, 2);
-            assert.deepStrictEqual(station.linkedStations, [{"network": "sncf", "id": "OCE:SA:87688887",
-                "type": "trains"}, {"network": "heraulttransport", "id": "SZ1", "type": "public_transit"}]);
-            //Object properties
-            // assert.strictEqual(station.prototype.length, 9)
-        });
-
-        it('should throws an error because the location isn\'t a standard GEOJSON object', () => {
-            let station = new viatransit.Station();
-            let wrongDbObject = JSON.parse(JSON.stringify(stationAssets.dbFormat));
-            let wrongDbObject2 = JSON.parse(JSON.stringify(stationAssets.dbFormat));
-            let wrongAPIObject = JSON.parse(JSON.stringify(stationAssets.apiFormat));
-            let wrongAPIObject2 = JSON.parse(JSON.stringify(stationAssets.apiFormat));
-
-            wrongDbObject.location = {lol: 'hihi'};
-            wrongDbObject2.stops[0].location = {coordinate: [-42, -42]};
-            wrongAPIObject.location = {coordinate: [42, 42]};
-            wrongAPIObject2.stops[1].location = {lol: 'hihi'};
-            assert.throws(() => { station.fillFromDatabase(wrongDbObject) }, Error, 'Error while filling from database a station: main location isn\'t a standard GEOJSON point.');
-            station = new viatransit.Station();
-            assert.throws(() => { station.fillFromDatabase(wrongDbObject2) }, Error, 'Error while filling from database a station: a stop object isn\'t standard. Maybe location wrong?');
-            station = new viatransit.Station();
-            assert.throws(() => { station.fillFromAPI(wrongAPIObject) }, Error, 'Error while filling from API a station: main location isn\'t a standard GEOJSON point.');
-            station = new viatransit.Station();
-            assert.throws(() => { station.fillFromAPI(wrongAPIObject2) }, Error, 'Error while filling from API a station: a stop object isn\'t standard. Maybe location wrong?');
+        it('should be properly created without constructor', () => {
+            assert.instanceOf(new viatransit.Station(), viatransit.Station);
+            assert.instanceOf(new viatransit.Stop(), viatransit.Stop);
         });
 
         it('should be properly filled from viaTransit API format', () => {
-            let station = new viatransit.Station();
-            station.fillFromAPI(stationAssets.apiFormat);
-
             //Generic properties
-            assert.strictEqual(station.name, 'Gare Montpellier Sud de France');
-            assert.strictEqual(station.type, 'public_transit');
-            assert.strictEqual(station.id, 'S5844');
-            assert.strictEqual(station.network, 'tam');
-            assert.deepStrictEqual(station.location, Point([3.92230177, 43.59628404]));
+            assert.strictEqual(station1.name, 'Gare Montpellier Sud de France');
+            assert.strictEqual(station1.type, 'public_transit');
+            assert.strictEqual(station1.id, 'S5844');
+            assert.strictEqual(station1.networkKey, 'tam');
+            assert.deepStrictEqual(station1.location, {"type": "Point", "coordinates": [3.92230177, 43.59628404]});
             //Services
-            assert.isArray(station.services);
-            assert.lengthOf(station.services, 3);
-            assert.deepStrictEqual(station.services, [{"network": "heraulttransport", "id": "HT120"},
-                {"network": "tam", "id": "50"}, {"network": "sncf", "id": "sncf"}]);
+            assert.isArray(station1.lines);
+            assert.lengthOf(station1.lines, 3);
+            assert.deepStrictEqual(station1.lines, [{"networkKey": "heraulttransport", "id": "HT120"},
+                {"networkKey": "tam", "id": "50"}, {"networkKey": "sncf", "id": "sncf"}]);
             //Stops
-            assert.isArray(station.stops);
-            assert.lengthOf(station.stops, 2);
-            assert.deepStrictEqual(station.stops, [{"services": ["50"], "id": "1461", "location":
-                    Point([3.92230177, 43.59628404])}, {"services": ["50"], "id": "1460",
-                "location": Point([3.92230177, 43.59628404])}]);
+            assert.isArray(station1.stops);
+            assert.lengthOf(station1.stops, 2);
+            assert.instanceOf(station1.stops[0], viatransit.Stop);
+            assert.deepStrictEqual(station1.stops, [{"lines": ["50"], "id": "1461", "location":
+                    {"type": "Point", "coordinates": [3.92230177, 43.59628404]}, "attributes": null}, {"lines": ["50"], "id": "1460",
+                    "location": {"type": "Point", "coordinates": [3.92230177, 43.59628404]}, "attributes": null}]);
             //Linked stations
-            assert.isArray(station.linkedStations);
-            assert.lengthOf(station.linkedStations, 2);
-            assert.deepStrictEqual(station.linkedStations, [{"network": "sncf", "id": "OCE:SA:87688887",
-                "type": "trains"}, {"network": "heraulttransport", "id": "SZ1", "type": "public_transit"}]);
-            //Object properties
-            // assert.strictEqual(station.prototype.length, 9)
-        });
-
-        it('should works with attributes', () => {
-            let station = new viatransit.Station();
-            let station2 = new viatransit.Station();
-            station.fillFromAPI(stationAssets.apiFormat);
-            station2.fillFromDatabase(stationAssets.dbFormat);
-
-            assert.isNull(station2.getAttribute('blabla'));
-            assert.isNull(station.getAttribute('icon'));
-            assert.strictEqual(station.getAttribute('lastEdit'), '3243596244014');
+            assert.isArray(station1.links);
+            assert.instanceOf(station1.links, viatransit.TransitLinkArray);
+            assert.lengthOf(station1.links, 1);
+            assert.deepStrictEqual(station1.links, [{
+                "network": "sncf",
+                "lines": ["all"],
+                "stations": [
+                    {"stationId": "OCE:SA:87688887", "stopId": "all"}
+                ],
+                "trips": [],
+                "attributes": null
+            }]);
+            //Attributes
+            assert.isArray(station1.getAttribute('exits'));
         });
 
     });

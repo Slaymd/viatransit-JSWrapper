@@ -4,20 +4,16 @@
 #
 version: 2.1
 orbs:
-  codecov: codecov/codecov@1.0.4
+  codecov: codecov/codecov@1.0.5
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:14.3.0
+
 jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:12.14.0
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
+  test:
+    <<: *defaults
     steps:
       - checkout
 
@@ -68,3 +64,35 @@ jobs:
 
       - codecov/upload:
           file: ./coverage/lcov.info
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+
+      - run:
+          name: Publish package
+          command: npm publish
+
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - test
+
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master

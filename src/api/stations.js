@@ -23,66 +23,7 @@ async function getStation(/*String*/networkKey, /*String*/stationId, /*String*/a
     const url = apiUrl + '/stations/details?network=' + networkKey + '&id=' + stationId;
 
     return axios.get(url, {timeout: 15000}).then(res => {
-        if (!(res.data instanceof Object))
-            return null;
-        let station = new Station();
-
-        station.fillFromAPI(res.data);
-        return station;
-    });
-}
-
-/**
- * Get API autocomplete result from a string
- * @async
- * @exports viatransit.API.autocompleteStationName
- * @param networkKey
- * @param query
- * @param apiUrl
- * @return {Promise<Array<Station>>}
- */
-async function autocompleteStationName(/*String*/networkKey, /*String*/query, /*String*/apiUrl)
-{
-    const url = apiUrl + '/stations/autocomplete?network=' + networkKey + '&str=' + query;
-
-    return axios.get(url, {timeout: 15000}).then(res => {
-        if (!(res.data instanceof Array))
-            return [];
-        let stations = [];
-
-        for (let stationApiObj of res.data) {
-            let station = new Station();
-            station.fillFromAPI(stationApiObj);
-            stations.push(station);
-        }
-        return stations;
-    });
-}
-
-/**
- * Get API autocomplete result from a string
- * @async
- * @exports viatransit.API.autocompleteStationNameInZone
- * @param zoneKey
- * @param query
- * @param apiUrl
- * @return {Promise<Array<Station>>}
- */
-async function autocompleteStationNameInZone(/*String*/zoneKey, /*String*/query, /*String*/apiUrl)
-{
-    const url = apiUrl + '/stations/autocomplete?networkZone=' + zoneKey + '&str=' + query;
-
-    return axios.get(url, {timeout: 15000}).then(res => {
-        if (!(res.data instanceof Array))
-            return [];
-        let stations = [];
-
-        for (let stationApiObj of res.data) {
-            let station = new Station();
-            station.fillFromAPI(stationApiObj);
-            stations.push(station);
-        }
-        return stations;
+        return new Station(res.data);
     });
 }
 
@@ -103,9 +44,7 @@ async function getNearbyStations(/*[Float, Float*/coordinates, /*Number*/radius 
         let stations = [];
 
         for (let stationApiObj of res.data) {
-            let station = new Station();
-            station.fillFromAPI(stationApiObj);
-            stations.push(station);
+            stations.push(new Station(stationApiObj));
         }
         return stations;
     });
@@ -129,13 +68,11 @@ async function getNearbyStationsByType(/*[Float, Float*/coordinates, /*Number*/r
 
         for (let type of Object.keys(res.data)) {
             result[type] = res.data[type].map(apiStationObject => {
-                let station = new Station();
-                station.fillFromAPI(apiStationObject);
-                return station;
+                return new Station(apiStationObject);
             })
         }
         return result;
     });
 }
 
-module.exports = { getStation, autocompleteStationName, autocompleteStationNameInZone, getNearbyStations, getNearbyStationsByType };
+module.exports = { getStation, getNearbyStations, getNearbyStationsByType };

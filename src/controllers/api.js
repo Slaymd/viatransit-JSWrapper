@@ -332,28 +332,6 @@ API = (function() {
             return stationsMethods.getStation(networkKey, stationId, this.getAPIRoot())
         },
         /**
-         * Get API autocomplete result from a string
-         * @async
-         * @exports viatransit.API.autocompleteStationName
-         * @param networkKey
-         * @param query
-         * @return {Promise<Array<Station>>}
-         */
-        autocompleteStationName: function(/*String*/networkKey, /*String*/query) {
-            return stationsMethods.autocompleteStationName(networkKey, query, this.getAPIRoot())
-        },
-        /**
-         * Get API autocomplete result from a string
-         * @async
-         * @exports viatransit.API.autocompleteStationNameInZone
-         * @param zoneKey
-         * @param query
-         * @return {Promise<Array<Station>>}
-         */
-        autocompleteStationNameInZone: function(/*String*/zoneKey, /*String*/query) {
-            return stationsMethods.autocompleteStationNameInZone(zoneKey, query, this.getAPIRoot())
-        },
-        /**
          * Get API coordinates' nearby stations in a Zone
          * @async
          * @exports viatransit.API.getNearbyStations
