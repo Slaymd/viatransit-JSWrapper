@@ -1,13 +1,21 @@
+//Imports
+const AbstractAttributes = require('./abstracts/AbstractAttributes');
+
 /**
  * @class TransitLink
+ * @property {string} network
+ * @property {string[]} lines
+ * @property {{stationId: string, stopId: string}[]} stations
+ * @property {string[]} trips
  */
-class TransitLink {
+class TransitLink extends AbstractAttributes {
 
     /**
      * Create an instance of TransitLink
      */
     constructor(/*({network: string, lines: [string], stations: [{stationId: string, stopId: string}], trips: [string], attributes: Object|null}|null)*/object = null)
     {
+        super(object instanceof Object ? object.attributes : null);
         /**
          * Network
          * @type {string}
@@ -28,11 +36,6 @@ class TransitLink {
          * @type {[string]}
          */
         this.trips = [];
-        /**
-         * Attributes
-         * @type {(Object|null)}
-         */
-        this.attributes = null;
         //Constructor fill
         if (object !== null)
             this.fill(object);
@@ -48,7 +51,6 @@ class TransitLink {
         this.lines = object.lines;
         this.stations = object.stations;
         this.trips = object.trips;
-        this.attributes = object.attributes;
     }
 
     /**
@@ -115,9 +117,7 @@ class TransitLink {
      */
     isLinkedToTrip(/*String*/networkKey, /*String*/stationId, /*String*/stopId, /*String*/tripId)
     {
-        if (this.network === 'all')
-            return true;
-        return this.isLinkedToStop(networkKey,'all', stationId, stopId) && (this.trips.includes('all') || tripId === 'all' || this.trips.length === 0 || this.trips.includes(tripId));
+        return this.network === 'all' ? true : this.isLinkedToStop(networkKey,'all', stationId, stopId) && (this.trips.includes('all') || tripId === 'all' || this.trips.length === 0 || this.trips.includes(tripId));
     }
 }
 
