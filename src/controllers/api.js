@@ -317,6 +317,15 @@ API = (function() {
         search: function(/*String*/query, /*[Number]*/nearbyCoords = null) {
             return searchMethods.search(query, nearbyCoords, this.getAPIRoot())
         },
+        /**
+         * Reverse Search
+         * @param lon
+         * @param lat
+         * @return {Promise<{places?: [{id: String, types: [String], name: String, location: [Number], attributes: Object|null}]}>}
+         */
+        reverseSearch: function(/*Number*/lon, /*Number*/lat) {
+            return searchMethods.reverseSearch(lon, lat, this.getAPIRoot());
+        },
 
         //STATIONS
 

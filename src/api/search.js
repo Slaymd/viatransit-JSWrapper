@@ -30,4 +30,30 @@ async function search(/*String*/query, /*[Number]*/nearbyCoords = null, /*String
     });
 }
 
-module.exports = { search };
+/**
+ * Reverse Search
+ * @param lon
+ * @param lat
+ * @param apiUrl
+ * @return {Promise<{places?: [{id: String, types: [String], name: String, location: [Number], attributes: Object|null}]}>}
+ */
+async function reverseSearch(/*Number*/lon, /*Number*/lat, /*String*/apiUrl)
+{
+    const url = apiUrl + '/search/reverse?lon=' + lon + '&lat=' + lat;
+
+    console.log(url);
+
+    return axios.get(url, {timeout: 15000}).then(res => {
+        let result = {};
+        console.log("RESSS");
+        console.log(res.data);
+        for (let type of Object.keys(res.data)) {
+            result[type] = res.data[type].map(apiObject => {
+                return apiObject;
+            })
+        }
+        return result;
+    });
+}
+
+module.exports = { search, reverseSearch };
