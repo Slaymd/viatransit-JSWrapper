@@ -14,7 +14,7 @@ describe('Lines', () => {
         it('should receive all lines', async () => {
             const lines = await viatransit.API.getLines('tam');
 
-            assert.lengthOf(lines.lines, 45);
+            assert.isAbove(lines.lines.length, 35);
             assert.instanceOf(lines.lines[0], viatransit.Line);
         });
 

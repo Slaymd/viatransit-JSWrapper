@@ -48,6 +48,7 @@ class Station extends AbstractAttributes {
         this.location = object.location;
         this.stops = object.stops.map(objectStop => new Stop(objectStop));
         this.links = new TransitLinkArray(object.links);
+        this.attributes = object.attributes;
     }
 
 }
