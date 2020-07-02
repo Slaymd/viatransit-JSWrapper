@@ -103,6 +103,18 @@ class Announcement {
         return attr === undefined ? null : attr;
     }
 
+    /**
+     * Verifying data completion of Announcement
+     */
+    isComplete()
+    {
+        return this.authorId.length > 0 && this.priority instanceof Number &&
+        this.lang.length > 0 && this.type.length > 0 && this.title.length > 0 &&
+        this.description.length > 0 && this.startDate instanceof Date &&
+        this.endDate instanceof Date && this.announcements instanceof Array;
+    }
+
+
 }
 
 module.exports = Announcement;

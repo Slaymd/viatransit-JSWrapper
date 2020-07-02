@@ -57,6 +57,7 @@ describe('Disruptions', () => {
             assert.strictEqual(announcement.getAttribute('textColor'), '#000000');
             announcement = disruption2.announcements[0];
             assert.isNull(announcement.getAttribute('viatransit'));
+            assert.isTrue(announcement.isComplete());
         });
 
         it('should be complete', () => {
