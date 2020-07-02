@@ -108,10 +108,11 @@ class Announcement {
      */
     isComplete()
     {
-        return this.authorId.length > 0 && this.priority instanceof Number &&
-        this.lang.length > 0 && this.type.length > 0 && this.title.length > 0 &&
-        this.description.length > 0 && this.startDate instanceof Date &&
-        this.endDate instanceof Date && this.announcements instanceof Array;
+        return typeof this.authorId == "string" && this.authorId.length > 0 &&
+        this.priority >= 0 && typeof this.authorId == "string" && this.lang.length > 0 &&
+        typeof this.type == "string" && this.type.length > 0 && typeof this.title == "string" &&
+        this.title.length > 0 && typeof this.description == "string" && this.description.length > 0 &&
+        this.startDate instanceof Date && this.endDate instanceof Date;
     }
 
 
