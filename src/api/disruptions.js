@@ -10,6 +10,29 @@ const Disruption = require('../models/Disruption');
  */
 
 /**
+ * post disruption on API
+ * @async
+ * @exports viatransit.API.postDisruption
+ * @param apiUrl
+ * @param token
+ * @param disruption
+ * @return {Promise<{id: String}>}
+ */
+async function postDisruption(/*String*/apiUrl, /*String*/token, /*Disruption*/disruption)
+{
+    const url = apiUrl + '/disruptions/';
+    const data = {disruption};
+
+    return axios.post(url, data, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+    .then((res) => {
+        return res.data;
+    }).catch((e) => {
+        return e.response.data;
+    });
+}
+
+
+/**
  * Get disruptions from API on network
  * @async
  * @exports viatransit.API.getNetworkDisruptions
@@ -39,6 +62,7 @@ async function getNetworkDisruptions(/*String*/networkKey, /*String*/apiUrl)
 
 /**
  * Get disruptions from API on network zone
+ * @deprecated
  * @async
  * @exports viatransit.API.getNetworkZoneDisruptions
  * @param zoneKey
@@ -67,4 +91,4 @@ async function getNetworkZoneDisruptions(/*String*/zoneKey, /*String*/apiUrl)
     });
 }
 
-module.exports = { getNetworkZoneDisruptions, getNetworkDisruptions };
+module.exports = { getNetworkZoneDisruptions, getNetworkDisruptions, postDisruption };
