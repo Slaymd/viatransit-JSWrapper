@@ -60,7 +60,7 @@ API = (function() {
          * @param disruption
          * @return {Promise<{id: String}>}
          */
-        getNetworkDisruptions: function(/*String*/token, /*Disruption*/disruption) {
+        postDisruption: function(/*String*/token, /*Disruption*/disruption) {
             return disruptionsMethods.postDisruption(this.getAPIRoot(), token, disruption);
         },
         /**
