@@ -48,12 +48,12 @@ async function getAllDisruptions(/*String*/apiUrl, /*String*/token)
         try {
             let disruptions = [];
 
-            for (let disruptionApiObj of res.data.disruptions) {
+            for (let disruptionApiObj of res.data) {
                 let disruption = new Disruption();
                 disruption.fillFromAPI(disruptionApiObj);
                 disruptions.push(disruption);
             }
-            return {dataUpdateDate: res.data.dataUpdateDate, disruptions};
+            return {/*dataUpdateDate: res.data.dataUpdateDate, */disruptions};
         } catch {
             return {dataUpdateDate: null, disruptions: []};
         }
