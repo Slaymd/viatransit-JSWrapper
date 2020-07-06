@@ -50,7 +50,7 @@ async function getAllDisruptions(/*String*/apiUrl, /*String*/token)
 
             for (let disruptionApiObj of res.data) {
                 let disruption = new Disruption();
-                disruption.fillFromAPI(disruptionApiObj);
+                disruption.fill(disruptionApiObj);
                 disruptions.push(disruption);
             }
             return {/*dataUpdateDate: res.data.dataUpdateDate, */disruptions};
@@ -78,7 +78,7 @@ async function getNetworkDisruptions(/*String*/networkKey, /*String*/apiUrl)
 
             for (let disruptionApiObj of res.data.disruptions) {
                 let disruption = new Disruption();
-                disruption.fillFromAPI(disruptionApiObj);
+                disruption.fill(disruptionApiObj);
                 disruptions.push(disruption);
             }
             return {dataUpdateDate: res.data.dataUpdateDate, disruptions};
@@ -109,7 +109,7 @@ async function getNetworkZoneDisruptions(/*String*/zoneKey, /*String*/apiUrl)
 
             for (let disruptionApiObj of res.data) {
                 let disruption = new Disruption();
-                disruption.fillFromAPI(disruptionApiObj);
+                disruption.fill(disruptionApiObj);
                 disruptions.push(disruption);
             }
             return disruptions;
