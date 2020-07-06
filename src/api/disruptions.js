@@ -31,6 +31,34 @@ async function postDisruption(/*String*/apiUrl, /*String*/token, /*Disruption*/d
     });
 }
 
+/**
+ * Get all disruption from API
+ * @async
+ * @exports viatransit.API.getAllDisruptions
+ * @param apiUrl
+ * @param token
+ * @return {Promise<{dataUpdateDate: String, disruptions: Array<Disruption>}>}
+ */
+async function getAllDisruptions(/*String*/apiUrl, /*String*/token)
+{
+    const url = apiUrl + '/disruptions/';
+
+    return axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+    .then(res => {
+        try {
+            let disruptions = [];
+
+            for (let disruptionApiObj of res.data.disruptions) {
+                let disruption = new Disruption();
+                disruption.fillFromAPI(disruptionApiObj);
+                disruptions.push(disruption);
+            }
+            return {dataUpdateDate: res.data.dataUpdateDate, disruptions};
+        } catch {
+            return {dataUpdateDate: null, disruptions: []};
+        }
+    });
+}
 
 /**
  * Get disruptions from API on network
@@ -91,4 +119,4 @@ async function getNetworkZoneDisruptions(/*String*/zoneKey, /*String*/apiUrl)
     });
 }
 
-module.exports = { getNetworkZoneDisruptions, getNetworkDisruptions, postDisruption };
+module.exports = { getNetworkZoneDisruptions, getNetworkDisruptions, getAllDisruptions, postDisruption };

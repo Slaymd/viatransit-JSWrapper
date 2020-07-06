@@ -64,6 +64,16 @@ API = (function() {
             return disruptionsMethods.postDisruption(this.getAPIRoot(), token, disruption);
         },
         /**
+         * Get all disruptions on API
+         * @async
+         * @exports viatransit.API.getAllDisruptions
+         * @param token
+         * @return {Promise<{dataUpdateDate: String, disruptions: Array<Disruption>}>}
+         */
+        getAllDisruptions: function(/*String*/token) {
+            return disruptionsMethods.getAllDisruptions(this.getAPIRoot(), token);
+        },
+        /**
          * Get disruptions from API on network
          * @async
          * @exports viatransit.API.getNetworkDisruptions
