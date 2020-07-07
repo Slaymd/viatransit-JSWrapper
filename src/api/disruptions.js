@@ -53,6 +53,30 @@ async function deleteDisruption(/*String*/apiUrl, /*String*/token, /*String*/dis
 }
 
 /**
+ * Update disruption on API
+ * @async
+ * @exports viatransit.API.updateDisruption
+ * @param apiUrl
+ * @param token
+ * @param disruptionId
+ * @param disruption
+ * @return {Promise<{String}>}
+ */
+async function updateDisruption(/*String*/apiUrl, /*String*/token, /*String*/disruptionId, /*Disruption*/disruption)
+{
+    const url = apiUrl + '/disruptions/' + disruptionId;
+    let data = {disruption};
+
+    return axios.put(url, data, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+    .then((res) => {
+        return res.data;
+    }).catch((e) => {
+        return e.response.data;
+    });
+}
+
+
+/**
  * Get all disruption from API
  * @async
  * @exports viatransit.API.getAllDisruptions
@@ -140,4 +164,4 @@ async function getNetworkZoneDisruptions(/*String*/zoneKey, /*String*/apiUrl)
     });
 }
 
-module.exports = { getNetworkZoneDisruptions, getNetworkDisruptions, getAllDisruptions, postDisruption, deleteDisruption };
+module.exports = { getNetworkZoneDisruptions, getNetworkDisruptions, getAllDisruptions, postDisruption, deleteDisruption, updateDisruption };
