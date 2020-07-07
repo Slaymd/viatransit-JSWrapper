@@ -84,7 +84,19 @@ API = (function() {
             return disruptionsMethods.getNetworkDisruptions(networkKey, this.getAPIRoot());
         },
         /**
+         * Delete disruptions on API
+         * @async
+         * @exports viatransit.API.deleteDisruption
+         * @param token
+         * @param disruptionId
+         * @return {Promise<{String}>}
+         */
+        deleteDisruption: function(/*String*/token, /*String*/disruptionId) {
+            return disruptionsMethods.deleteDisruption(this.getAPIRoot(), token, disruptionId);
+        },
+        /**
          * Get disruptions from API on network zone
+         * @deprecated
          * @async
          * @exports viatransit.API.getNetworkZoneDisruptions
          * @param zoneKey
