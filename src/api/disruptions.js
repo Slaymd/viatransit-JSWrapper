@@ -42,7 +42,7 @@ async function postDisruption(/*String*/apiUrl, /*String*/token, /*Disruption*/d
  */
 async function deleteDisruption(/*String*/apiUrl, /*String*/token, /*String*/disruptionId)
 {
-    const url = apiUrl + '/disruptions?id=' + disruptionId;
+    const url = apiUrl + '/disruptions/' + disruptionId;
 
     return axios.delete(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
     .then((res) => {
