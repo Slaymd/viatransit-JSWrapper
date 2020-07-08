@@ -46,6 +46,10 @@ describe('Networks', () => {
             assert.deepStrictEqual(network1.services[0], new viatransit.NetworkService({"gtfsId": "1", "name": "TaM", "status": "enabled", "links": [{"network": "tam", "lines": ["all"], "stations": [], "trips": [], "attributes": null},], "attributes": {icon: 'tam-mini'}}));
         });
 
+        it('should be complete', () => {
+            assert.isTrue(network1.isComplete());
+        })
+
         it('should get network service properly', () => {
             assert.deepStrictEqual(network1.getService(line1), new viatransit.NetworkService({"gtfsId": "1", "name": "TaM", "status": "enabled", "links": [{"network": "tam", "lines": ["all"], "stations": [], "trips": [], "attributes": null},], "attributes": {icon: 'tam-mini'}}));
         });

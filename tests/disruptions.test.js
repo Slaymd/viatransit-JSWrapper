@@ -12,14 +12,14 @@ describe('Disruptions', () => {
 
     describe('API', () => {
 
-        it('should receive network disruptions'/*, async () => {*/
-            // let disruptions = await viatransit.API.getNetworkDisruptions('tam');
-            //
-            // assert.isArray(disruptions.disruptions);
-            // for (let disruption of disruptions.disruptions) {
-            //     assert.instanceOf(disruption, viatransit.Disruption);
-            // }
-        /*}*/);
+        it('should receive network disruptions', async () => {
+            let disruptions = await viatransit.API.getAllDisruptions();
+
+            assert.isArray(disruptions.disruptions);
+            for (let disruption of disruptions.disruptions) {
+                assert.instanceOf(disruption, viatransit.Disruption);
+            }
+        });
 
     });
 
@@ -46,8 +46,8 @@ describe('Disruptions', () => {
             assert.lengthOf(announcement.links, 1);
             assert.strictEqual(announcement.id, '5cd09bdc87387472c1fa6199');
             assert.strictEqual(announcement.authorId, '5c61cc3363939c74bdcfde35');
-            assert.deepStrictEqual(announcement.endDate, new Date('2019-05-06T20:39:38.285Z'));
-            assert.deepStrictEqual(announcement.startDate, new Date('2019-05-06T20:39:38.285Z'));
+            assert.deepStrictEqual(announcement.startDate, new Date('2019-05-05T20:37:00.000Z'));
+            assert.deepStrictEqual(announcement.endDate, new Date('2019-05-05T21:59:00.000Z'));
             assert.strictEqual(announcement.priority, 1);
             assert.strictEqual(announcement.type, "warning");
             assert.strictEqual(announcement.lang, "fr");
@@ -63,6 +63,16 @@ describe('Disruptions', () => {
         it('should be complete', () => {
             assert.isTrue(disruption1.isComplete());
             assert.isFalse(disruption2.isComplete());
+        });
+
+        it('should be effective', () => {
+            assert.isTrue(disruption1.announcements[0].isEffective(new Date('2019-05-05T20:38:00.000Z')))
+            assert.isTrue(disruption1.isEffective(new Date('2019-05-05T20:38:00.000Z')))
+        });
+
+        it('shouldn\'t be effective', () => {
+            assert.isFalse(disruption1.announcements[0].isEffective(new Date('2018-05-05T20:38:00.000Z')))
+            assert.isFalse(disruption1.isEffective(new Date('2018-05-05T20:38:00.000Z')))
         });
 
     });

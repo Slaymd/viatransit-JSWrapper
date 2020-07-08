@@ -41,12 +41,8 @@ async function reverseSearch(/*Number*/lon, /*Number*/lat, /*String*/apiUrl)
 {
     const url = apiUrl + '/search/reverse?lon=' + lon + '&lat=' + lat;
 
-    console.log(url);
-
     return axios.get(url, {timeout: 15000}).then(res => {
         let result = {};
-        console.log("RESSS");
-        console.log(res.data);
         for (let type of Object.keys(res.data)) {
             result[type] = res.data[type].map(apiObject => {
                 return apiObject;

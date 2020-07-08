@@ -210,6 +210,28 @@ class Disruption {
     }
 
     /**
+     * Is disruption effective at specific date
+     * @param atDate
+     * @param config
+     * @return {boolean}
+     */
+    isEffective(/*Date*/atDate= null, /*{checkDisruption: Boolean, checkAnnouncements: Boolean}*/config = {checkAnnouncements: true, checkDisruption: true}) {
+        let date = !atDate ? new Date() : atDate;
+        let isEffective = false;
+
+        if (config.checkAnnouncements) {
+            if (this.announcements.filter(announcement => announcement.isEffective(date)).length > 0)
+                isEffective = true;
+        }
+        if (config.checkDisruption) {
+            if ((date >= this.startDate) && (date < this.endDate))
+                isEffective = true;
+        }
+
+        return isEffective;
+    }
+
+    /**
      * Get attribute value from key
      * @param key
      * @returns {Object|null}

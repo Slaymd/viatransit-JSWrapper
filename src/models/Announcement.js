@@ -104,6 +104,17 @@ class Announcement {
     }
 
     /**
+     * Is announcement effective at specific date
+     * @param atDate
+     * @return {boolean}
+     */
+    isEffective(/*Date*/atDate= null) {
+        let date = !atDate ? new Date() : atDate;
+
+        return (date >= this.startDate) && (date < this.endDate);
+    }
+
+    /**
      * Verifying data completion of Announcement
      */
     isComplete()
