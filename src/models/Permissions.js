@@ -75,11 +75,21 @@ class Permission {
     }
 
     /**
+     * Check is permission is master (*)
+    * @returns Boolean
+     */
+    isMaster()
+    {
+        return this.permissions.includes('*')
+    }
+
+    /**
      * Get attribute value from key
      * @param key
      * @returns {Object|null}
      */
-    getAttribute(/*String*/key) {
+    getAttribute(/*String*/key)
+    {
         if (this.attributes === null || this.attributes === undefined)
             return null;
 

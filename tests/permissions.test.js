@@ -46,5 +46,12 @@ describe('Permissions', () => {
             permission.fillFromAPI(permissionAssets.dbFormat);
             assert.strictEqual(permission.hasPermission("user.remove.self"), true);
         });
+
+        it('should return false because of user is not master', () => {
+            let permission = new viatransit.Permission();
+
+            permission.fillFromAPI(permissionAssets.dbFormat);
+            assert.strictEqual(permission.isMaster(), false);
+        });
     });
 });
