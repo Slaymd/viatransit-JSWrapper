@@ -84,6 +84,26 @@ class Permission {
     }
 
     /**
+    * Get networks permissions availables
+    * @params networksList
+    * @returns Array
+    */
+    getNetworksPermissions(networksList)
+    {
+        let networksPermissions = [];
+
+        if (this.isMaster() || this.hasPermission('networks'))
+            networksList.forEach(network => networksPermissions.push(network.key));
+        else {
+            networksList.forEach(network => {
+                if (this.hasPermission('networks.' + network.key))
+                    networksPermissions.push(network.key)
+            });
+        }
+        return networksPermissions;
+    }
+
+    /**
      * Get attribute value from key
      * @param key
      * @returns {Object|null}
