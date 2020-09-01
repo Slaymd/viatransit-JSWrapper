@@ -7,8 +7,13 @@ class Datasets {
     /**
      * Create an instance of Datasets
      */
-    constructor(/*({datasets: Object, uploadedBy: String, verified: Boolean, attributes: Object|null}|null)*/object= null)
+    constructor(/*({id: String, datasets: Object, uploadedBy: String, verified: Boolean, attributes: Object|null}|null)*/object= null)
     {
+        /**
+         * Id
+         * @type {string}
+         */
+        this.id = "";
         /**
          * Datasets
          * @type {object}
@@ -38,8 +43,22 @@ class Datasets {
      * Fill properties from viaTransit API return format
      * @param object
      */
-    fill(/*({datasets: Object, uploadedBy: String, verified: Boolean, attributes: Object|null}|null)*/object)
+    fill(/*({id: String, datasets: Object, uploadedBy: String, verified: Boolean, attributes: Object|null}|null)*/object)
     {
+        this.id = String(object.id);
+        this.datasets = object.datasets;
+        this.uploadedBy = object.uploadedBy;
+        this.verified = object.verified;
+        this.attributes = object.attributes;
+    }
+
+    /**
+     * Fill properties from viaTransit Database return format
+     * @param object
+     */
+    fillFromDatabase(/*({id: String, datasets: Object, uploadedBy: String, verified: Boolean, attributes: Object|null}|null)*/object)
+    {
+        this.id = String(object._id);
         this.datasets = object.datasets;
         this.uploadedBy = object.uploadedBy;
         this.verified = object.verified;
@@ -54,6 +73,8 @@ class Datasets {
         return this.datasets instanceof Object &&
         this.hasValidType() &&
         this.hasCoordinates() &&
+        typeof this.id == "string" &&
+        this.id.length > 0 &&
         typeof this.uploadedBy == "string" &&
         typeof this.verified == "boolean" &&
         this.attributes instanceof Object;

@@ -4,17 +4,27 @@ const viatransit = require('../src/index');
 
 //Assets
 const datasetsAssets = require('./assets/datasets');
-const datasets1 = new viatransit.Datasets(datasetsAssets.datasets1);
-const datasets2 = new viatransit.Datasets(datasetsAssets.datasets2);
+const datasets1 = new viatransit.Datasets();
+const datasets2 = new viatransit.Datasets();
 
 describe('Datasets', () => {
 
     describe('Model', () => {
 
         it('should be properly filled from viaTransit API format', () => {
+            datasets1.fill(datasetsAssets.datasetsAPI);
+            assert.strictEqual(datasets1.id, '2684335908');
             assert.strictEqual(datasets1.uploadedBy, 'userId');
             assert.strictEqual(datasets1.verified, true);
             assert.isObject(datasets1.datasets);
+        });
+
+        it('should be properly filled from viaTransit DB format', () => {
+            datasets2.fillFromDatabase(datasetsAssets.datasetsDB);
+            assert.strictEqual(datasets2.id, '2684335908');
+            assert.strictEqual(datasets2.uploadedBy, 'userId');
+            assert.strictEqual(datasets2.verified, false);
+            assert.isObject(datasets2.datasets);
         });
 
         it('should be complete', () => {
