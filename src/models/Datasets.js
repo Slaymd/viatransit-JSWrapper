@@ -74,7 +74,6 @@ class Datasets {
         this.hasValidType() &&
         this.hasCoordinates() &&
         typeof this.id == "string" &&
-        this.id.length > 0 &&
         typeof this.uploadedBy == "string" &&
         typeof this.verified == "boolean" &&
         this.attributes instanceof Object;
