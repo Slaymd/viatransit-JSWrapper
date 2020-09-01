@@ -16,6 +16,7 @@ module.exports.Token = require('./models/Tokens');
 module.exports.Permission = require('./models/Permissions');
 module.exports.Station = require('./models/Station');
 module.exports.Stop = require('./models/Stop');
+module.exports.Datasets = require('./models/Datasets');
 module.exports.Network = require('./models/Network');
 module.exports.NetworkService = require('./models/NetworkService');
 module.exports.TransitLink = require('./models/TransitLink');
