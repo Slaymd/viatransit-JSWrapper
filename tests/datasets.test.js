@@ -4,6 +4,7 @@ const viatransit = require('../src/index');
 
 //Assets
 const datasetsAssets = require('./assets/datasets');
+const datasets = require('./assets/datasets');
 const datasets1 = new viatransit.Datasets();
 const datasets2 = new viatransit.Datasets();
 
@@ -57,6 +58,16 @@ describe('Datasets', () => {
 
         it('should works with attributes', () => {
             assert.isNull(datasets1.getAttribute('blabla'));
+        });
+
+        it('should get differentes datasets types', () => {
+            assert.isArray(datasets1.getAvailablesTypes());
+            assert.isString(datasets1.getAvailablesTypes()[0]);
+        });
+
+        it('should get differentes kinds of datasets', () => {
+            assert.isArray(datasets1.getKinds());
+            assert.isString(datasets1.getKinds()[0]);
         });
 
     });

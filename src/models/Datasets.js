@@ -13,30 +13,27 @@ class Datasets {
          * Id
          * @type {string}
          */
-        this.id = "";
+        this.id = object && object.id ? object.id : "";
         /**
          * Datasets
          * @type {object}
          */
-        this.datasets = {};
+        this.datasets = object && object.datasets ? object.datasets : {};
         /**
          * UploadedBy
          * @type {string}
          */
-        this.uploadedBy = "";
+        this.uploadedBy = object && object.uploadedBy ? object.uploadedBy : "";
         /**
          * Verified
          * @type {boolean}
          */
-        this.verified = false;
+        this.verified = object && object.verified ? object.verified : false;
         /**
          * Attributes
          * @type {Object|null}
          */
-        this.attributes = null;
-        //Optional constructor fill
-        if (object !== null)
-            this.fill(object);
+        this.attributes = object && object.attributes ? object.attributes : {};
     }
 
     /**
@@ -88,11 +85,27 @@ class Datasets {
     }
 
     /**
-     * Verifying if the datasets has a valid type
+     * Return list of datasets types
+     */
+    getAvailablesTypes()
+    {
+        return ["Point", "Polygon", "LineString"];
+    }
+
+    /**
+     * Return list of differente kind of datasets
+     */
+    getKinds()
+    {
+        return ['cycleways', 'carshare-areas'];
+    }
+
+    /**
+     * Verifying if the datasets has a valid geoJSON type
      */
     hasValidType()
     {
-        const types = ["Point", "Polygon", "LineString"];
+        const types = this.getAvailablesTypes();
 
         return types.includes(this.datasets.type);
     }
