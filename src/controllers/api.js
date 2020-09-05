@@ -8,6 +8,7 @@ let searchMethods = require('../api/search');
 let stationsMethods = require('../api/stations');
 let usersMethods = require('../api/users');
 let userLogsMethods = require('../api/userLogs');
+let datasetsMethods = require('../api/datasets');
 let linesMethods = require('../api/lines');
 let versionsMethods = require('../api/versions');
 let mapsMethods = require('../api/maps');
@@ -169,6 +170,64 @@ API = (function() {
         getLineMap: function(/*String*/networkKey, /*String*/lineId)
         {
             return mapsMethods.getLineMap(this.getAPIRoot(), networkKey, lineId);
+        },
+
+        //MAPBOX
+
+        /**
+         * Get datasets
+         * @async
+         * @exports viatransit.API.getDatasets
+         * @param token
+         * @param kind
+         * @param datasetsId
+         * @return {Promise<{kind: String, datasetsArray: Array}>}
+         */
+        getDatasets: function(/*String*/token, /*String*/kind, /*String*/datasetsId = null)
+        {
+            return datasetsMethods.getDatasets(this.getAPIRoot(), token, kind, datasetsId);
+        },
+
+        /**
+         * Post datasets
+         * @async
+         * @exports viatransit.API.postDatasets
+         * @param token
+         * @param kind
+         * @param datasetsArray
+         * @return {Promise<{kind: String, datasets: Array}>}
+         */
+        postDatasets: function(/*String*/token, /*String*/kind, /*Array*/datasetsArray)
+        {
+            return datasetsMethods.postDatasets(this.getAPIRoot(), token, kind, datasetsArray);
+        },
+
+        /**
+         * Update datasets
+         * @async
+         * @exports viatransit.API.updateDatasets
+         * @param token
+         * @param kind
+         * @param datasetsArray
+         * @return {Promise<{kind: String, datasets: Array}>}
+         */
+        updateDatasets: function(/*String*/token, /*String*/kind, /*Array*/datasetsArray)
+        {
+            return datasetsMethods.updateDatasets(this.getAPIRoot(), token, kind, datasetsArray);
+        },
+
+        /**
+         * Delete datasets
+         * @async
+         * @exports viatransit.API.deleteDatasets
+         * @param token
+         * @param kind
+         * @param datasetsId
+         * @return {Promise<{Object}>}
+         */
+        deleteDatasets: function(/*String*/token, /*String*/kind, /*String*/datasetsId)
+        {
+            return datasetsMethods.deleteDatasets(this.getAPIRoot(), token, kind, datasetsId);
         },
 
         //ITINERARIES
