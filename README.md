@@ -10,13 +10,21 @@ A nodejs package that includes a **wrapper** of the public **[viatransit](https:
 
 ## Available services
 
+* Auth
+* Users
+* Users Logs
+* Permissions
 * Schedules
 * Disruptions
-* Users
+* Itineraries
+* Search
+* Trips
 * Stations
 * Lines
 * Maps
+* Datasets
 * Networks
+* Newsletter
 * Data versions
 
 ## Usage
