@@ -28,9 +28,8 @@ async function getDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*
         .then((res) => {
             return res.data;
         }).catch((e) => {
-                return e.response.data;
-            }
-        );
+            return e.response.data;
+        });
 }
 
 /**
@@ -49,9 +48,8 @@ async function postDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /
     .then((res) => {
         return res.data;
     }).catch((e) => {
-            return e.response.data;
-        }
-    );
+        return e.response.data;
+    });
 }
 
 /**
@@ -70,9 +68,8 @@ async function updateDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind,
     .then((res) => {
         return res.data;
     }).catch((e) => {
-            return e.response.data;
-        }
-    );
+        return e.response.data;
+    });
 }
 
 /**
@@ -91,9 +88,8 @@ async function deleteDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind,
         .then((res) => {
             return res.data;
         }).catch((e) => {
-                return e.response.data;
-            }
-        );
+            return e.response.data;
+        });
 }
 
 module.exports = { getDatasets, postDatasets, updateDatasets, deleteDatasets };

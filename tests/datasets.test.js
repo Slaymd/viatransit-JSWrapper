@@ -17,7 +17,7 @@ describe('Datasets', () => {
             assert.strictEqual(datasets1.id, '2684335908');
             assert.strictEqual(datasets1.uploadedBy, 'userId');
             assert.strictEqual(datasets1.verified, true);
-            assert.isObject(datasets1.datasets);
+            assert.isObject(datasets1.feature);
         });
 
         it('should be properly filled from viaTransit DB format', () => {
@@ -25,7 +25,7 @@ describe('Datasets', () => {
             assert.strictEqual(datasets2.id, '2684335908');
             assert.strictEqual(datasets2.uploadedBy, 'userId');
             assert.strictEqual(datasets2.verified, false);
-            assert.isObject(datasets2.datasets);
+            assert.isObject(datasets2.feature);
         });
 
         it('should be complete', () => {

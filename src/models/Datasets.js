@@ -7,7 +7,7 @@ class Datasets {
     /**
      * Create an instance of Datasets
      */
-    constructor(/*({id: String, datasets: Object, uploadedBy: String, verified: Boolean, attributes: Object|null}|null)*/object= null)
+    constructor(/*({id: String, feature: Object, uploadedBy: String, verified: Boolean, attributes: Object|null}|null)*/object= null)
     {
         /**
          * Id
@@ -15,10 +15,10 @@ class Datasets {
          */
         this.id = object && object.id ? object.id : "";
         /**
-         * Datasets
+         * Feature
          * @type {object}
          */
-        this.datasets = object && object.datasets ? object.datasets : {};
+        this.feature = object && object.feature ? object.feature : {};
         /**
          * UploadedBy
          * @type {string}
@@ -40,10 +40,10 @@ class Datasets {
      * Fill properties from viaTransit API return format
      * @param object
      */
-    fill(/*({id: String, datasets: Object, uploadedBy: String, verified: Boolean, attributes: Object|null}|null)*/object)
+    fill(/*({id: String, feature: Object, uploadedBy: String, verified: Boolean, attributes: Object|null}|null)*/object)
     {
         this.id = String(object.id);
-        this.datasets = object.datasets;
+        this.feature = object.feature;
         this.uploadedBy = object.uploadedBy;
         this.verified = object.verified;
         this.attributes = object.attributes;
@@ -53,10 +53,10 @@ class Datasets {
      * Fill properties from viaTransit Database return format
      * @param object
      */
-    fillFromDatabase(/*({id: String, datasets: Object, uploadedBy: String, verified: Boolean, attributes: Object|null}|null)*/object)
+    fillFromDatabase(/*({id: String, feature: Object, uploadedBy: String, verified: Boolean, attributes: Object|null}|null)*/object)
     {
         this.id = String(object._id);
-        this.datasets = object.datasets;
+        this.feature = object.feature;
         this.uploadedBy = object.uploadedBy;
         this.verified = object.verified;
         this.attributes = object.attributes;
@@ -67,7 +67,7 @@ class Datasets {
      */
     isComplete()
     {
-        return this.datasets instanceof Object &&
+        return this.feature instanceof Object &&
         this.hasValidType() &&
         this.hasCoordinates() &&
         typeof this.id == "string" &&
@@ -101,21 +101,21 @@ class Datasets {
     }
 
     /**
-     * Verifying if the datasets has a valid geoJSON type
+     * Verifying if the feature datasets has a valid geoJSON type
      */
     hasValidType()
     {
         const types = this.getAvailablesTypes();
 
-        return types.includes(this.datasets.type);
+        return types.includes(this.feature.geometry.type);
     }
 
     /**
-     * Verifying if the datasets has coordinates
+     * Verifying if the feature datasets has coordinates
      */
     hasCoordinates()
     {
-        return this.datasets.coordinates instanceof Array && this.datasets.coordinates.length > 0;
+        return this.feature.geometry.coordinates instanceof Array && this.feature.geometry.coordinates.length > 0;
     }
 
     /**
