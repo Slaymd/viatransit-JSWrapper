@@ -26,3 +26,6 @@ module.exports.StopSequence = require('./models/StopSequence');
 module.exports.Itinerary = require('./models/Itinerary');
 module.exports.ItinerarySection = require('./models/ItinerarySection');
 module.exports.ItinerarySectionStep = require('./models/ItinerarySectionStep');
+
+//Utils
+module.exports.Utils = require('./controllers/utils').Utils;

@@ -1,3 +1,5 @@
+let Utils = require('../controllers/utils').Utils;
+
 /**
  * @class Datasets
  * @classdesc All properties of one Datasets
@@ -92,7 +94,7 @@ class Datasets {
      */
     getAvailablesTypes()
     {
-        return ["Point", "Polygon", "LineString"];
+        return Utils.getDatasetsGeometryTypes();
     }
 
     /**
@@ -100,7 +102,7 @@ class Datasets {
      */
     getKinds()
     {
-        return ['cycleways', 'carshare-areas'];
+        return Utils.getDatasetsKinds()
     }
 
     /**
