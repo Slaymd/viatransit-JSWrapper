@@ -230,6 +230,20 @@ API = (function() {
             return datasetsMethods.deleteDatasets(this.getAPIRoot(), token, kind, datasetsId);
         },
 
+        /**
+         * Upload datasets to tileset on Mapbox
+         * @async
+         * @exports viatransit.API.uploadDatasets
+         * @param token
+         * @param kind
+         * @param tilesetName (optional)
+         * @return {Promise<{Object}>}
+         */
+        uploadDatasets: function(/*String*/token, /*String*/kind, /*String*/tilesetName = null)
+        {
+            return datasetsMethods.uploadDatasets(this.getAPIRoot(), token, kind, tilesetName);
+        },
+
         //ITINERARIES
 
         /**

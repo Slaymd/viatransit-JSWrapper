@@ -92,4 +92,26 @@ async function deleteDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind,
         });
 }
 
-module.exports = { getDatasets, postDatasets, updateDatasets, deleteDatasets };
+/**
+ *
+ * @param apiUrl
+ * @param token
+ * @param kind
+ * @param tilesetName (optional)
+ * @returns {Promise<*>}
+ */
+async function uploadDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*String*/tilesetName)
+{
+    let url = apiUrl + "/mapbox/tileset/" + kind;
+    if (tilesetName !== null)
+        url = url + "?tilesetName=" + tilesetName;
+
+    return await axios.post(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+        .then((res) => {
+            return res.data;
+        }).catch((e) => {
+            return e.response.data;
+        });
+}
+
+module.exports = { getDatasets, postDatasets, updateDatasets, deleteDatasets, uploadDatasets};
