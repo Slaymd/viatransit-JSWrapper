@@ -56,6 +56,17 @@ describe('Datasets', () => {
             assert.isFalse(datasets2.hasCoordinates());
         })
 
+        it('datasets should not be complete', () => {
+            let datasets = new viatransit.Datasets(datasetsAssets.badFeature);                    
+            assert.isFalse(datasets.isComplete());
+
+            datasets = new viatransit.Datasets(datasetsAssets.badFeatureType);
+            assert.isFalse(datasets.isComplete());
+            
+            datasets = new viatransit.Datasets(datasetsAssets.badFeatureProperties);        
+            assert.isFalse(datasets.isComplete());
+        })
+
         it('should works with attributes', () => {
             assert.isNull(datasets1.getAttribute('blabla'));
         });

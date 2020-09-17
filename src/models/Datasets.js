@@ -68,6 +68,9 @@ class Datasets {
     isComplete()
     {
         return this.feature instanceof Object &&
+        this.feature.type === 'Feature' &&
+        this.feature.properties instanceof Object &&
+        this.feature.geometry instanceof Object &&
         this.hasValidType() &&
         this.hasCoordinates() &&
         typeof this.id == "string" &&
@@ -115,7 +118,8 @@ class Datasets {
      */
     hasCoordinates()
     {
-        return this.feature.geometry.coordinates instanceof Array && this.feature.geometry.coordinates.length > 0;
+        return this.feature.geometry.coordinates instanceof Array
+        && this.feature.geometry.coordinates.length > 0;
     }
 
     /**

@@ -34,5 +34,40 @@ module.exports = {
         "uploadedBy": "userId",
         "verified": false,
         "attributes": {}
+    },
+    badFeature: {
+        "id": "id",
+        "feature": 'hello',
+        "uploadedBy": "userId",
+        "verified": true,
+        "attributes": {}
+    },
+    badFeatureType: {
+        "id": "id",
+        "feature": {
+            "type": "BAD_TYPE",
+            "properties": {},
+            "geometry": {
+                "coordinates": [5.689544677734375, 43.70660077729878],
+                "type": "Point"
+            },
+        },
+        "uploadedBy": "userId",
+        "verified": true,
+        "attributes": {}
+    },
+    badFeatureProperties: {
+        "id": "id",
+        "feature": {
+            "type": "Feature",
+            "properties": "THIS_IS_PROPERTIES",
+            "geometry": {
+                "coordinates": [5.689544677734375, 43.70660077729878],
+                "type": "Point"
+            },
+        },
+        "uploadedBy": "userId",
+        "verified": true,
+        "attributes": {}
     }
 };
