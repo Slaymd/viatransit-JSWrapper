@@ -1,9 +1,6 @@
 //Imports
 const axios = require('axios');
 
-//Models
-const Datasets = require('../models/Datasets');
-
 /**
  * viaTransit Datasets
  * @module viatransit
@@ -14,15 +11,16 @@ const Datasets = require('../models/Datasets');
  * @param apiUrl
  * @param token
  * @param kind
+ * @param networkKey
  * @param datasetsId
  * @returns {Promise<*>}
  */
-async function getDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*String*/datasetsId)
+async function getDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*String*/datasetsId)
 {
-    let url = apiUrl + "/mapbox/datasets/" + kind;
+    let url = apiUrl + "/mapbox/datasets/" + kind + '?networkKey=' + networkKey;
     
     if (datasetsId !== null)
-        url = url + '?id=' + datasetsId;
+        url = url + '&id=' + datasetsId;
  
     return await axios.get(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
@@ -37,12 +35,13 @@ async function getDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*
  * @param apiUrl
  * @param token
  * @param kind
+ * @param networkKey
  * @param datasetsArray
  * @returns {Promise<*>}
  */
-async function postDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Array*/datasetsArray)
+async function postDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*Array*/datasetsArray)
 {
-    let url = apiUrl + "/mapbox/datasets/" + kind;
+    let url = apiUrl + "/mapbox/datasets/" + kind + '?networkKey=' + networkKey;
  
     return await axios.post(url, { datasetsArray }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
     .then((res) => {
@@ -57,12 +56,13 @@ async function postDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /
  * @param apiUrl
  * @param token
  * @param kind
+ * @param networkKey
  * @param datasetsArray
  * @returns {Promise<*>}
  */
-async function updateDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Array*/datasetsArray)
+async function updateDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*Array*/datasetsArray)
 {
-    let url = apiUrl + "/mapbox/datasets/" + kind;
+    let url = apiUrl + "/mapbox/datasets/" + kind + '?networkKey=' + networkKey;
  
     return await axios.put(url, { datasetsArray }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
     .then((res) => {
@@ -77,12 +77,13 @@ async function updateDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind,
  * @param apiUrl
  * @param token
  * @param kind
+ * @param networkKey
  * @param datasetsId
  * @returns {Promise<*>}
  */
-async function deleteDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*String*/datasetsId)
+async function deleteDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*String*/datasetsId)
 {
-    let url = apiUrl + "/mapbox/datasets/" + kind + "?id=" + datasetsId;
+    let url = apiUrl + "/mapbox/datasets/" + kind + "?networkKey=" + networkKey + "&id=" + datasetsId;
  
     return await axios.delete(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
@@ -97,14 +98,15 @@ async function deleteDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind,
  * @param apiUrl
  * @param token
  * @param kind
+ * @param networkKey
  * @param tilesetName (optional)
  * @returns {Promise<*>}
  */
-async function uploadDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*String*/tilesetName)
+async function uploadDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*String*/tilesetName)
 {
-    let url = apiUrl + "/mapbox/tileset/" + kind;
+    let url = apiUrl + "/mapbox/tileset/" + kind + '?networkKey=' + networkKey;
     if (tilesetName !== null)
-        url = url + "?tilesetName=" + tilesetName;
+        url = url + "&tilesetName=" + tilesetName;
 
     return await axios.post(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
