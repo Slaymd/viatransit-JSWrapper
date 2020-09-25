@@ -186,7 +186,7 @@ API = (function() {
          */
         getDatasets: function(/*String*/token, /*String*/kind, /*String*/networkKey, /*String*/datasetsId = null)
         {
-            return datasetsMethods.getDatasets(this.getAPIRoot(), token, kind, datasetsId);
+            return datasetsMethods.getDatasets(this.getAPIRoot(), token, kind, networkKey, datasetsId);
         },
 
         /**
@@ -201,7 +201,7 @@ API = (function() {
          */
         postDatasets: function(/*String*/token, /*String*/kind, /*String*/networkKey, /*Array*/datasetsArray)
         {
-            return datasetsMethods.postDatasets(this.getAPIRoot(), token, kind, datasetsArray);
+            return datasetsMethods.postDatasets(this.getAPIRoot(), token, kind, networkKey, datasetsArray);
         },
 
         /**
@@ -216,7 +216,7 @@ API = (function() {
          */
         updateDatasets: function(/*String*/token, /*String*/kind, /*String*/networkKey, /*Array*/datasetsArray)
         {
-            return datasetsMethods.updateDatasets(this.getAPIRoot(), token, kind, datasetsArray);
+            return datasetsMethods.updateDatasets(this.getAPIRoot(), token, kind, networkKey, datasetsArray);
         },
 
         /**
@@ -231,7 +231,7 @@ API = (function() {
          */
         deleteDatasets: function(/*String*/token, /*String*/kind, /*String*/networkKey, /*String*/datasetsId)
         {
-            return datasetsMethods.deleteDatasets(this.getAPIRoot(), token, kind, datasetsId);
+            return datasetsMethods.deleteDatasets(this.getAPIRoot(), token, kind, networkKey, datasetsId);
         },
 
         /**
@@ -246,7 +246,7 @@ API = (function() {
          */
         uploadDatasets: function(/*String*/token, /*String*/kind, /*String*/networkKey, /*String*/tilesetName = null)
         {
-            return datasetsMethods.uploadDatasets(this.getAPIRoot(), token, kind, tilesetName);
+            return datasetsMethods.uploadDatasets(this.getAPIRoot(), token, kind, networkKey, tilesetName);
         },
 
         //ITINERARIES
