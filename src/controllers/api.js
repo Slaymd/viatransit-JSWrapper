@@ -180,13 +180,14 @@ API = (function() {
          * @exports viatransit.API.getDatasets
          * @param token
          * @param kind
-         * @param networkKey
+         * @param ownerType
+         * @param ownerName
          * @param datasetsId
          * @return {Promise<{kind: String, datasetsArray: Array}>}
          */
-        getDatasets: function(/*String*/token, /*String*/kind, /*String*/networkKey, /*String*/datasetsId = null)
+        getDatasets: function(/*String*/token, /*String*/kind, /*String*/ownerType, /*String*/ownerName, /*String*/datasetsId = null)
         {
-            return datasetsMethods.getDatasets(this.getAPIRoot(), token, kind, networkKey, datasetsId);
+            return datasetsMethods.getDatasets(this.getAPIRoot(), token, kind, ownerType, ownerName, datasetsId);
         },
 
         /**
@@ -195,13 +196,12 @@ API = (function() {
          * @exports viatransit.API.postDatasets
          * @param token
          * @param kind
-         * @param networkKey
          * @param datasetsArray
          * @return {Promise<{kind: String, datasets: Array}>}
          */
-        postDatasets: function(/*String*/token, /*String*/kind, /*String*/networkKey, /*Array*/datasetsArray)
+        postDatasets: function(/*String*/token, /*String*/kind, /*Array*/datasetsArray)
         {
-            return datasetsMethods.postDatasets(this.getAPIRoot(), token, kind, networkKey, datasetsArray);
+            return datasetsMethods.postDatasets(this.getAPIRoot(), token, kind, datasetsArray);
         },
 
         /**
@@ -210,13 +210,12 @@ API = (function() {
          * @exports viatransit.API.updateDatasets
          * @param token
          * @param kind
-         * @param networkKey
          * @param datasetsArray
          * @return {Promise<{kind: String, datasets: Array}>}
          */
-        updateDatasets: function(/*String*/token, /*String*/kind, /*String*/networkKey, /*Array*/datasetsArray)
+        updateDatasets: function(/*String*/token, /*String*/kind, /*Array*/datasetsArray)
         {
-            return datasetsMethods.updateDatasets(this.getAPIRoot(), token, kind, networkKey, datasetsArray);
+            return datasetsMethods.updateDatasets(this.getAPIRoot(), token, kind, datasetsArray);
         },
 
         /**
@@ -225,13 +224,12 @@ API = (function() {
          * @exports viatransit.API.deleteDatasets
          * @param token
          * @param kind
-         * @param networkKey
          * @param datasetsId
          * @return {Promise<{Object}>}
          */
-        deleteDatasets: function(/*String*/token, /*String*/kind, /*String*/networkKey, /*String*/datasetsId)
+        deleteDatasets: function(/*String*/token, /*String*/kind, /*String*/datasetsId)
         {
-            return datasetsMethods.deleteDatasets(this.getAPIRoot(), token, kind, networkKey, datasetsId);
+            return datasetsMethods.deleteDatasets(this.getAPIRoot(), token, kind, datasetsId);
         },
 
         /**

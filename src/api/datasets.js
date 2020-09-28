@@ -11,13 +11,14 @@ const axios = require('axios');
  * @param apiUrl
  * @param token
  * @param kind
- * @param networkKey
+ * @param ownerType
+ * @param ownerName
  * @param datasetsId
  * @returns {Promise<*>}
  */
-async function getDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*String*/datasetsId)
+async function getDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/ownerType, /*String*/ownerName, /*String*/datasetsId)
 {
-    let url = apiUrl + "/mapbox/datasets/" + kind + '?networkKey=' + networkKey;
+    let url = apiUrl + "/mapbox/datasets/" + kind + '?ownerType=' + ownerType + '&ownerName=' + ownerName;
     
     if (datasetsId !== null)
         url = url + '&id=' + datasetsId;
@@ -35,13 +36,12 @@ async function getDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*
  * @param apiUrl
  * @param token
  * @param kind
- * @param networkKey
  * @param datasetsArray
  * @returns {Promise<*>}
  */
-async function postDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*Array*/datasetsArray)
+async function postDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Array*/datasetsArray)
 {
-    let url = apiUrl + "/mapbox/datasets/" + kind + '?networkKey=' + networkKey;
+    let url = apiUrl + "/mapbox/datasets/" + kind;
  
     return await axios.post(url, { datasetsArray }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
     .then((res) => {
@@ -56,13 +56,12 @@ async function postDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /
  * @param apiUrl
  * @param token
  * @param kind
- * @param networkKey
  * @param datasetsArray
  * @returns {Promise<*>}
  */
-async function updateDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*Array*/datasetsArray)
+async function updateDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Array*/datasetsArray)
 {
-    let url = apiUrl + "/mapbox/datasets/" + kind + '?networkKey=' + networkKey;
+    let url = apiUrl + "/mapbox/datasets/" + kind;
  
     return await axios.put(url, { datasetsArray }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
     .then((res) => {
@@ -77,13 +76,12 @@ async function updateDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind,
  * @param apiUrl
  * @param token
  * @param kind
- * @param networkKey
  * @param datasetsId
  * @returns {Promise<*>}
  */
-async function deleteDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*String*/datasetsId)
+async function deleteDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*String*/datasetsId)
 {
-    let url = apiUrl + "/mapbox/datasets/" + kind + "?networkKey=" + networkKey + "&id=" + datasetsId;
+    let url = apiUrl + "/mapbox/datasets/" + kind + "?id=" + datasetsId;
  
     return await axios.delete(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
