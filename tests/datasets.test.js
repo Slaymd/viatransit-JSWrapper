@@ -81,6 +81,16 @@ describe('Datasets', () => {
             assert.isString(datasets1.getKinds()[0]);
         });
 
+        it('should not get feature properties, wrong kind', () => {
+            const properties = viatransit.Utils.getDatasetsFeatureProperties('WRONG_KIND');
+            assert.isNull(properties);
+        });
+
+        it('should get feature properties according a kind', () => {
+            const properties = viatransit.Utils.getDatasetsFeatureProperties('cycleways');
+            assert.isArray(properties);
+        });
+
     });
 
 });
