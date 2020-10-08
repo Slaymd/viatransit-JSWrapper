@@ -29,7 +29,7 @@ A nodejs package that includes a **wrapper** of the public **[viatransit](https:
 * Stations
 * Lines
 * Maps
-* Datasets
+* Map editor (dataset, tileset)
 * Networks
 * Newsletter
 * Data versions
