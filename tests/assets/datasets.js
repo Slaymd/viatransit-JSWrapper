@@ -10,7 +10,9 @@ module.exports = {
                 "fee": "no",
                 "motorcar": "designated",
                 "parking": "surface",
-                "surface": "asphalt"
+                "surface": "asphalt",
+                "owner_type": "test",
+                "owner_name": "test"
             },
             "geometry": {
                 "coordinates": [5.689544677734375, 43.70660077729878],

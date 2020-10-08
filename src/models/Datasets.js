@@ -66,8 +66,10 @@ class Datasets {
 
     /**
      * Verifying data completion of Datasets
+     * @param kind
+     * @returns {boolean} 
      */
-    isComplete()
+    isComplete(kind)
     {
         return this.feature instanceof Object &&
         this.feature.type === 'Feature' &&
@@ -75,6 +77,7 @@ class Datasets {
         this.feature.geometry instanceof Object &&
         this.hasValidType() &&
         this.hasCoordinates() &&
+        this.hasProperties(kind) &&
         typeof this.id == "string" &&
         typeof this.uploadedBy == "string" &&
         typeof this.verified == "boolean" &&
@@ -122,6 +125,27 @@ class Datasets {
     {
         return this.feature.geometry.coordinates instanceof Array
         && this.feature.geometry.coordinates.length > 0;
+    }
+
+    /**
+     * Verifying if the feature has defaults properties
+     * @param kind
+     * @returns {boolean}
+     */
+    hasProperties(kind)
+    {
+        if (!kind)
+            return false;
+        const properties = Utils.getDatasetsFeatureProperties(kind);
+        if (!properties)
+            return false;
+
+        for (const property of properties) {
+            if (this.feature.properties[property] === null ||
+                this.feature.properties[property] === undefined)
+                return false;
+        }
+        return true;
     }
 
     /**
