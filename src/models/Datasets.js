@@ -142,7 +142,8 @@ class Datasets {
 
         for (const property of properties) {
             if (this.feature.properties[property] === null ||
-                this.feature.properties[property] === undefined)
+                this.feature.properties[property] === undefined ||
+                this.feature.properties[property].length < 1)
                 return false;
         }
         return true;
