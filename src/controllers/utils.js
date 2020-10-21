@@ -1,17 +1,15 @@
 const properties = [
     {
         kind: 'cycleways',
-        properties: ["@id",
-            "highway",
+        properties: ["highway",
             "source",
             "owner_type",
             "owner_name"
         ]
     },
     {
-        kind: 'carshare-areas',
-        properties: ["@id",
-            "amenity",
+        kind: 'parking',
+        properties: ["amenity",
             "capacity",
             "fee",
             "motorcar",
@@ -26,7 +24,7 @@ Utils = (function() {
     
     return {
         getDatasetsKinds: function() {
-            return ['cycleways', 'carshare-areas']; 
+            return ['cycleways', 'parking']; 
         },
         getDatasetsGeometryTypes: function() {
             return ["Point", "Polygon", "LineString"];

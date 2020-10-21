@@ -29,7 +29,7 @@ describe('Datasets', () => {
         });
 
         it('should be complete', () => {
-            assert.isTrue(datasets1.isComplete('carshare-areas'));
+            assert.isTrue(datasets1.isComplete('parking'));
         })
 
         it('should be verified', () => {
@@ -45,7 +45,7 @@ describe('Datasets', () => {
         })
 
         it('datasets should have valid properties', () => {
-            assert.isTrue(datasets1.hasProperties('carshare-areas'));
+            assert.isTrue(datasets1.hasProperties('parking'));
         })
 
         it('should not be verified', () => {
@@ -62,13 +62,13 @@ describe('Datasets', () => {
 
         it('datasets should not be complete', () => {
             let datasets = new viatransit.Datasets(datasetsAssets.badFeature);                    
-            assert.isFalse(datasets.isComplete('carshare-areas'));
+            assert.isFalse(datasets.isComplete('parking'));
 
             datasets = new viatransit.Datasets(datasetsAssets.badFeatureType);
-            assert.isFalse(datasets.isComplete('carshare-areas'));
+            assert.isFalse(datasets.isComplete('parking'));
             
             datasets = new viatransit.Datasets(datasetsAssets.badFeatureProperties);        
-            assert.isFalse(datasets.isComplete('carshare-areas'));
+            assert.isFalse(datasets.isComplete('parking'));
         })
 
         it('should not be complete, missing kind parameter', () => {
@@ -76,7 +76,7 @@ describe('Datasets', () => {
         })
 
         it('datasets should not have valid properties', () => {
-            assert.isFalse(datasets2.hasProperties('carshare-areas'));
+            assert.isFalse(datasets2.hasProperties('parking'));
         })
 
         it('datasets should not have valid properties, missing kind parameter', () => {

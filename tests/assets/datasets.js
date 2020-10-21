@@ -4,7 +4,6 @@ module.exports = {
         "feature": {
             "type": "Feature",
             "properties": {
-                "@id": "way/435187420",
                 "amenity": "parking",
                 "capacity": "2",
                 "fee": "no",
