@@ -4,8 +4,8 @@ const properties = [
         properties: [
             {id: 'highway', require: true, type: 'input', values: 'all'},
             {id: 'source', require: true, type: 'input', values: 'all'},
-            {id: 'owner_type', require: true, type: 'input', value: 'all'},
-            {id: 'owner_name', require: true, type: 'input', value: 'all'}
+            {id: 'owner_type', require: true, type: 'input', values: 'all'},
+            {id: 'owner_name', require: true, type: 'input', values: 'all'}
         ]
     },
     {
@@ -13,8 +13,8 @@ const properties = [
         properties: [
             {id: 'fee', require: true, type: 'dropdown', values: ['yes', 'no']},
             {id: 'capacity', require: false, type: 'input', values: 'number'},
-            {id: 'owner_type', require: true, type: 'input', value: 'all'},
-            {id: 'owner_name', require: true, type: 'input', value: 'all'}
+            {id: 'owner_type', require: true, type: 'input', values: 'all'},
+            {id: 'owner_name', require: true, type: 'input', values: 'all'}
         ]
     }
 ];
