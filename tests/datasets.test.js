@@ -4,7 +4,6 @@ const viatransit = require('../src/index');
 
 //Assets
 const datasetsAssets = require('./assets/datasets');
-const datasets = require('./assets/datasets');
 const datasets1 = new viatransit.Datasets();
 const datasets2 = new viatransit.Datasets();
 

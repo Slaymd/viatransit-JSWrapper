@@ -133,9 +133,9 @@ class Datasets {
             return false;
 
         for (const property of properties) {
-            if (this.feature.properties[property.id] === null ||
+            if (property.require === true && (this.feature.properties[property.id] === null ||
                 this.feature.properties[property.id] === undefined ||
-                this.feature.properties[property.id].length < 1)
+                this.feature.properties[property.id].length < 1))
                 return false;
         }
         return true;
