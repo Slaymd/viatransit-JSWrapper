@@ -17,7 +17,7 @@ let itinerariesMethods = require('../api/itineraries');
 let newsletterMethods = require('../api/newsletter');
 
 API = (function() {
-    let apiRoot = "https://viatransit.fr/api/v1";
+    let apiRoot = "https://api.viatransit.fr/v1";
     return {
         getAPIRoot: function() {
             return apiRoot;

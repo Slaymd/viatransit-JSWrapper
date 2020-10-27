@@ -14,9 +14,9 @@ describe('Search', () => {
         });
 
         it('should receive reverse search results', async () => {
-            viatransit.API.setAPIRoot("https://viatransit.fr/beta/api/v1");
+            viatransit.API.setAPIRoot("https://beta.api.viatransit.fr/v1");
             const searchResults = await viatransit.API.reverseSearch(3.880261, 43.605133);
-            viatransit.API.setAPIRoot("https://viatransit.fr/api/v1");
+            viatransit.API.setAPIRoot("https://api.viatransit.fr/v1");
 
             assert.isObject(searchResults);
         });
