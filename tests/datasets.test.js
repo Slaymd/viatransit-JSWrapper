@@ -87,11 +87,6 @@ describe('Datasets', () => {
             assert.isNull(datasets1.getAttribute('blabla'));
         });
 
-        it('should get differentes datasets types', () => {
-            assert.isArray(datasets1.getAvailablesTypes());
-            assert.isString(datasets1.getAvailablesTypes()[0]);
-        });
-
         it('should get differentes kinds of datasets', () => {
             assert.isArray(datasets1.getKinds());
             assert.isString(datasets1.getKinds()[0]);

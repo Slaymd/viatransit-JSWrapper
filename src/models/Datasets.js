@@ -93,14 +93,6 @@ class Datasets {
     }
 
     /**
-     * Return list of datasets types
-     */
-    getAvailablesTypes()
-    {
-        return Utils.getDatasetsGeometryTypes();
-    }
-
-    /**
      * Return list of differente kind of datasets
      */
     getKinds()
@@ -113,7 +105,7 @@ class Datasets {
      */
     hasValidType()
     {
-        const types = this.getAvailablesTypes();
+        const types = Utils.getDatasetsGeometryTypes();
 
         return types.includes(this.feature.geometry.type);
     }
@@ -141,9 +133,9 @@ class Datasets {
             return false;
 
         for (const property of properties) {
-            if (this.feature.properties[property] === null ||
-                this.feature.properties[property] === undefined ||
-                this.feature.properties[property].length < 1)
+            if (this.feature.properties[property.id] === null ||
+                this.feature.properties[property.id] === undefined ||
+                this.feature.properties[property.id].length < 1)
                 return false;
         }
         return true;
