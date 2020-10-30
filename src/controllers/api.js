@@ -183,7 +183,7 @@ API = (function() {
          * @param ownerType
          * @param ownerName
          * @param datasetsId
-         * @return {Promise<{kind: String, datasetsArray: Array}>}
+         * @return {Promise<{kind: String, FeatureCollection: Array}>}
          */
         getDatasets: function(/*String*/token, /*String*/kind, /*String*/ownerType, /*String*/ownerName, /*String*/datasetsId = null)
         {
@@ -196,12 +196,12 @@ API = (function() {
          * @exports viatransit.API.postDatasets
          * @param token
          * @param kind
-         * @param datasetsArray
+         * @param FeatureCollection
          * @return {Promise<{kind: String, datasets: Array}>}
          */
-        postDatasets: function(/*String*/token, /*String*/kind, /*Array*/datasetsArray)
+        postDatasets: function(/*String*/token, /*String*/kind, /*Array*/FeatureCollection)
         {
-            return datasetsMethods.postDatasets(this.getAPIRoot(), token, kind, datasetsArray);
+            return datasetsMethods.postDatasets(this.getAPIRoot(), token, kind, FeatureCollection);
         },
 
         /**
@@ -210,12 +210,12 @@ API = (function() {
          * @exports viatransit.API.updateDatasets
          * @param token
          * @param kind
-         * @param datasetsArray
+         * @param FeatureCollection
          * @return {Promise<{kind: String, datasets: Array}>}
          */
-        updateDatasets: function(/*String*/token, /*String*/kind, /*Array*/datasetsArray)
+        updateDatasets: function(/*String*/token, /*String*/kind, /*Array*/FeatureCollection)
         {
-            return datasetsMethods.updateDatasets(this.getAPIRoot(), token, kind, datasetsArray);
+            return datasetsMethods.updateDatasets(this.getAPIRoot(), token, kind, FeatureCollection);
         },
 
         /**
