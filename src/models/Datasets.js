@@ -129,7 +129,7 @@ class Datasets {
         if (!kind)
             return false;
         const properties = Utils.getDatasetsFeatureProperties(kind);
-        if (!properties)
+        if (!properties || !this.feature.properties instanceof Object)
             return false;
 
         for (const property of properties) {
