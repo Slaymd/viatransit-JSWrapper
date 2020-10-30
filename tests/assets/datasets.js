@@ -4,12 +4,10 @@ module.exports = {
         "feature": {
             "type": "Feature",
             "properties": {
-                "amenity": "parking",
-                "capacity": "2",
                 "fee": "no",
-                "motorcar": "designated",
-                "parking": "surface",
-                "surface": "asphalt",
+                "capacity": "2",
+                "carshare": "yes",
+                "type": "carshare",
                 "owner_type": "test",
                 "owner_name": "test"
             },
