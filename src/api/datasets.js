@@ -36,14 +36,14 @@ async function getDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*
  * @param apiUrl
  * @param token
  * @param kind
- * @param FeatureCollection
+ * @param featureCollection
  * @returns {Promise<*>}
  */
-async function postDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Array*/FeatureCollection)
+async function postDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Array*/featureCollection)
 {
     let url = apiUrl + "/mapbox/datasets/" + kind;
  
-    return await axios.post(url, { FeatureCollection }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+    return await axios.post(url, { featureCollection }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
     .then((res) => {
         return res.data;
     }).catch((e) => {
@@ -56,14 +56,14 @@ async function postDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /
  * @param apiUrl
  * @param token
  * @param kind
- * @param FeatureCollection
+ * @param featureCollection
  * @returns {Promise<*>}
  */
-async function updateDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Array*/FeatureCollection)
+async function updateDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Array*/featureCollection)
 {
     let url = apiUrl + "/mapbox/datasets/" + kind;
  
-    return await axios.put(url, { FeatureCollection }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+    return await axios.put(url, { featureCollection }, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
     .then((res) => {
         return res.data;
     }).catch((e) => {
