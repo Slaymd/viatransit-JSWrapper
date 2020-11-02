@@ -94,6 +94,11 @@ Utils = (function() {
                 return null;
             return properties.find(o => o.kind === kind).properties;
         },
+        getDatasetsFeaturePropertiesConfig: function(kind) {
+            if (!this.getDatasetsKinds().includes(kind))
+                return null;
+            return properties.find(o => o.kind === kind).config;
+        }
     }
 }());
 
