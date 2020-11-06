@@ -106,7 +106,7 @@ async function uploadDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind,
     if (tilesetName !== null)
         url = url + "&tilesetName=" + tilesetName;
 
-    return await axios.post(url, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+    return await axios.post(url, null, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
             return res.data;
         }).catch((e) => {
