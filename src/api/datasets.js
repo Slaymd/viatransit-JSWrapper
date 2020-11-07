@@ -103,10 +103,12 @@ async function deleteDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind,
 async function uploadDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*String*/tilesetName)
 {
     let url = apiUrl + "/mapbox/tileset/" + kind + '?networkKey=' + networkKey;
+    const data = {'data': 'data'};
+
     if (tilesetName !== null)
         url = url + "&tilesetName=" + tilesetName;
 
-    return await axios.post(url, null, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
+    return await axios.post(url, data, { headers: { Authorization: 'Bearer '.concat(token)}, timeout: 15000})
         .then((res) => {
             return res.data;
         }).catch((e) => {
