@@ -233,18 +233,18 @@ API = (function() {
         },
 
         /**
-         * Upload datasets to tileset on Mapbox
+         * Upload dataset to tileset on Mapbox
          * @async
-         * @exports viatransit.API.uploadDatasets
+         * @exports viatransit.API.uploadTileset
          * @param token
          * @param kind
          * @param networkKey
          * @param tilesetName (optional)
          * @return {Promise<{Object}>}
          */
-        uploadDatasets: function(/*String*/token, /*String*/kind, /*String*/networkKey, /*String*/tilesetName = null)
+        uploadTileset: function(/*String*/token, /*String*/kind, /*String*/networkKey, /*String*/tilesetName = null)
         {
-            return datasetsMethods.uploadDatasets(this.getAPIRoot(), token, kind, networkKey, tilesetName);
+            return datasetsMethods.uploadTileset(this.getAPIRoot(), token, kind, networkKey, tilesetName);
         },
 
         //ITINERARIES

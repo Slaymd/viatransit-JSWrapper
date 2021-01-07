@@ -100,7 +100,7 @@ async function deleteDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind,
  * @param tilesetName (optional)
  * @returns {Promise<*>}
  */
-async function uploadDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*String*/tilesetName)
+async function uploadTileset(/*String*/apiUrl, /*String*/token, /*String*/kind, /*Sting*/networkKey, /*String*/tilesetName)
 {
     let url = apiUrl + "/mapbox/tileset/" + kind + '?networkKey=' + networkKey;
     const data = {'data': 'data'};
@@ -116,4 +116,4 @@ async function uploadDatasets(/*String*/apiUrl, /*String*/token, /*String*/kind,
         });
 }
 
-module.exports = { getDatasets, postDatasets, updateDatasets, deleteDatasets, uploadDatasets};
+module.exports = { getDatasets, postDatasets, updateDatasets, deleteDatasets, uploadTileset};
