@@ -12,14 +12,32 @@ const properties = [
         config: [
             {
                 name: 'cycleway',
+                color: '#27AE60',
+                icon: {
+                    "type": "svg",
+                    "url": "https://viatransit.fr/UI/solid_cycleway.svg",
+                    "style": {
+                        "width": 20,
+                        "height": 6
+                    }
+                },
                 properties: [
                     {'highway': 'cycleway'},
                     {'bicycle': 'designated'},
                     {'temporary': 'no'}
-                ]
+                ],
             },
             {
                 name: 'shared',
+                color: '#27AE60',
+                icon: {
+                    "type": "svg",
+                    "url": "https://viatransit.fr/UI/dashed_cycleway.svg",
+                    "style": {
+                        "width": 20,
+                        "height": 6
+                    }
+                },
                 properties: [
                     {'highway': 'cycleway'},
                     {'bicycle': 'shared'},
@@ -28,6 +46,15 @@ const properties = [
             },
             {
                 name: 'temporary',
+                color: '#F1C40F',
+                icon: {
+                    "type": "svg",
+                    "url": "https://viatransit.fr/UI/solid_temporary_cycleway.svg",
+                    "style": {
+                        "width": 20,
+                        "height": 6
+                    }
+                },
                 properties: [
                     {'highway': 'cycleway'},
                     {'bicycle': 'shared'},
@@ -51,6 +78,15 @@ const properties = [
         config: [
             {
                 name: 'free',
+                color: '#0097E6',
+                icon: {
+                    "type": "svg",
+                    "url": "https://viatransit.fr/UI/free-parking.svg",
+                    "style": {
+                        "width": 16,
+                        "height": 16
+                    }
+                },
                 properties: [
                     {'fee': 'no'},
                     {'carshare': 'no'},
@@ -59,6 +95,15 @@ const properties = [
             },
             {
                 name: 'paid',
+                color: '#E1B12C',
+                icon: {
+                    "type": "svg",
+                    "url": "https://viatransit.fr/UI/fee-parking.svg",
+                    "style": {
+                        "width": 16,
+                        "height": 16
+                    }
+                },
                 properties: [
                     {'fee': 'yes'},
                     {'carshare': 'no'},
@@ -67,6 +112,15 @@ const properties = [
             },
             {
                 name: 'carshare_area',
+                color: '#0097E6',
+                icon: {
+                    "type": "svg",
+                    "url": "https://viatransit.fr/UI/carpool-parking.svg",
+                    "style": {
+                        "width": 16,
+                        "height": 16
+                    }
+                },
                 properties: [
                     {'fee': 'no'},
                     {'carshare': 'yes'},
