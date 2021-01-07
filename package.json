@@ -29,7 +29,7 @@
   "homepage": "https://viatransit.fr",
   "dependencies": {
     "@turf/turf": "^5.1.6",
-    "axios": "^0.19.2"
+    "axios": "^0.21.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
