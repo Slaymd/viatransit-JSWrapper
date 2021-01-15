@@ -82,6 +82,14 @@ describe('Datasets', () => {
             assert.isFalse(datasets2.hasProperties());
         });
 
+        it('should find config according properties', () => {
+            assert.isObject(datasets1.findConfigProperties('parking'));
+        });
+        
+        it('should not find config', () => {
+            assert.isFalse(datasets2.findConfigProperties('parking'));
+        });
+
         it('should works with attributes', () => {
             assert.isNull(datasets1.getAttribute('blabla'));
         });

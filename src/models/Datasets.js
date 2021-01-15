@@ -144,6 +144,34 @@ class Datasets {
     }
 
     /**
+     * Find configuration related to properties
+     * @param kind
+     * @returns {Boolean|Object}
+     */
+    findConfigProperties(kind)
+    {
+        if (!kind)
+            return false;
+        const configs = Utils.getDatasetsFeaturePropertiesConfig(kind);
+
+        for (const config of configs) {
+            let configProperties = {};
+            let configMatch = true;
+
+            for (const properties of config.properties)
+                configProperties = Object.assign(configProperties, properties);
+            for (const el in configProperties) {
+                if (this.feature.properties[el] !== configProperties[el])
+                    configMatch = false;
+            }
+            if (configMatch === true)
+                return config;
+        }
+        return false;
+
+    }
+
+    /**
      * Get attribute value from key
      * @param key
      * @returns {*}
