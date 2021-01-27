@@ -48,4 +48,47 @@ async function register(/*String*/email, /*String*/password, /*String*/apiUrl)
     });
 }
 
-module.exports = { login, register };
+/**
+ * Send a request for reset password
+ * @async
+ * @exports viatransit.API.forgotPassword
+ * @param email
+ * @param apiUrl
+ * @return {Promise<Object>}
+ */
+async function forgotPassword(/*String*/email, /*String*/apiUrl)
+{
+    const url = apiUrl + "/users/forgot-password/";
+    
+    const data = {email};
+
+    return await axios.post(url, data, {timeout: 15000}).then(res => {
+        return res.data;
+    }).catch(e => {
+        return e.response.data;
+    });
+}
+
+/**
+ * Reset the forgot password
+ * @async
+ * @exports viatransit.API.resetPassword
+ * @param id
+ * @param password
+ * @param apiUrl
+ * @return {Promise<Object>}
+ */
+async function resetPassword(/*String*/id, /*String*/password, /*String*/apiUrl)
+{
+    const url = apiUrl + "/users/reset-password/";
+    
+    const data = {id, password};
+
+    return await axios.post(url, data, {timeout: 15000}).then(res => {
+        return res.data;
+    }).catch(e => {
+        return e.response.data;
+    });
+}
+
+module.exports = { login, register, forgotPassword, resetPassword };

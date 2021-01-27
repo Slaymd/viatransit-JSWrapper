@@ -50,6 +50,28 @@ API = (function() {
         register: function(/*String*/email, /*String*/password) {
             return authMethods.register(email, password, this.getAPIRoot());
         },
+        /**
+         * Send a request for reset password
+         * @async
+         * @exports viatransit.API.forgotPassword
+         * @param email
+         * @return {Promise<Object>}
+         */
+        forgotPassword: function(/*String*/email) {
+            return authMethods.forgotPassword(email, this.getAPIRoot());
+        },
+        /**
+         * Reset the forgot password
+         * @async
+         * @exports viatransit.API.resetPassword
+         * @param id
+         * @param password
+         * @return {Promise<Object>}
+         */
+        resetPassword: function(/*String*/id, /*String*/password) {
+            return authMethods.resetPassword(id, password, this.getAPIRoot());
+        },
+
 
         //DISRUPTIONS
 
