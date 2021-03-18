@@ -1,6 +1,6 @@
 {
   "name": "viatransit",
-  "version": "0.19.42",
+  "version": "0.20.0",
   "description": "viaTransit API wrapper and usefull tools",
   "main": "src/index.js",
   "scripts": {
@@ -28,12 +28,13 @@
   },
   "homepage": "https://viatransit.fr",
   "dependencies": {
-    "@turf/turf": "^5.1.6",
+    "@mapbox/polyline": "^1.1.1",
+    "@turf/turf": "^6.3.0",
     "axios": "^0.21.1"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^8.0.1",
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
     "nyc": "^15.1.0"
   }
 }

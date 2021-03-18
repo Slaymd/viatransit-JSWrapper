@@ -32,7 +32,7 @@ describe('Schedules', () => {
             for (let cluster of clusters) {
                 assert.nestedProperty(cluster, 'line', 'A cluster should have a line property');
                 assert.nestedProperty(cluster, 'line.id', 'A cluster line should have an id property');
-                assert.nestedProperty(cluster, 'line.network', 'A cluster line should have a network property');
+                assert.nestedProperty(cluster, 'line.networkKey', 'A cluster line should have a network property');
                 assert.nestedProperty(cluster, 'headsign', 'A cluster should have a headsign property');
                 assert.nestedProperty(cluster, 'schedules', 'A cluster should have a schedules property');
                 assert.isArray(cluster.schedules, 'Cluster schedules should be an Array');
@@ -51,7 +51,7 @@ describe('Schedules', () => {
             for (let cluster of clusters) {
                 assert.nestedProperty(cluster, 'line', 'A cluster should have a line property');
                 assert.nestedProperty(cluster, 'line.id', 'A cluster line should have an id property');
-                assert.nestedProperty(cluster, 'line.network', 'A cluster line should have a network property');
+                assert.nestedProperty(cluster, 'line.networkKey', 'A cluster line should have a network property');
                 assert.nestedProperty(cluster, 'schedules', 'A cluster should have a schedules property');
                 assert.isArray(cluster.schedules, 'Cluster schedules should be an Array');
                 for (let schedule of cluster.schedules) {

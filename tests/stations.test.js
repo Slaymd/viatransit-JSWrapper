@@ -1,7 +1,6 @@
 //Imports
 const assert = require('chai').assert;
 const viatransit = require('../src/index');
-const Point = require('@turf/turf').point;
 
 //Assets
 const stationAssets = require('./assets/stations.js');
