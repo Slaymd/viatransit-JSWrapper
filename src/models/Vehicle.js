@@ -11,15 +11,14 @@ const Utils = require("../controllers/utils").Utils;
  * @property {number} sequenceId
  * @property {string} lastUpdateDate
  * @property {[number]} currentLocation
- * @property {string} routeEncoded
- * @property {number} routeDuration
+ * @property {[{encodedSegment: string, duration: number, nextStation: {id: string, stopId: string, name string}}]} routeSegments
  */
 class Vehicle extends AbstractAttributes {
 
     /**
      * Create an instance of Vehicle
      */
-    constructor(/*({id: string, networkKey: string, lineId: string, tripId: string, sequenceId: number, lastUpdateDate: string, currentLocation: [number], routeEncoded: string, routeDuration: number, attributes: (Object|null)}|null)*/object = null)
+    constructor(/*({id: string, networkKey: string, lineId: string, tripId: string, sequenceId: number, lastUpdateDate: string, currentLocation: [number], routeSegments: [{encodedSegment: string, duration: number, nextStation: {id: string, stopId: string, name string}}], attributes: (Object|null)}|null)*/object = null)
     {
         super(object instanceof Object ? object.attributes : null);
         this.id = "";
@@ -29,8 +28,7 @@ class Vehicle extends AbstractAttributes {
         this.sequenceId = -1;
         this.lastUpdateDate = "";
         this.currentLocation = [0, 0];
-        this.routeEncoded = ""
-        this.routeDuration = -1;
+        this.routeSegments = [];
         //Optional constructor fill
         if (object !== null)
             this.fill(object);
@@ -40,7 +38,7 @@ class Vehicle extends AbstractAttributes {
      * Fill from viaTransit API return format
      * @param object
      */
-    fill(/*{id: string, networkKey: string, lineId: string, tripId: string, sequenceId: number, lastUpdateDate: string, currentLocation: [number], routeEncoded: string, routeDuration: number, attributes: (Object|null)}*/object) {
+    fill(/*{id: string, networkKey: string, lineId: string, tripId: string, sequenceId: number, lastUpdateDate: string, currentLocation: [number], routeSegments: [{encodedSegment: string, duration: number, nextStation: {id: string, stopId: string, name string}}], attributes: (Object|null)}*/object) {
         this.id = object.id;
         this.networkKey = object.networkKey;
         this.lineId = object.lineId;
@@ -48,25 +46,24 @@ class Vehicle extends AbstractAttributes {
         this.sequenceId = object.sequenceId;
         this.lastUpdateDate = object.lastUpdateDate;
         this.currentLocation = object.currentLocation;
-        this.routeEncoded = object.routeEncoded;
-        this.routeDuration = object.routeDuration;
+        this.routeSegments = object.routeSegments;
         this.attributes = object.attributes;
     }
 
     /**
      * Get decoded route line string
-     * @return {[[number]]}
+     * @return {[{segment: [[number]], duration: number, nextStation: {id: string, stopId: string, name string}}]}
      */
     getRoute() {
-        return Utils.decodeLineString(this.routeEncoded);
+        return this.routeSegments.map(segment => { return {segment: Utils.decodeLineString(segment.encodedSegment), duration: segment.duration, nextStation: segment.nextStation}});
     }
 
     /**
      * Set encoded route line array
-     * @param lineString
+     * @param routeSegments
      */
-    setRoute(/*[[number]]*/lineString) {
-        this.routeEncoded = Utils.encodeLineString(lineString);
+    setRoute(/*[{segment: [[number]], duration: number, nextStation: {id: string, stopId: string, name string}}]*/routeSegments) {
+        this.routeSegments = routeSegments.map(segment => { return {encodedSegment: Utils.encodeLineString(segment.segment), duration: segment.duration, nextStation: segment.nextStation}})
     }
 
 }

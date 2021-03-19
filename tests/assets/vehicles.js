@@ -10,8 +10,28 @@ module.exports = {
             3.9802157878875732,
             43.54865697708563
         ],
-        routeEncoded: "kkhWcrxhGeFx@cEt@q@Lw@E_AOu@o@y@q@_Ak@{@[_Du@gE{@oFuAqAOyMqCy@LiB`DBnAoCtE",
-        routeDuration: 865,
+        routeSegments: [
+            {
+                encodedSegment: "kkhWcrxhGeFx@cEt@q@Lw@E_AOu@o@y@q@_Ak@{@[_Du@gE{@oFuAqAOyMqCy@LiB`DBnAoCtE",
+                duration: 865,
+                nextStation: {
+                    id: "SZ11",
+                    stopId: "12",
+                    name: "Avranche",
+                    lines: "L1"
+                },
+            },
+            {
+                encodedSegment: "asjWypxhGMCqCk@UDKEEI_Dm@eEq@qBc@u@GSBSECK}Cm@aPuC",
+                duration: 300,
+                nextStation: {
+                    id: "SZ12",
+                    stopId: "14",
+                    name: "Petit Travers",
+                    lines: "L1"
+                },
+            }
+        ],
         attributes: {
             licencePlate: "DY-704-HK",
             headsign: "La Grande Motte - Casino"

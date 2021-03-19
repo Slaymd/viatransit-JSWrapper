@@ -36,9 +36,9 @@ describe('Vehicles', () => {
             assert.lengthOf(vehicle1.currentLocation, 2);
             assert.deepStrictEqual(vehicle1.currentLocation, [3.9802157878875732, 43.54865697708563]);
             //Vehicle route
-            assert.strictEqual(vehicle1.routeEncoded, "kkhWcrxhGeFx@cEt@q@Lw@E_AOu@o@y@q@_Ak@{@[_Du@gE{@oFuAqAOyMqCy@LiB`DBnAoCtE");
-            assert.deepStrictEqual(vehicle1.getRoute(), [[3.98022, 43.54866], [3.98137, 43.54837], [3.98235, 43.5481], [3.9826, 43.54803], [3.98288, 43.54806], [3.9832, 43.54814], [3.98347, 43.54838], [3.98376, 43.54863], [3.98408, 43.54885], [3.98438, 43.54899], [3.98518, 43.54926], [3.98618, 43.54956], [3.98738, 43.54999], [3.98779, 43.55007], [3.99016, 43.5508], [3.99045, 43.55073], [3.99098, 43.54992], [3.99096, 43.54952], [3.99168, 43.54845]]);
-            assert.strictEqual(vehicle1.routeDuration, 865);
+            assert.strictEqual(vehicle1.routeSegments[0].encodedSegment, "kkhWcrxhGeFx@cEt@q@Lw@E_AOu@o@y@q@_Ak@{@[_Du@gE{@oFuAqAOyMqCy@LiB`DBnAoCtE");
+            assert.deepStrictEqual(vehicle1.getRoute()[0].segment, [[3.98022, 43.54866], [3.98137, 43.54837], [3.98235, 43.5481], [3.9826, 43.54803], [3.98288, 43.54806], [3.9832, 43.54814], [3.98347, 43.54838], [3.98376, 43.54863], [3.98408, 43.54885], [3.98438, 43.54899], [3.98518, 43.54926], [3.98618, 43.54956], [3.98738, 43.54999], [3.98779, 43.55007], [3.99016, 43.5508], [3.99045, 43.55073], [3.99098, 43.54992], [3.99096, 43.54952], [3.99168, 43.54845]]);
+            assert.strictEqual(vehicle1.routeSegments[0].duration, 865);
             //Attributes
             assert.strictEqual(vehicle1.getAttribute('licencePlate'), 'DY-704-HK');
         });
@@ -48,12 +48,15 @@ describe('Vehicles', () => {
 
             let vehicleTmp = new viatransit.Vehicle(vehicleAssets.vehicle1);
 
-            assert.strictEqual(vehicleTmp.routeEncoded, "kkhWcrxhGeFx@cEt@q@Lw@E_AOu@o@y@q@_Ak@{@[_Du@gE{@oFuAqAOyMqCy@LiB`DBnAoCtE");
+            assert.strictEqual(vehicleTmp.routeSegments[0].encodedSegment, "kkhWcrxhGeFx@cEt@q@Lw@E_AOu@o@y@q@_Ak@{@[_Du@gE{@oFuAqAOyMqCy@LiB`DBnAoCtE");
 
-            vehicleTmp.setRoute(newLineString);
+            vehicleTmp.setRoute([{segment: newLineString, duration: 500, nextStation: {id: "1", stopId: "1-1", name: "Test"}}]);
 
-            assert.strictEqual(vehicleTmp.routeEncoded, "kkhWcrxhG_N|Bm@B[FIPBZ[h@wAnC~AZXl@jATRLq@~APhA?j@I?a@DWTg@QE?");
-            assert.deepStrictEqual(vehicleTmp.getRoute(), newLineString);
+            assert.lengthOf(vehicleTmp.routeSegments, 1);
+            assert.strictEqual(vehicleTmp.routeSegments[0].encodedSegment, "kkhWcrxhG_N|Bm@B[FIPBZ[h@wAnC~AZXl@jATRLq@~APhA?j@I?a@DWTg@QE?");
+            assert.strictEqual(vehicleTmp.routeSegments[0].duration, 500);
+            assert.deepStrictEqual(vehicleTmp.routeSegments[0].nextStation, {id: "1", stopId: "1-1", name: "Test"});
+            assert.deepStrictEqual(vehicleTmp.getRoute()[0].segment, newLineString);
         });
 
     });
