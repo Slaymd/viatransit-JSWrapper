@@ -18,7 +18,7 @@ module.exports = {
                     id: "SZ11",
                     stopId: "12",
                     name: "Avranche",
-                    lines: "L1"
+                    lines: ["L1"]
                 },
             },
             {
@@ -28,7 +28,7 @@ module.exports = {
                     id: "SZ12",
                     stopId: "14",
                     name: "Petit Travers",
-                    lines: "L1"
+                    lines: ["L1"]
                 },
             }
         ],

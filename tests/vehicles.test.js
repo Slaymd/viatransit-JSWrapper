@@ -10,11 +10,13 @@ describe('Vehicles', () => {
 
     describe('API', () => {
 
-        it('should receive line vehicles'/*, async () => {
-            const station = await viatransit.API.getStation('tam', 'S5472');
+        it('should receive line vehicles', async () => {
+            viatransit.API.setAPIRoot('https://beta.api.viatransit.fr/v1');
+            const vehicles = await viatransit.API.getVehicleLocations('transpor', 'L1');
+            viatransit.API.setAPIRoot('https://api.viatransit.fr/v1');
 
-            assert.instanceOf(station, viatransit.Station);
-        }*/);
+            assert.isArray(vehicles);
+        }).timeout(4000);
 
     });
 

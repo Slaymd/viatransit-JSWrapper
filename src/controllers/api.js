@@ -13,6 +13,7 @@ let linesMethods = require('../api/lines');
 let versionsMethods = require('../api/versions');
 let mapsMethods = require('../api/maps');
 let tripsMethods = require('../api/trips');
+let vehicleMethods = require('../api/vehicles');
 let itinerariesMethods = require('../api/itineraries');
 let newsletterMethods = require('../api/newsletter');
 
@@ -351,6 +352,20 @@ API = (function() {
          */
         getLines: function(/*String*/networkKey) {
             return linesMethods.getLines(this.getAPIRoot(), networkKey);
+        },
+
+        //VEHICLES
+
+        /**
+         * Get line vehicle locations
+         * @async
+         * @exports viatransit.API.getVehicleLocations
+         * @param networkKey
+         * @param lineId
+         * @return {Promise<Array<Vehicle>>}
+         */
+        getVehicleLocations: function(/*String*/networkKey, /*String*/lineId) {
+            return vehicleMethods.getVehicleLocations(this.getAPIRoot(), networkKey, lineId);
         },
 
         //TRIPS
