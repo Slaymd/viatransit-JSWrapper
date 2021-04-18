@@ -89,11 +89,13 @@ async function getClusterizedSchedules(/*String*/networkKey, /*String*/stationId
  * @param stationId
  * @param fromDate
  * @param depth
+ * @param lineId
+ * @param daysLoop
  * @return {Promise<Array<Schedule>>}
  */
-async function getSchedules(/*String*/apiUrl, /*String*/networkKey, /*String*/stationId, /*(Date|null)*/fromDate = null, /*Number*/depth = 4)
+async function getSchedules(/*String*/apiUrl, /*String*/networkKey, /*String*/stationId, /*(Date|null)*/fromDate = null, /*Number*/depth = 4, /*String*/lineId = 'all', /*boolean*/daysLoop = false)
 {
-    const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId + (fromDate ? '&fromDate=' + fromDate.toISOString() : '') + (depth !== 4 ? '&depth=' + depth : '');
+    const url = apiUrl + '/stations/schedules?network=' + networkKey + '&id=' + stationId + (fromDate ? '&fromDate=' + fromDate.toISOString() : '') + (depth !== 4 ? '&depth=' + depth : '') + (lineId && lineId !== 'all' ? '&lineId=' + lineId : '') + (daysLoop === true ? '&daysLoop=true' : '');
 
     return axios.get(url, {timeout: 15000}).then(res => {
         if (!(res.data instanceof Array))

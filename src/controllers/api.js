@@ -460,8 +460,8 @@ API = (function() {
          * @param depth
          * @return {Promise<Array<Schedule>>}
          */
-        getSchedules: function(/*String*/networkKey, /*String*/stationId, /*(Date|null)*/fromDate = null, /*Number*/depth = 4) {
-            return schedulesMethods.getSchedules(this.getAPIRoot(), networkKey, stationId, fromDate, depth);
+        getSchedules: function(/*String*/networkKey, /*String*/stationId, /*(Date|null)*/fromDate = null, /*Number*/depth = 4, /*String*/lineId = 'all', /*boolean*/daysLoop = false) {
+            return schedulesMethods.getSchedules(this.getAPIRoot(), networkKey, stationId, fromDate, depth, lineId, daysLoop);
         },
 
         //SEARCH
