@@ -1,3 +1,7 @@
+//Imports
+const polyline = require("@mapbox/polyline");
+
+//Globals
 const properties = [
     {
         kind: 'cycleways',
@@ -152,6 +156,12 @@ Utils = (function() {
             if (!this.getDatasetsKinds().includes(kind))
                 return null;
             return properties.find(o => o.kind === kind).config;
+        },
+        encodeLineString: function(/*[[number]]*/lineString) {
+            return polyline.encode(lineString);
+        },
+        decodeLineString: function(/*string*/encodedLineString) {
+            return polyline.decode(encodedLineString);
         }
     }
 }());

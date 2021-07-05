@@ -13,6 +13,7 @@ let linesMethods = require('../api/lines');
 let versionsMethods = require('../api/versions');
 let mapsMethods = require('../api/maps');
 let tripsMethods = require('../api/trips');
+let vehicleMethods = require('../api/vehicles');
 let itinerariesMethods = require('../api/itineraries');
 let newsletterMethods = require('../api/newsletter');
 
@@ -353,6 +354,20 @@ API = (function() {
             return linesMethods.getLines(this.getAPIRoot(), networkKey);
         },
 
+        //VEHICLES
+
+        /**
+         * Get line vehicle locations
+         * @async
+         * @exports viatransit.API.getVehicleLocations
+         * @param networkKey
+         * @param lineId
+         * @return {Promise<Array<Vehicle>>}
+         */
+        getVehicleLocations: function(/*String*/networkKey, /*String*/lineId) {
+            return vehicleMethods.getVehicleLocations(this.getAPIRoot(), networkKey, lineId);
+        },
+
         //TRIPS
 
         /**
@@ -445,8 +460,8 @@ API = (function() {
          * @param depth
          * @return {Promise<Array<Schedule>>}
          */
-        getSchedules: function(/*String*/networkKey, /*String*/stationId, /*(Date|null)*/fromDate = null, /*Number*/depth = 4) {
-            return schedulesMethods.getSchedules(this.getAPIRoot(), networkKey, stationId, fromDate, depth);
+        getSchedules: function(/*String*/networkKey, /*String*/stationId, /*(Date|null)*/fromDate = null, /*Number*/depth = 4, /*String*/lineId = 'all', /*boolean*/daysLoop = false) {
+            return schedulesMethods.getSchedules(this.getAPIRoot(), networkKey, stationId, fromDate, depth, lineId, daysLoop);
         },
 
         //SEARCH
