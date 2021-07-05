@@ -57,8 +57,8 @@ API = (function() {
          * @param email
          * @return {Promise<Object>}
          */
-        forgotPassword: function(/*String*/email) {
-            return authMethods.forgotPassword(email, this.getAPIRoot());
+        forgotPassword: function(/*String*/email, /*Boolean*/isTestRequest) {
+            return authMethods.forgotPassword(email, isTestRequest, this.getAPIRoot());
         },
         /**
          * Reset the forgot password

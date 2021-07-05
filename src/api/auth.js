@@ -56,11 +56,11 @@ async function register(/*String*/email, /*String*/password, /*String*/apiUrl)
  * @param apiUrl
  * @return {Promise<Object>}
  */
-async function forgotPassword(/*String*/email, /*String*/apiUrl)
+async function forgotPassword(/*String*/email, /*Boolean*/isTestRequest = false,/*String*/apiUrl)
 {
     const url = apiUrl + "/users/forgot-password/";
     
-    const data = {email};
+    const data = {email, isTestRequest};
 
     return await axios.post(url, data, {timeout: 15000}).then(res => {
         return res.data;
